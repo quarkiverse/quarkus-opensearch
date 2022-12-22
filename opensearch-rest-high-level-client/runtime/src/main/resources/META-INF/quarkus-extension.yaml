@@ -1,0 +1,12 @@
+---
+artifact: ${project.groupId}:${project.artifactId}:${project.version}
+name: "OpenSearch REST High Level Client"
+metadata:
+  keywords:
+  - "opensearch"
+  - "full text"
+  - "search"
+  categories:
+  - "data"
+  config:
+  - "quarkiverse.opensearch."

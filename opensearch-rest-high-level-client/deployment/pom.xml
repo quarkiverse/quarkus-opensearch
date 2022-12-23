@@ -63,10 +63,11 @@
     </build>
     <profiles>
         <profile>
-            <id>test-opensearch</id>
+            <id>it</id>
             <activation>
                 <property>
-                    <name>test-containers</name>
+                    <name>performRelease</name>
+                    <value>!true</value>
                 </property>
             </activation>
             <build>

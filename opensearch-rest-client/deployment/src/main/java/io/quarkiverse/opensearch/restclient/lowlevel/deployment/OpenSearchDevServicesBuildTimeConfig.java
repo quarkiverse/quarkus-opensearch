@@ -6,7 +6,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(name = "opensearch.devservices", phase = ConfigPhase.BUILD_TIME)
+@ConfigRoot(prefix = "quarkiverse", name = "opensearch.devservices", phase = ConfigPhase.BUILD_TIME)
 public class OpenSearchDevServicesBuildTimeConfig {
 
     /**

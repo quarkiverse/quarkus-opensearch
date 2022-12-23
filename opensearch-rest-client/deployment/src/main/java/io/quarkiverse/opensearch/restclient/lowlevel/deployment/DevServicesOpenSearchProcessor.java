@@ -198,7 +198,8 @@ public class DevServicesOpenSearchProcessor {
         final Supplier<DevServicesResultBuildItem.RunningDevService> defaultOpenSearchSupplier = () -> {
             OpensearchContainer container = new OpensearchContainer(
                     DockerImageName.parse(config.imageName).asCompatibleSubstituteFor("opensearchproject/opensearch"));
-            ConfigureUtil.configureSharedNetwork(container, "opensearch");
+            // seems to broken for OpensearchContainer - need to investigate
+            // ConfigureUtil.configureSharedNetwork(container, "opensearch");
             if (config.serviceName != null) {
                 container.withLabel(DEV_SERVICE_LABEL, config.serviceName);
             }
@@ -207,8 +208,6 @@ public class DevServicesOpenSearchProcessor {
             }
             timeout.ifPresent(container::withStartupTimeout);
             container.addEnv("ES_JAVA_OPTS", config.javaOpts);
-            // Disable security as else we would need to configure it correctly to avoid tons of WARNING in the log
-            container.addEnv("plugins.security.disabled", "false");
 
             container.start();
             return new DevServicesResultBuildItem.RunningDevService(Feature.ELASTICSEARCH_REST_CLIENT_COMMON.getName(),

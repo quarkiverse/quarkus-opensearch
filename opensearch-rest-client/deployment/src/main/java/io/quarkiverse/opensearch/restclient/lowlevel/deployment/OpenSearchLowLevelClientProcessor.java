@@ -44,4 +44,9 @@ class OpenSearchLowLevelClientProcessor {
                 buildTimeConfig.healthEnabled);
     }
 
+    @BuildStep
+    DevservicesOpenSearchBuildItem devServices() {
+        return new DevservicesOpenSearchBuildItem("dev.quarkiverse.opensearch.hosts");
+    }
+
 }

@@ -9,24 +9,22 @@
     </parent>
     <groupId>io.quarkiverse.opensearch</groupId>
     <artifactId>quarkus-opensearch-parent</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>999-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quarkus - OpenSearch Client - Parent</name>
     <modules>
-        <module>opensearch-rest-client-common</module>
         <module>opensearch-rest-client</module>
         <module>opensearch-rest-high-level-client</module>
+        <module>docs</module>
     </modules>
     <properties>
-        <compiler-plugin.version>3.8.1</compiler-plugin.version>
-        <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <compiler-plugin.version>3.10.1</compiler-plugin.version>
+        <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <quarkus.version>2.15.1.Final</quarkus.version>
         <opensearch.version>2.4.1</opensearch.version>
         <opensearch-testcontainers.version>2.0.0</opensearch-testcontainers.version>
-        <quarkus.version>2.15.0.Final</quarkus.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -65,17 +63,6 @@
                 <artifactId>opensearch-testcontainers</artifactId>
                 <version>${opensearch-testcontainers.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-client-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-client-common-deployment</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-rest-client</artifactId>
@@ -110,6 +97,11 @@
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${compiler-plugin.version}</version>
+                    <configuration>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -123,11 +115,10 @@
                     <value>!true</value>
                 </property>
             </activation>
-            <!--
             <modules>
-              <module>integration-tests</module>
+                <module>integration-tests</module>
             </modules>
-            -->
         </profile>
     </profiles>
+
 </project>

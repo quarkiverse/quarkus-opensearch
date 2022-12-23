@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.quarkiverse.opensearch</groupId>
         <artifactId>quarkus-opensearch-rest-client-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -16,11 +16,11 @@
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-core-deployment</artifactId>
+            <artifactId>quarkus-arc-deployment</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-rest-client-common-deployment</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health-deployment</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>
@@ -28,11 +28,21 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-arc-deployment</artifactId>
+            <artifactId>quarkus-smallrye-health-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-health-spi</artifactId>
+            <artifactId>quarkus-devservices-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch</groupId>
+            <artifactId>opensearch-testcontainers</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Test dependencies -->
@@ -52,7 +62,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -76,7 +85,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <id>test-opensearch</id>
@@ -97,5 +105,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>

@@ -28,7 +28,6 @@ import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
 import io.quarkus.deployment.console.StartupLogCompressor;
 import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
 import io.quarkus.deployment.logging.LoggingSetupBuildItem;
-import io.quarkus.devservices.common.ConfigureUtil;
 import io.quarkus.devservices.common.ContainerAddress;
 import io.quarkus.devservices.common.ContainerLocator;
 import io.quarkus.runtime.configuration.ConfigUtils;

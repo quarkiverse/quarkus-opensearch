@@ -15,7 +15,7 @@ public class DevServicesOpenSearchDevModeTestCase {
             .withApplicationRoot((jar) -> jar
                     .addClass(TestResource.class)
                     .addAsResource(new StringAsset("quarkiverse.opensearch.devservices.port=9200"),
-                    "application.properties"));
+                            "application.properties"));
 
     @Test
     public void testDatasource() throws Exception {

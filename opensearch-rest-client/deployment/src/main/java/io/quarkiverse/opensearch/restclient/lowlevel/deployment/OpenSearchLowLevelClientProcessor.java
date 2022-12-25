@@ -15,7 +15,7 @@ import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
 class OpenSearchLowLevelClientProcessor {
 
-    private static final String FEATURE = "opensearch-rest-client";
+    static final String FEATURE = "opensearch-rest-client";
     private static final DotName OPENSEARCH_CLIENT_CONFIG = DotName.createSimple(OpenSearchClientConfig.class.getName());
 
     @BuildStep
@@ -46,7 +46,7 @@ class OpenSearchLowLevelClientProcessor {
 
     @BuildStep
     DevservicesOpenSearchBuildItem devServices() {
-        return new DevservicesOpenSearchBuildItem("dev.quarkiverse.opensearch.hosts");
+        return new DevservicesOpenSearchBuildItem("quarkiverse.opensearch.hosts");
     }
 
 }

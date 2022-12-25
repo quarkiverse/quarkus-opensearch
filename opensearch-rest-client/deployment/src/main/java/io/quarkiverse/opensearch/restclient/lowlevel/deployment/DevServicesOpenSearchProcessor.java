@@ -15,7 +15,6 @@ import org.opensearch.testcontainers.OpensearchContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import io.quarkus.builder.BuildException;
-import io.quarkus.deployment.Feature;
 import io.quarkus.deployment.IsNormal;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.BuildSteps;
@@ -195,10 +194,13 @@ public class DevServicesOpenSearchProcessor {
 
         // Starting the server
         final Supplier<DevServicesResultBuildItem.RunningDevService> defaultOpenSearchSupplier = () -> {
+            // OpensearchContainer has security disabled by default
             OpensearchContainer container = new OpensearchContainer(
                     DockerImageName.parse(config.imageName).asCompatibleSubstituteFor("opensearchproject/opensearch"));
-            // seems to broken for OpensearchContainer - need to investigate
+
+            // share network fails - need to investigate
             // ConfigureUtil.configureSharedNetwork(container, "opensearch");
+
             if (config.serviceName != null) {
                 container.withLabel(DEV_SERVICE_LABEL, config.serviceName);
             }
@@ -209,7 +211,7 @@ public class DevServicesOpenSearchProcessor {
             container.addEnv("ES_JAVA_OPTS", config.javaOpts);
 
             container.start();
-            return new DevServicesResultBuildItem.RunningDevService(Feature.ELASTICSEARCH_REST_CLIENT_COMMON.getName(),
+            return new DevServicesResultBuildItem.RunningDevService(OpenSearchLowLevelClientProcessor.FEATURE,
                     container.getContainerId(),
                     container::close,
                     buildPropertiesMap(buildItemConfig, container.getHttpHostAddress()));
@@ -217,7 +219,7 @@ public class DevServicesOpenSearchProcessor {
 
         return maybeContainerAddress
                 .map(containerAddress -> new DevServicesResultBuildItem.RunningDevService(
-                        Feature.ELASTICSEARCH_REST_CLIENT_COMMON.getName(),
+                        OpenSearchLowLevelClientProcessor.FEATURE,
                         containerAddress.getId(),
                         null,
                         buildPropertiesMap(buildItemConfig, containerAddress.getUrl())))
@@ -228,7 +230,8 @@ public class DevServicesOpenSearchProcessor {
             String httpHosts) {
         Map<String, String> propertiesToSet = new HashMap<>();
         for (String property : buildItemConfig.hostsConfigProperties) {
-            propertiesToSet.put(property, httpHosts);
+            // remove http scheme added by OpensearchContainer from httpHosts
+            propertiesToSet.put(property, httpHosts.replaceAll("^http://", ""));
         }
         return propertiesToSet;
     }

@@ -2,7 +2,6 @@ package io.quarkiverse.opensearch.restclient.lowlevel.deployment.test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -13,9 +12,7 @@ public class DevServicesOpenSearchDevModeTestCase {
     @RegisterExtension
     static QuarkusDevModeTest test = new QuarkusDevModeTest()
             .withApplicationRoot((jar) -> jar
-                    .addClass(TestResource.class)
-                    .addAsResource(new StringAsset("quarkiverse.opensearch.devservices.port=9200"),
-                            "application.properties"));
+                    .addClass(TestResource.class));
 
     @Test
     public void testDatasource() throws Exception {

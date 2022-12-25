@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>quarkus-opensearch-docs</artifactId>
-    <name>Quarkus Opensearch Extension - Documentation</name>
+    <name>Quarkus - OpenSearch Extension - Documentation</name>
 
     <dependencies>
         <!-- Make sure the doc is built after the other artifacts -->

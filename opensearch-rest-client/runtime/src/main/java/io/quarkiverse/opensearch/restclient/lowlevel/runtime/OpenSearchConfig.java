@@ -5,62 +5,64 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
 
-@ConfigRoot(prefix = "quarkiverse", name = "opensearch", phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
-public class OpenSearchConfig {
+@ConfigMapping(prefix = "quarkiverse.opensearch")
+@ConfigRoot(phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
+public interface OpenSearchConfig {
 
     /**
      * The list of hosts of the OpenSearch servers.
      */
-    @ConfigItem(defaultValue = "localhost:9200")
-    public List<InetSocketAddress> hosts;
+    Optional<List<InetSocketAddress>> hosts();
 
     /**
      * The protocol to use when contacting OpenSearch servers.
      * Set to "https" to enable SSL/TLS.
      */
-    @ConfigItem(defaultValue = "http")
-    public String protocol;
+    default String protocol() {
+        return "http";
+    };
 
     /**
      * The username for basic HTTP authentication.
      */
-    @ConfigItem
-    public Optional<String> username;
+    Optional<String> username();
 
     /**
      * The password for basic HTTP authentication.
      */
-    @ConfigItem
-    public Optional<String> password;
+    Optional<String> password();
 
     /**
      * The connection timeout.
      */
-    @ConfigItem(defaultValue = "1S")
-    public Duration connectionTimeout;
+    default Duration connectionTimeout() {
+        return Duration.ofSeconds(15);
+    }
 
     /**
      * The socket timeout.
      */
-    @ConfigItem(defaultValue = "30S")
-    public Duration socketTimeout;
+    default Duration socketTimeout() {
+        return Duration.ofSeconds(30);
+    }
 
     /**
      * The maximum number of connections to all the OpenSearch servers.
      */
-    @ConfigItem(defaultValue = "20")
-    public int maxConnections;
+    default int maxConnections() {
+        return 20;
+    }
 
     /**
      * The maximum number of connections per OpenSearch server.
      */
-    @ConfigItem(defaultValue = "10")
-    public int maxConnectionsPerRoute;
+    default int maxConnectionsPerRoute() {
+        return 10;
+    }
 
     /**
      * The number of IO thread.
@@ -69,28 +71,30 @@ public class OpenSearchConfig {
      * Thread counts higher than the number of processors should not be necessary because the I/O threads rely on non-blocking
      * operations, but you may want to use a thread count lower than the number of processors.
      */
-    @ConfigItem
-    public Optional<Integer> ioThreadCounts;
+    Optional<Integer> ioThreadCounts();
 
     /**
      * Configuration for the automatic discovery of new OpenSearch nodes.
      */
-    @ConfigItem
-    public DiscoveryConfig discovery;
+    default DiscoveryConfig discovery() {
+        return new DiscoveryConfig() {
+        };
+    }
 
-    @ConfigGroup
-    public static class DiscoveryConfig {
+    public static interface DiscoveryConfig {
 
         /**
          * Defines if automatic discovery is enabled.
          */
-        @ConfigItem(defaultValue = "false")
-        public boolean enabled;
+        default boolean enabled() {
+            return false;
+        }
 
         /**
          * Refresh interval of the node list.
          */
-        @ConfigItem(defaultValue = "5M")
-        public Duration refreshInterval;
+        default Duration refreshInterval() {
+            return Duration.ofMinutes(5);
+        }
     }
 }

@@ -1,0 +1,93 @@
+
+:summaryTableId: quarkus-opensearch
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[quarkus-opensearch_configuration]]link:#quarkus-opensearch_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.health.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
+
+[.description]
+--
+Whether a health check is published in case the smallrye-health extension is present.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.hosts]]`link:#quarkus-opensearch_quarkus.opensearch.hosts[quarkus.opensearch.hosts]`
+
+[.description]
+--
+The list of hosts of the OpenSearch servers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HOSTS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_HOSTS+++`
+endif::add-copy-button-to-env-var[]
+--|list of host:port 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
+
+[.description]
+--
+The username for basic HTTP authentication.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_USERNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_USERNAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.password]]`link:#quarkus-opensearch_quarkus.opensearch.password[quarkus.opensearch.password]`
+
+[.description]
+--
+The password for basic HTTP authentication.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
+
+[.description]
+--
+The number of IO thread. By default, this is the number of locally detected processors. 
+Thread counts higher than the number of processors should not be necessary because the I/O threads rely on non-blocking operations, but you may want to use a thread count lower than the number of processors.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_IO_THREAD_COUNTS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_IO_THREAD_COUNTS+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|
+
+|===

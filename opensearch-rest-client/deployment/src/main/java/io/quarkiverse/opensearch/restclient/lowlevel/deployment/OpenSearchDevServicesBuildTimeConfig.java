@@ -6,7 +6,7 @@ import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(prefix = "quarkiverse", name = "devservices.opensearch", phase = ConfigPhase.BUILD_TIME)
+@ConfigRoot(name = "opensearch.devservices", phase = ConfigPhase.BUILD_TIME)
 public class OpenSearchDevServicesBuildTimeConfig {
 
     /**
@@ -33,7 +33,7 @@ public class OpenSearchDevServicesBuildTimeConfig {
     public String imageName;
 
     /**
-     * The value for the ES_JAVA_OPTS env variable.
+     * The value for the OPENSEARCH_JAVA_OPTS env variable.
      * Defaults to setting the heap to 512MB min - 1GB max.
      */
     @ConfigItem(defaultValue = "-Xms512m -Xmx1g")

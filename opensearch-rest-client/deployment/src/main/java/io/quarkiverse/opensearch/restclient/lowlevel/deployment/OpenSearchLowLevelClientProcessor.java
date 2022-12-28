@@ -46,7 +46,7 @@ class OpenSearchLowLevelClientProcessor {
 
     @BuildStep
     DevservicesOpenSearchBuildItem devServices() {
-        return new DevservicesOpenSearchBuildItem("quarkiverse.opensearch.hosts");
+        return new DevservicesOpenSearchBuildItem("quarkus.opensearch.hosts");
     }
 
 }

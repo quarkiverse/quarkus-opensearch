@@ -9,7 +9,7 @@ import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
 
-@ConfigMapping(prefix = "quarkiverse.opensearch")
+@ConfigMapping(prefix = "quarkus.opensearch")
 @ConfigRoot(phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
 public interface OpenSearchConfig {
 

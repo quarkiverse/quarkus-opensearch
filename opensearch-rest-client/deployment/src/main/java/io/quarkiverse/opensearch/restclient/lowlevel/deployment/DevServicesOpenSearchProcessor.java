@@ -169,11 +169,6 @@ public class DevServicesOpenSearchProcessor {
             return null;
         }
 
-        // We only support OPENSEARCH container
-        if (buildItemConfig.distribution == DevservicesOpenSearchBuildItem.Distribution.ELASTIC) {
-            throw new BuildException("Dev services for OpenSearch doesn't support Elasticsearch", Collections.emptyList());
-        }
-
         // Hibernate Search OpenSearch have a version configuration property, we need to check that it is coherent
         // with the image we are about to launch
         if (buildItemConfig.version != null) {
@@ -204,11 +199,9 @@ public class DevServicesOpenSearchProcessor {
             if (config.serviceName != null) {
                 container.withLabel(DEV_SERVICE_LABEL, config.serviceName);
             }
-            if (config.port.isPresent()) {
-                container.setPortBindings(List.of(config.port.get() + ":" + config.port.get()));
-            }
+            config.port.ifPresent(integer -> container.setPortBindings(List.of(integer + ":" + integer)));
             timeout.ifPresent(container::withStartupTimeout);
-            container.addEnv("ES_JAVA_OPTS", config.javaOpts);
+            container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts);
 
             container.start();
             return new DevServicesResultBuildItem.RunningDevService(OpenSearchLowLevelClientProcessor.FEATURE,
@@ -243,7 +236,6 @@ public class DevServicesOpenSearchProcessor {
     private static class DevservicesOpenSearchBuildItemsConfiguration {
         private Set<String> hostsConfigProperties;
         private String version;
-        private DevservicesOpenSearchBuildItem.Distribution distribution;
 
         private DevservicesOpenSearchBuildItemsConfiguration(List<DevservicesOpenSearchBuildItem> buildItems)
                 throws BuildException {
@@ -256,15 +248,6 @@ public class DevServicesOpenSearchProcessor {
                 } else if (!version.equals(buildItem.getVersion())) {
                     // safety guard but should never occur as only Hibernate Search ORM Elasticsearch configure the version
                     throw new BuildException("Multiple extensions request OpenSearch Dev Services on different version.",
-                            Collections.emptyList());
-                }
-
-                if (distribution == null) {
-                    distribution = buildItem.getDistribution();
-                } else if (!distribution.equals(buildItem.getDistribution())) {
-                    // safety guard but should never occur as only Hibernate Search ORM Elasticsearch configure the distribution
-                    throw new BuildException(
-                            "Multiple extensions request OpenSearch Dev Services on different distribution.",
                             Collections.emptyList());
                 }
 

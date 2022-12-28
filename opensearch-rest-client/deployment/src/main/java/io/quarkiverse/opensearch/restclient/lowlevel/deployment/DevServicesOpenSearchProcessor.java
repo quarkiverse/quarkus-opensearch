@@ -199,11 +199,9 @@ public class DevServicesOpenSearchProcessor {
             if (config.serviceName != null) {
                 container.withLabel(DEV_SERVICE_LABEL, config.serviceName);
             }
-            if (config.port.isPresent()) {
-                container.setPortBindings(List.of(config.port.get() + ":" + config.port.get()));
-            }
+            config.port.ifPresent(integer -> container.setPortBindings(List.of(integer + ":" + integer)));
             timeout.ifPresent(container::withStartupTimeout);
-            container.addEnv("ES_JAVA_OPTS", config.javaOpts);
+            container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts);
 
             container.start();
             return new DevServicesResultBuildItem.RunningDevService(OpenSearchLowLevelClientProcessor.FEATURE,

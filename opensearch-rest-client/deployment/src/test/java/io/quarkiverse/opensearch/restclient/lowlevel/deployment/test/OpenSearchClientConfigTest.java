@@ -23,7 +23,7 @@ public class OpenSearchClientConfigTest {
     static final QuarkusUnitTest TEST = new QuarkusUnitTest()
             .setArchiveProducer(
                     () -> ShrinkWrap.create(JavaArchive.class).addClasses(TestConfigurator.class, RestClientBuilderHelper.class)
-                            .addAsResource(new StringAsset("quarkiverse.opensearch.hosts=opensearch:9200"),
+                            .addAsResource(new StringAsset("quarkus.opensearch.hosts=opensearch:9200"),
                                     "application.properties"));
 
     @Inject

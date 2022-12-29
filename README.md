@@ -21,6 +21,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center"><a href="https://github.com/sboeckelmann"><img src="https://avatars.githubusercontent.com/u/20949582?v=4?s=100" width="100px;" alt="sboeckelmann"/><br /><sub><b>sboeckelmann</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-opensearch/commits?author=sboeckelmann" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.loicmathieu.fr"><img src="https://avatars.githubusercontent.com/u/1819009?v=4?s=100" width="100px;" alt="Loïc Mathieu"/><br /><sub><b>Loïc Mathieu</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-opensearch/commits?author=loicmathieu" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

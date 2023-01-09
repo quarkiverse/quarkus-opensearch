@@ -5,7 +5,17 @@
 [![Build](https://github.com/quarkiverse/quarkus-opensearch/workflows/Build/badge.svg)](https://github.com/quarkiverse/quarkus-opensearch/actions?query=workflow%3ABuild)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-WIP extension for OpenSearch
+This extension allows you to connect to an [OpenSearch cluster](https://opensearch.org/) using the clients provided by the OpenSearch project.
+
+## Supported OpenSearch Clients 
+- OpenSearch REST client (core client)
+- [OpenSearch REST high-level client](https://opensearch.org/docs/latest/clients/java-rest-high-level/)
+- [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/)
+
+## Documentation
+
+Take a look at [the documentation](https://github.com/quarkiverse/quarkus-opensearch/blob/main/docs/modules/ROOT/pages/index.adoc) on how
+to use the extension.
 
 ## Contributing
 

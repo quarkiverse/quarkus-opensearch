@@ -2,7 +2,23 @@
 
 include::./includes/attributes.adoc[]
 
-TIP: Describe what the extension does here.
+The quarkus-opensearch extension allows you to connect to an link:https://opensearch.org/[OpenSearch cluster] using the clients provided by the OpenSearch project.
+
+== OpenSearch Clients
+
+OpenSearch provides three different flavours of clients for connecting to the cluster. This extension has support for all three of them.
+
+=== OpenSearch REST (low-level) client
+
+Core low-level client which lets you interact with OpenSearch clusters through HTTP methods and JSON, it is also used by the two other higher level clients for connecting to the cluster.
+
+=== link:https://opensearch.org/docs/latest/clients/java-rest-high-level/[OpenSearch REST high-level client]
+
+The OpenSearch Java high-level REST client lets you interact with your OpenSearch clusters and indices through Java methods and data structures rather than HTTP methods and JSON.
+
+=== link:https://opensearch.org/docs/latest/clients/java/[OpenSearch Java client]
+
+Just like the OpenSearch REST high-level level, the OpenSearch Java client lets you interact with OpenSearch through Java methods and data structures. In comparison to the REST high-level, it has no dependency to `org.opensearch:opensearch` and also provides an async client implementation.
 
 == Installation
 
@@ -23,3 +39,37 @@ For instance, with Maven, add the following dependency to your POM file:
 == Extension Configuration Reference
 
 include::includes/quarkus-opensearch.adoc[leveloffset=+1, opts=optional]
+
+=== OpenSearch REST high-level client
+
+The REST high-level client depends on the REST client and does not require any additional configuration.
+
+If you want to use this client all you need to do is add the `io.quarkiverse.opensearch:quarkus-opensearch-rest-high-level-client` extension first to your build file.
+
+with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.opensearch</groupId>
+    <artifactId>quarkus-opensearch-rest-high-level-client</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----
+
+=== OpenSearch Java client
+
+The java client depends on the REST client and does not require any additional configuration.
+
+If you want to use this client all you need to do is add the `io.quarkiverse.opensearch:quarkus-opensearch-java-client` extension first to your build file.
+
+with Maven, add the following dependency to your POM file:
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>io.quarkiverse.opensearch</groupId>
+    <artifactId>quarkus-opensearch-java-client</artifactId>
+    <version>{project-version}</version>
+</dependency>
+----

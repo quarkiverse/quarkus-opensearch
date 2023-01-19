@@ -2,6 +2,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![version](https://img.shields.io/maven-central/v/io.quarkiverse.opensearch/quarkus-opensearch-parent)](https://repo1.maven.org/maven2/io/quarkiverse/opensearch/)
 [![Build](https://github.com/quarkiverse/quarkus-opensearch/workflows/Build/badge.svg)](https://github.com/quarkiverse/quarkus-opensearch/actions?query=workflow%3ABuild)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

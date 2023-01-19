@@ -75,11 +75,11 @@ public class OpenSearchDevServicesBuildTimeConfig {
             return false;
         OpenSearchDevServicesBuildTimeConfig that = (OpenSearchDevServicesBuildTimeConfig) o;
         return Objects.equals(shared, that.shared)
-            && Objects.equals(enabled, that.enabled)
-            && Objects.equals(port, that.port)
-            && Objects.equals(imageName, that.imageName)
-            && Objects.equals(javaOpts, that.javaOpts)
-            && Objects.equals(serviceName, that.serviceName);
+                && Objects.equals(enabled, that.enabled)
+                && Objects.equals(port, that.port)
+                && Objects.equals(imageName, that.imageName)
+                && Objects.equals(javaOpts, that.javaOpts)
+                && Objects.equals(serviceName, that.serviceName);
     }
 
     @Override

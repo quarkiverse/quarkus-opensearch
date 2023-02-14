@@ -15,6 +15,8 @@ import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.transport.OpenSearchTransport;
 import org.opensearch.client.transport.rest_client.RestClientTransport;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @ApplicationScoped
 public class OpenSearchTransportProducer {
 
@@ -27,7 +29,8 @@ public class OpenSearchTransportProducer {
     @Produces
     @Singleton
     public OpenSearchTransport openSearchTransport() {
-        this.transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
+        this.transport = new RestClientTransport(restClient,
+                new JacksonJsonpMapper(new ObjectMapper().findAndRegisterModules()));
         return this.transport;
     }
 

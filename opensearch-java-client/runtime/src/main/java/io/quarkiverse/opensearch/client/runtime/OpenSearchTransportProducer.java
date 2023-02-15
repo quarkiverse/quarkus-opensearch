@@ -6,6 +6,7 @@ import java.io.UncheckedIOException;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -26,11 +27,15 @@ public class OpenSearchTransportProducer {
 
     private OpenSearchTransport transport;
 
+    @Inject
+    private Instance<ObjectMapper> objectMappers;
+
     @Produces
     @Singleton
     public OpenSearchTransport openSearchTransport() {
+        final ObjectMapper objectMapper = objectMappers.stream().findFirst().orElse(new ObjectMapper().findAndRegisterModules());
         this.transport = new RestClientTransport(restClient,
-                new JacksonJsonpMapper(new ObjectMapper().findAndRegisterModules()));
+                new JacksonJsonpMapper(objectMapper));
         return this.transport;
     }
 

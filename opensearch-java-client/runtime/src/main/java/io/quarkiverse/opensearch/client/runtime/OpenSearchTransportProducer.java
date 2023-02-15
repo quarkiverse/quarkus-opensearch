@@ -33,7 +33,8 @@ public class OpenSearchTransportProducer {
     @Produces
     @Singleton
     public OpenSearchTransport openSearchTransport() {
-        final ObjectMapper objectMapper = objectMappers.stream().findFirst().orElse(new ObjectMapper().findAndRegisterModules());
+        final ObjectMapper objectMapper = objectMappers.stream().findFirst()
+                .orElse(new ObjectMapper().findAndRegisterModules());
         this.transport = new RestClientTransport(restClient,
                 new JacksonJsonpMapper(objectMapper));
         return this.transport;

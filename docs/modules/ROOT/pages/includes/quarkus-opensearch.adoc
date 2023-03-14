@@ -26,7 +26,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.hosts]]`link:#quarkus-opensearch_quarkus.opensearch.hosts[quarkus.opensearch.hosts]`
+a| [[quarkus-opensearch_quarkus.opensearch.hosts]]`link:#quarkus-opensearch_quarkus.opensearch.hosts[quarkus.opensearch.hosts]`
 
 [.description]
 --
@@ -42,7 +42,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
+a| [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
 
 [.description]
 --
@@ -58,7 +58,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.password]]`link:#quarkus-opensearch_quarkus.opensearch.password[quarkus.opensearch.password]`
+a| [[quarkus-opensearch_quarkus.opensearch.password]]`link:#quarkus-opensearch_quarkus.opensearch.password[quarkus.opensearch.password]`
 
 [.description]
 --
@@ -74,7 +74,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
+a| [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
 
 [.description]
 --

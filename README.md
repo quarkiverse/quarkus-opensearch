@@ -13,6 +13,15 @@ This extension allows you to connect to an [OpenSearch cluster](https://opensear
 - [OpenSearch REST high-level client](https://opensearch.org/docs/latest/clients/java-rest-high-level/)
 - [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/)
 
+## Version Matrix 
+|       | Quarkus      | OpenSearch |
+|-------|--------------|------------|
+| 0.2.4 | 2.16.4.Final | 2.6.0      |
+| 0.2.3 | 2.16.3.Final | 2.5.0      |
+| 0.2.2 | 2.16.2.Final | 2.5.0      |
+| 0.2.1 | 2.16.2.Final | 2.5.0      |
+| 0.2.0 | 2.15.2.Final | 2.4.1      |
+
 ## Documentation
 
 Take a look at [the documentation](https://github.com/quarkiverse/quarkus-opensearch/blob/main/docs/modules/ROOT/pages/index.adoc) on how

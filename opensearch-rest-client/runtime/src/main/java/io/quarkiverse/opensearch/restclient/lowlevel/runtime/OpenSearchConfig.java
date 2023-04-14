@@ -8,6 +8,7 @@ import java.util.Optional;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithDefault;
 
 @ConfigMapping(prefix = "quarkus.opensearch")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
@@ -22,9 +23,8 @@ public interface OpenSearchConfig {
      * The protocol to use when contacting OpenSearch servers.
      * Set to "https" to enable SSL/TLS.
      */
-    default String protocol() {
-        return "http";
-    };
+    @WithDefault("http")
+    String protocol();
 
     /**
      * The username for basic HTTP authentication.
@@ -39,30 +39,26 @@ public interface OpenSearchConfig {
     /**
      * The connection timeout.
      */
-    default Duration connectionTimeout() {
-        return Duration.ofSeconds(15);
-    }
+    @WithDefault("15S")
+    Duration connectionTimeout();
 
     /**
      * The socket timeout.
      */
-    default Duration socketTimeout() {
-        return Duration.ofSeconds(30);
-    }
+    @WithDefault("30S")
+    Duration socketTimeout();
 
     /**
      * The maximum number of connections to all the OpenSearch servers.
      */
-    default int maxConnections() {
-        return 20;
-    }
+    @WithDefault("20")
+    int maxConnections();
 
     /**
      * The maximum number of connections per OpenSearch server.
      */
-    default int maxConnectionsPerRoute() {
-        return 10;
-    }
+    @WithDefault("10")
+    int maxConnectionsPerRoute();
 
     /**
      * The number of IO thread.
@@ -76,25 +72,20 @@ public interface OpenSearchConfig {
     /**
      * Configuration for the automatic discovery of new OpenSearch nodes.
      */
-    default DiscoveryConfig discovery() {
-        return new DiscoveryConfig() {
-        };
-    }
+    DiscoveryConfig discovery();
 
-    public static interface DiscoveryConfig {
+    interface DiscoveryConfig {
 
         /**
          * Defines if automatic discovery is enabled.
          */
-        default boolean enabled() {
-            return false;
-        }
+        @WithDefault("false")
+        boolean enabled();
 
         /**
          * Refresh interval of the node list.
          */
-        default Duration refreshInterval() {
-            return Duration.ofMinutes(5);
-        }
+        @WithDefault("5M")
+        Duration refreshInterval();
     }
 }

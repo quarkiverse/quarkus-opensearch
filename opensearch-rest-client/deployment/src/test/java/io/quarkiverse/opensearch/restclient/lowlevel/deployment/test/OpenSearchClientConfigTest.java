@@ -2,8 +2,8 @@ package io.quarkiverse.opensearch.restclient.lowlevel.deployment.test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.jboss.shrinkwrap.api.ShrinkWrap;

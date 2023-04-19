@@ -3,11 +3,11 @@ package io.quarkiverse.opensearch.restclient.lowlevel.runtime;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestClientBuilder;

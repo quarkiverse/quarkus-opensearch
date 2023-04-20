@@ -173,20 +173,37 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.discovery]]`link:#quarkus-opensearch_quarkus.opensearch.discovery[quarkus.opensearch.discovery]`
+a| [[quarkus-opensearch_quarkus.opensearch.discovery.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.enabled[quarkus.opensearch.discovery.enabled]`
 
 [.description]
 --
-Configuration for the automatic discovery of new OpenSearch nodes.
+Defines if automatic discovery is enabled.
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY+++`
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|DiscoveryConfig 
-|required icon:exclamation-circle[title=Configuration property is required]
+--|boolean 
+|`false`
+
+
+a| [[quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
+
+[.description]
+--
+Refresh interval of the node list.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+|`5M`
 
 |===
 ifndef::no-duration-note[]

@@ -42,6 +42,22 @@ endif::add-copy-button-to-env-var[]
 |
 
 
+a| [[quarkus-opensearch_quarkus.opensearch.protocol]]`link:#quarkus-opensearch_quarkus.opensearch.protocol[quarkus.opensearch.protocol]`
+
+[.description]
+--
+The protocol to use when contacting OpenSearch servers. Set to "https" to enable SSL/TLS.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_PROTOCOL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_PROTOCOL+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`http`
+
+
 a| [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
 
 [.description]
@@ -74,6 +90,72 @@ endif::add-copy-button-to-env-var[]
 |
 
 
+a| [[quarkus-opensearch_quarkus.opensearch.connection-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.connection-timeout[quarkus.opensearch.connection-timeout]`
+
+[.description]
+--
+The connection timeout.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+|`15S`
+
+
+a| [[quarkus-opensearch_quarkus.opensearch.socket-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.socket-timeout[quarkus.opensearch.socket-timeout]`
+
+[.description]
+--
+The socket timeout.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+|`30S`
+
+
+a| [[quarkus-opensearch_quarkus.opensearch.max-connections]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections[quarkus.opensearch.max-connections]`
+
+[.description]
+--
+The maximum number of connections to all the OpenSearch servers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`20`
+
+
+a| [[quarkus-opensearch_quarkus.opensearch.max-connections-per-route]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
+
+[.description]
+--
+The maximum number of connections per OpenSearch server.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`10`
+
+
 a| [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
 
 [.description]
@@ -90,4 +172,33 @@ endif::add-copy-button-to-env-var[]
 --|int 
 |
 
+
+a| [[quarkus-opensearch_quarkus.opensearch.discovery]]`link:#quarkus-opensearch_quarkus.opensearch.discovery[quarkus.opensearch.discovery]`
+
+[.description]
+--
+Configuration for the automatic discovery of new OpenSearch nodes.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY+++`
+endif::add-copy-button-to-env-var[]
+--|DiscoveryConfig 
+|required icon:exclamation-circle[title=Configuration property is required]
+
 |===
+ifndef::no-duration-note[]
+[NOTE]
+[id='duration-note-anchor-{summaryTableId}']
+.About the Duration format
+====
+The format for durations uses the standard `java.time.Duration` format.
+You can learn more about it in the link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-[Duration#parse() javadoc].
+
+You can also provide duration values starting with a number.
+In this case, if the value consists only of a number, the converter treats the value as seconds.
+Otherwise, `PT` is implicitly prepended to the value to obtain a standard `java.time.Duration` format.
+====
+endif::no-duration-note[]

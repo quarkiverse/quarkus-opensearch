@@ -14,13 +14,16 @@ This extension allows you to connect to an [OpenSearch cluster](https://opensear
 - [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/)
 
 ## Version Matrix 
-|       | Quarkus      | OpenSearch |
-|-------|--------------|------------|
-| 0.2.4 | 2.16.4.Final | 2.6.0      |
-| 0.2.3 | 2.16.3.Final | 2.5.0      |
-| 0.2.2 | 2.16.2.Final | 2.5.0      |
-| 0.2.1 | 2.16.2.Final | 2.5.0      |
-| 0.2.0 | 2.15.2.Final | 2.4.1      |
+|       | Quarkus      | OpenSearch |OpenSearch Java Client |
+|-------|--------------|------------|-----------------------|
+| 1.0.0 | 3.0.0.Final  | 2.6.0      |2.4.0                  |
+| 0.2.6 | 2.16.6.Final | 2.6.0      |2.2.0                  |
+| 0.2.5 | 2.16.5.Final | 2.6.0      |2.2.0                  |
+| 0.2.4 | 2.16.4.Final | 2.6.0      |2.2.0                  |
+| 0.2.3 | 2.16.3.Final | 2.5.0      |2.2.0                  |
+| 0.2.2 | 2.16.2.Final | 2.5.0      |2.2.0                  |
+| 0.2.1 | 2.16.2.Final | 2.5.0      |2.2.0                  |
+| 0.2.0 | 2.15.2.Final | 2.4.1      |2.2.0                  |
 
 ## Documentation
 

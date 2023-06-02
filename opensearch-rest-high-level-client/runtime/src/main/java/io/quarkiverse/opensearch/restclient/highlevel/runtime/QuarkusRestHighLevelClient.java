@@ -6,7 +6,7 @@ import java.util.List;
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.CheckedConsumer;
-import org.opensearch.common.xcontent.NamedXContentRegistry;
+import org.opensearch.core.xcontent.NamedXContentRegistry;
 
 /**
  * The RestHighLevelClient cannot be built with an existing RestClient.

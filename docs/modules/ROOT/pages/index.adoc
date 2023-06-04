@@ -35,11 +35,6 @@ For instance, with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
-[[extension-configuration-reference]]
-== Extension Configuration Reference
-
-include::includes/quarkus-opensearch.adoc[leveloffset=+1, opts=optional]
-
 === OpenSearch REST high-level client
 
 The REST high-level client depends on the REST client and does not require any additional configuration.
@@ -73,3 +68,8 @@ with Maven, add the following dependency to your POM file:
     <version>{project-version}</version>
 </dependency>
 ----
+
+[[extension-configuration-reference]]
+== Extension Configuration Reference
+
+include::includes/quarkus-opensearch.adoc[leveloffset=+1, opts=optional]

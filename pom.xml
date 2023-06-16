@@ -17,6 +17,11 @@
         <module>opensearch-java-client</module>
         <module>docs</module>
     </modules>
+    <scm>
+      <connection>scm:git:git@github.com:quarkiverse/quarkus-opensearch.git</connection>
+      <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-opensearch.git</developerConnection>
+      <url>https://github.com/quarkiverse/quarkus-opensearch</url>
+    </scm>  
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <maven.compiler.release>11</maven.compiler.release>

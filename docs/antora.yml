@@ -1,5 +1,5 @@
 name: quarkus-opensearch
-title: Quarkus Opensearch Extension
+title: Opensearch
 version: dev
 nav:
   - modules/ROOT/nav.adoc

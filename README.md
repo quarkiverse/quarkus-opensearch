@@ -16,6 +16,7 @@ This extension allows you to connect to an [OpenSearch cluster](https://opensear
 ## Version Matrix 
 |       | Quarkus      | OpenSearch | OpenSearch Java Client |
 |-------|--------------|------------|------------------------|
+| 1.3.0 | 3.5.2        | 2.11.0     | 2.8.1                  |
 | 1.2.3 | 3.2.8.Final  | 2.11.0     | 2.8.1                  |
 | 1.2.2 | 3.2.4.Final  | 2.9.0      | 2.6.0                  |
 | 1.2.1 | 3.2.3.Final  | 2.9.0      | 2.6.0                  |

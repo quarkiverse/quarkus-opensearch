@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.RestClientBuilder;
 
-import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
-import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchRestClientConfig;
+import io.quarkiverse.opensearch.restclient.lowlevel.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.RestClientBuilderHelper;
 import io.quarkus.test.QuarkusUnitTest;
 
@@ -27,7 +27,7 @@ public class OpenSearchClientConfigTest {
                                     "application.properties"));
 
     @Inject
-    OpenSearchRestClientConfig config;
+    OpenSearchConfig config;
 
     @Test
     public void testRestClientBuilderHelperWithElasticsearchClientConfig() {

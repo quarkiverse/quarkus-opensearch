@@ -21,7 +21,7 @@ import org.opensearch.client.sniff.OpenSearchNodesSniffer;
 import org.opensearch.client.sniff.Sniffer;
 import org.opensearch.client.sniff.SnifferBuilder;
 
-import io.quarkiverse.opensearch.restclient.lowlevel.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
 
@@ -33,7 +33,7 @@ public final class RestClientBuilderHelper {
         // avoid instantiation
     }
 
-    public static RestClientBuilder createRestClientBuilder(OpenSearchConfig config) {
+    public static RestClientBuilder createRestClientBuilder(OpenSearchRestClientConfig config) {
         List<HttpHost> hosts = new ArrayList<>();
         if (config.hosts().isPresent()) {
             for (InetSocketAddress host : config.hosts().get()) {
@@ -99,7 +99,7 @@ public final class RestClientBuilderHelper {
         return builder;
     }
 
-    public static Sniffer createSniffer(RestClient client, OpenSearchConfig config) {
+    public static Sniffer createSniffer(RestClient client, OpenSearchRestClientConfig config) {
         SnifferBuilder builder = Sniffer.builder(client)
                 .setSniffIntervalMillis((int) config.discovery().refreshInterval().toMillis());
 

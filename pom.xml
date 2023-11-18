@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <name>Quarkus - OpenSearch Client - Parent</name>
     <modules>
+        <module>opensearch-client-common</module>
         <module>opensearch-rest-client</module>
         <module>opensearch-rest-high-level-client</module>
         <module>opensearch-java-client</module>
@@ -76,22 +77,22 @@
             </dependency>
             <dependency>
                 <groupId>io.quarkiverse.opensearch</groupId>
+                <artifactId>quarkus-opensearch-client-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.opensearch</groupId>
+                <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-rest-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-high-level-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-high-level-client-deployment</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

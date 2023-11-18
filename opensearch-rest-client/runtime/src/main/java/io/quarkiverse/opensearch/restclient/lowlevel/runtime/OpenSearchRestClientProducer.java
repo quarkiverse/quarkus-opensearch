@@ -17,7 +17,7 @@ import org.opensearch.client.sniff.Sniffer;
 public class OpenSearchRestClientProducer {
 
     @Inject
-    OpenSearchConfig config;
+    OpenSearchRestClientConfig config;
 
     private RestClient client;
 

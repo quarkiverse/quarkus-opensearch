@@ -2,6 +2,7 @@ package io.quarkiverse.opensearch.client.runtime;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Optional;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,10 +34,14 @@ public class OpenSearchTransportProducer {
     @Produces
     @Singleton
     public OpenSearchTransport openSearchTransport() {
-        final ObjectMapper objectMapper = objectMappers.stream().findFirst()
-                .orElse(new ObjectMapper().findAndRegisterModules());
-        this.transport = new RestClientTransport(restClient,
-                new JacksonJsonpMapper(objectMapper));
+        final Optional<ObjectMapper> objectMapper = objectMappers.stream().findFirst();
+        if (objectMapper.isPresent()) {
+            this.transport = new RestClientTransport(restClient,
+                    new JacksonJsonpMapper(objectMapper.get()));
+        } else {
+            this.transport = new RestClientTransport(restClient,
+                    new JacksonJsonpMapper());
+        }
         return this.transport;
     }
 

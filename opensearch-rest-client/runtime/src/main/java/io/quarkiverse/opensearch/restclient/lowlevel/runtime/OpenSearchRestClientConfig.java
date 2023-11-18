@@ -10,31 +10,9 @@ import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
 import io.smallrye.config.WithDefault;
 
-@ConfigMapping(prefix = "quarkus.opensearch")
+@ConfigMapping(prefix = "quarkus.opensearch.rest-client")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
-public interface OpenSearchConfig {
-
-    /**
-     * The list of hosts of the OpenSearch servers.
-     */
-    Optional<List<InetSocketAddress>> hosts();
-
-    /**
-     * The protocol to use when contacting OpenSearch servers.
-     * Set to "https" to enable SSL/TLS.
-     */
-    @WithDefault("http")
-    String protocol();
-
-    /**
-     * The username for basic HTTP authentication.
-     */
-    Optional<String> username();
-
-    /**
-     * The password for basic HTTP authentication.
-     */
-    Optional<String> password();
+public interface OpenSearchRestClientConfig {
 
     /**
      * The connection timeout.

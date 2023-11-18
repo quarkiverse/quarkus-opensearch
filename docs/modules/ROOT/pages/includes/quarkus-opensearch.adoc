@@ -12,6 +12,7 @@ h|Default
 
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.health.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
 
+
 [.description]
 --
 Whether a health check is published in case the smallrye-health extension is present.
@@ -27,6 +28,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus.opensearch.hosts]]`link:#quarkus-opensearch_quarkus.opensearch.hosts[quarkus.opensearch.hosts]`
+
 
 [.description]
 --
@@ -44,6 +46,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.protocol]]`link:#quarkus-opensearch_quarkus.opensearch.protocol[quarkus.opensearch.protocol]`
 
+
 [.description]
 --
 The protocol to use when contacting OpenSearch servers. Set to "https" to enable SSL/TLS.
@@ -59,6 +62,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
+
 
 [.description]
 --
@@ -76,6 +80,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.password]]`link:#quarkus-opensearch_quarkus.opensearch.password[quarkus.opensearch.password]`
 
+
 [.description]
 --
 The password for basic HTTP authentication.
@@ -91,6 +96,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus.opensearch.connection-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.connection-timeout[quarkus.opensearch.connection-timeout]`
+
 
 [.description]
 --
@@ -109,6 +115,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.socket-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.socket-timeout[quarkus.opensearch.socket-timeout]`
 
+
 [.description]
 --
 The socket timeout.
@@ -126,6 +133,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.max-connections]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections[quarkus.opensearch.max-connections]`
 
+
 [.description]
 --
 The maximum number of connections to all the OpenSearch servers.
@@ -142,6 +150,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.max-connections-per-route]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
 
+
 [.description]
 --
 The maximum number of connections per OpenSearch server.
@@ -157,6 +166,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
+
 
 [.description]
 --
@@ -176,6 +186,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus.opensearch.discovery.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.enabled[quarkus.opensearch.discovery.enabled]`
 
+
 [.description]
 --
 Defines if automatic discovery is enabled.
@@ -191,6 +202,7 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
+
 
 [.description]
 --
@@ -212,11 +224,17 @@ ifndef::no-duration-note[]
 [id='duration-note-anchor-{summaryTableId}']
 .About the Duration format
 ====
-The format for durations uses the standard `java.time.Duration` format.
-You can learn more about it in the link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence-[Duration#parse() javadoc].
+To write duration values, use the standard `java.time.Duration` format.
+See the link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() javadoc] for more information.
 
-You can also provide duration values starting with a number.
-In this case, if the value consists only of a number, the converter treats the value as seconds.
-Otherwise, `PT` is implicitly prepended to the value to obtain a standard `java.time.Duration` format.
+You can also use a simplified format, starting with a number:
+
+* If the value is only a number, it represents time in seconds.
+* If the value is a number followed by `ms`, it represents time in milliseconds.
+
+In other cases, the simplified format is translated to the `java.time.Duration` format for parsing:
+
+* If the value is a number followed by `h`, `m`, or `s`, it is prefixed with `PT`.
+* If the value is a number followed by `d`, it is prefixed with `P`.
 ====
 endif::no-duration-note[]

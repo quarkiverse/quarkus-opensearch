@@ -14,8 +14,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>runtime</module>
         <module>deployment</module>
+        <module>runtime</module>
     </modules>
 
 </project>

@@ -6,22 +6,26 @@ import java.io.UncheckedIOException;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestClientBuilder;
 import org.opensearch.client.sniff.Sniffer;
 
+import io.quarkiverse.opensearch.OpenSearchConfig;
+
 @ApplicationScoped
 public class OpenSearchRestClientProducer {
 
-    @Inject
-    OpenSearchRestClientConfig config;
+    private final OpenSearchConfig config;
 
     private RestClient client;
 
     private Sniffer sniffer;
+
+    public OpenSearchRestClientProducer(final OpenSearchConfig config) {
+        this.config = config;
+    }
 
     @Produces
     @Singleton

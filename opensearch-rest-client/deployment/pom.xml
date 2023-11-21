@@ -33,6 +33,14 @@
             <artifactId>quarkus-devservices-deployment</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-client-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.opensearch</groupId>
             <artifactId>opensearch-testcontainers</artifactId>
             <exclusions>

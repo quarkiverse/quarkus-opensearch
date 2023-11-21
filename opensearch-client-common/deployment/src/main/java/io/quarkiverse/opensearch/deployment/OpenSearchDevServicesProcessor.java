@@ -7,8 +7,8 @@ class OpenSearchDevServicesProcessor {
     static final String FEATURE = "opensearch-common";
 
     @BuildStep
-    DevservicesOpenSearchBuildItem devServices() {
-        return new DevservicesOpenSearchBuildItem("quarkus.opensearch.hosts");
+    DevServicesOpenSearchBuildItem devServices() {
+        return new DevServicesOpenSearchBuildItem("quarkus.opensearch.hosts");
     }
 
 }

@@ -1,11 +1,11 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.client.deployment;
 
 import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
 @ConfigRoot(name = "opensearch", phase = ConfigPhase.BUILD_TIME)
-public class OpenSearchBuildTimeConfig {
+public class OpenSearchClientBuildTimeConfig {
     /**
      * Whether a health check is published in case the smallrye-health extension is present.
      */

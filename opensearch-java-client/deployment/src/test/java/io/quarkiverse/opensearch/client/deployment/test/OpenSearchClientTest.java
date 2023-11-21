@@ -22,7 +22,7 @@ import org.opensearch.client.opensearch.indices.DeleteIndexRequest;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class OpenSearchClientTest {
+class OpenSearchClientTest {
 
     @RegisterExtension
     static final QuarkusUnitTest TEST = new QuarkusUnitTest()
@@ -43,7 +43,7 @@ public class OpenSearchClientTest {
     private final TimeUnit seconds = TimeUnit.SECONDS;
 
     @Test
-    public void testOpenSearchClient() throws Exception {
+    void testOpenSearchClient() throws Exception {
         assertNotNull(client._transport());
         CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder().index(index).build();
         assertEquals(client.indices().create(createIndexRequest).index(), index);
@@ -70,7 +70,7 @@ public class OpenSearchClientTest {
     }
 
     @Test
-    public void testOpenSearchAsyncClient() throws Exception {
+    void testOpenSearchAsyncClient() throws Exception {
         assertNotNull(asyncClient._transport());
         CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder().index(index).build();
         assertEquals(asyncClient.indices().create(createIndexRequest).get(wait, seconds).index(), index);

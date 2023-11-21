@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment.test;
+package io.quarkiverse.opensearch.restclient.test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.RestClientBuilder;
 
-import io.quarkiverse.opensearch.restclient.lowlevel.OpenSearchClientConfig;
-import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.RestClientBuilderHelper;
 import io.quarkus.test.QuarkusUnitTest;
 
@@ -30,7 +30,7 @@ public class OpenSearchClientConfigTest {
     OpenSearchConfig config;
 
     @Test
-    public void testRestClientBuilderHelperWithElasticsearchClientConfig() {
+    void testRestClientBuilderHelperWithElasticsearchClientConfig() {
         RestClientBuilderHelper.createRestClientBuilder(config).build();
         assertTrue(TestConfigurator.invoked);
     }

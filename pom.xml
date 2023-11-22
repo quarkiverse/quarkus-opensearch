@@ -31,7 +31,7 @@
         <quarkus.version>3.5.2</quarkus.version>
         <opensearch.version>2.11.0</opensearch.version>
         <opensearch.client.version>2.8.1</opensearch.client.version>
-        <opensearch-testcontainers.version>2.0.0</opensearch-testcontainers.version>
+        <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
     </properties>
     <dependencyManagement>
         <dependencies>

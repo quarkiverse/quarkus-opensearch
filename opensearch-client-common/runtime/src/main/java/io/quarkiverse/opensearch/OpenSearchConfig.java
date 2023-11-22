@@ -1,6 +1,5 @@
 package io.quarkiverse.opensearch;
 
-import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
@@ -9,15 +8,19 @@ import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 import io.smallrye.config.ConfigMapping;
 import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
 @ConfigMapping(prefix = "quarkus.opensearch")
 @ConfigRoot(phase = ConfigPhase.RUN_TIME)
 public interface OpenSearchConfig {
 
     /**
-     * The list of hosts of the OpenSearch servers.
+     * The list of hosts of the OpenSearch servers, when accessing AWS OpenSearch set to AWS endpoint name.
+     *
+     * Host Example: opensearch-01:9200,opensearch-02:9200
+     * AWS Endpoint Example: search-domain-name-identifier.region.es.amazonaws.com
      */
-    Optional<List<InetSocketAddress>> hosts();
+    Optional<List<String>> hosts();
 
     /**
      * The protocol to use when contacting OpenSearch servers.
@@ -70,6 +73,33 @@ public interface OpenSearchConfig {
     Optional<Integer> ioThreadCounts();
 
     /**
+     * AWS Region
+     */
+    @WithName("aws.region")
+    @WithDefault("us-west-2")
+    String awsRegion();
+
+    /**
+     * Set to "es" or "aoss" to use AWS OpenSearch Service.
+     * es : Amazon OpenSearch Service
+     * aoss : Amazon OpenSearch Serverless
+     */
+    @WithName("aws.service")
+    Optional<String> awsService();
+
+    /**
+     * AWS Secret Access Key for setting up StaticCredentialsProvider
+     */
+    @WithName("aws.access-key-id")
+    Optional<String> accessKeyId();
+
+    /**
+     * AWS Secret Access Key Secret for setting up StaticCredentialsProvider
+     */
+    @WithName("aws.access-key-secret")
+    Optional<String> secretAccessKey();
+
+    /**
      * Configuration for the automatic discovery of new OpenSearch nodes.
      */
     DiscoveryConfig discovery();
@@ -87,32 +117,6 @@ public interface OpenSearchConfig {
          */
         @WithDefault("5M")
         Duration refreshInterval();
-    }
-
-    /**
-     * AWS OpenSearch configuration
-     */
-    Optional<AWSConfig> aws();
-
-    interface AWSConfig {
-        /**
-         * AWS OpenSearch endpoint
-         */
-        Optional<String> endpoint();
-
-        /**
-         * AWS Region
-         */
-        @WithDefault("us-west-2")
-        String region();
-
-        /**
-         * AWS OpenSearch Service Type
-         * es : Amazon OpenSearch Service
-         * aoss : Amazon OpenSearch Serverless
-         */
-        @WithDefault("es")
-        String service();
     }
 
 }

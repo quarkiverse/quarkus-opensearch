@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.deployment;
 
 import io.quarkus.builder.item.MultiBuildItem;
 

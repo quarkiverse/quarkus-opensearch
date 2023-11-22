@@ -128,6 +128,16 @@
                 <version>${apache.httpclient5.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.httpcomponents.core5</groupId>
+                <artifactId>httpcore5</artifactId>
+                <version>${apache.httpclient5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>auth</artifactId>
+                <version>${awssdk.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>apache-client</artifactId>
                 <version>${awssdk.version}</version>

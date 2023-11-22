@@ -22,6 +22,10 @@
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
             <artifactId>quarkus-opensearch-java-client</artifactId>
         </dependency>
         <!-- Test dependencies -->

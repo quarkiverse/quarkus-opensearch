@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.deployment;
 
 import java.time.Duration;
 import java.util.Collections;

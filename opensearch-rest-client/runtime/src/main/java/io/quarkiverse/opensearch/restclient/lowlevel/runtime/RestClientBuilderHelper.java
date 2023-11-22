@@ -1,6 +1,5 @@
 package io.quarkiverse.opensearch.restclient.lowlevel.runtime;
 
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +35,9 @@ public final class RestClientBuilderHelper {
     public static RestClientBuilder createRestClientBuilder(OpenSearchConfig config) {
         List<HttpHost> hosts = new ArrayList<>();
         if (config.hosts().isPresent()) {
-            for (InetSocketAddress host : config.hosts().get()) {
-                hosts.add(new HttpHost(host.getHostString(), host.getPort(), config.protocol()));
+            for (String host : config.hosts().get()) {
+                String[] h = host.split(":");
+                hosts.add(new HttpHost(h[0], Integer.valueOf(h[1]), config.protocol()));
             }
         }
 

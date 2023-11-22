@@ -18,7 +18,7 @@ import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.RestClientBuilderHelper;
 import io.quarkus.test.QuarkusUnitTest;
 
-public class OpenSearchClientConfigTest {
+class OpenSearchRestClientConfigTest {
     @RegisterExtension
     static final QuarkusUnitTest TEST = new QuarkusUnitTest()
             .setArchiveProducer(
@@ -30,7 +30,7 @@ public class OpenSearchClientConfigTest {
     OpenSearchConfig config;
 
     @Test
-    void testRestClientBuilderHelperWithElasticsearchClientConfig() {
+    void testRestClientBuilderHelperWithOpenSearchClientConfig() {
         RestClientBuilderHelper.createRestClientBuilder(config).build();
         assertTrue(TestConfigurator.invoked);
     }

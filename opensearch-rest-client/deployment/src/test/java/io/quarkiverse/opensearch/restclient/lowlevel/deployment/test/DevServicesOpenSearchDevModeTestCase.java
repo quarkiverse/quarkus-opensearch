@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import io.quarkus.test.QuarkusDevModeTest;
 import io.restassured.RestAssured;
 
-class DevServicesOpenSearchDevModeTestCase {
+public class DevServicesOpenSearchDevModeTestCase {
     @RegisterExtension
     static QuarkusDevModeTest test = new QuarkusDevModeTest()
             .withApplicationRoot((jar) -> jar

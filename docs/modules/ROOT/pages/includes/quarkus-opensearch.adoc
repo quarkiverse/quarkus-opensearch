@@ -10,7 +10,8 @@ h|[[quarkus-opensearch_configuration]]link:#quarkus-opensearch_configuration[Con
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.health.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
+
+a|icon:lock[title=Fixed at build time] `link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
 
 
 [.description]

@@ -3,6 +3,7 @@ package io.quarkiverse.opensearch.client.deployment.test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -11,6 +12,8 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.transport.aws.AwsSdk2TransportOptions;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
 import io.quarkiverse.opensearch.client.AwsSdk2TransportOptionsCallback;
@@ -31,9 +34,12 @@ class AwsSdk2TransportConfigTest {
     @Inject
     OpenSearchConfig config;
 
+    @Inject
+    Instance<ObjectMapper> objectMappers;
+
     @Test
     void testOpenSearchTransportHelperWithOpenSearchClientConfig() throws Exception {
-        OpenSearchTransportHelper.createAwsSdk2Transport(config);
+        OpenSearchTransportHelper.createAwsSdk2Transport(config, objectMappers);
         assertTrue(AwsSdk2TransportOptionsTestConfigurator.invoked);
     }
 

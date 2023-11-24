@@ -3,6 +3,7 @@ package io.quarkiverse.opensearch.client.deployment.test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
 import org.apache.hc.client5.http.config.RequestConfig;
@@ -13,6 +14,8 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
 import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
@@ -32,9 +35,12 @@ class ApacheHttpClient5TransportConfigTest {
     @Inject
     OpenSearchConfig config;
 
+    @Inject
+    Instance<ObjectMapper> objectMappers;
+
     @Test
     void testOpenSearchTransportHelperWithOpenSearchClientConfig() throws Exception {
-        OpenSearchTransportHelper.createApacheHttpClient5Transport(config);
+        OpenSearchTransportHelper.createApacheHttpClient5Transport(config, objectMappers);
         assertTrue(HttpClientTestConfigurator.invoked);
         assertTrue(RequestConfigTestConfigurator.invoked);
     }

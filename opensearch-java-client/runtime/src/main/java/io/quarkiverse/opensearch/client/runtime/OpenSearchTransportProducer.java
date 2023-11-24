@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,7 +26,7 @@ public class OpenSearchTransportProducer {
 
     private final OpenSearchConfig config;
 
-    private OpenSearchTransport transport;
+    private Set<OpenSearchTransport> transports = new HashSet<>();
 
     public OpenSearchTransportProducer(final Instance<ObjectMapper> objectMappers,
             final OpenSearchConfig config) {
@@ -36,21 +37,25 @@ public class OpenSearchTransportProducer {
     @Produces
     @Singleton
     public OpenSearchTransport openSearchTransport() throws NoSuchAlgorithmException, KeyManagementException {
-        final Optional<ObjectMapper> objectMapper = objectMappers.stream().findFirst();
         if (config.awsService().isPresent()) {
-            return OpenSearchTransportHelper.createAwsSdk2Transport(config);
+            return addTransport(OpenSearchTransportHelper.createAwsSdk2Transport(config, objectMappers));
         }
-        return OpenSearchTransportHelper.createApacheHttpClient5Transport(config);
+        return addTransport(OpenSearchTransportHelper.createApacheHttpClient5Transport(config, objectMappers));
+    }
+
+    private OpenSearchTransport addTransport(final OpenSearchTransport transport) {
+        transports.add(transport);
+        return transport;
     }
 
     @PreDestroy
     void destroy() {
-        try {
-            if (this.transport != null) {
-                this.transport.close();
+        for (OpenSearchTransport transport : transports) {
+            try {
+                transport.close();
+            } catch (IOException ioe) {
+                throw new UncheckedIOException(ioe);
             }
-        } catch (IOException ioe) {
-            throw new UncheckedIOException(ioe);
         }
     }
 

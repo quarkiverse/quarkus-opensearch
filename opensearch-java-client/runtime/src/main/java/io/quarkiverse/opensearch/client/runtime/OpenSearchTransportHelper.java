@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
+import jakarta.enterprise.inject.Instance;
+
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.config.ConnectionConfig;
@@ -21,10 +23,13 @@ import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.apache.hc.core5.util.Timeout;
 import org.jboss.logging.Logger;
+import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.transport.aws.AwsSdk2Transport;
 import org.opensearch.client.transport.aws.AwsSdk2TransportOptions;
 import org.opensearch.client.transport.httpclient5.ApacheHttpClient5Transport;
 import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
 import io.quarkiverse.opensearch.client.AwsSdk2TransportOptionsCallback;
@@ -38,13 +43,14 @@ import software.amazon.awssdk.regions.Region;
 
 public final class OpenSearchTransportHelper {
 
-    private static final Logger LOG = Logger.getLogger(OpenSearchTransportHelper.class);
-
     private OpenSearchTransportHelper() {
-        // avoid instantiation
+        // private constructor
     }
 
-    public static ApacheHttpClient5Transport createApacheHttpClient5Transport(final OpenSearchConfig config)
+    private static final Logger LOG = Logger.getLogger(OpenSearchTransportHelper.class);
+
+    public static ApacheHttpClient5Transport createApacheHttpClient5Transport(final OpenSearchConfig config,
+            final Instance<ObjectMapper> objectMappers)
             throws NoSuchAlgorithmException, KeyManagementException {
         List<HttpHost> list = new ArrayList<>();
         for (String s : config.hosts()
@@ -53,9 +59,16 @@ public final class OpenSearchTransportHelper {
             HttpHost apply = new HttpHost(config.protocol(), h[0], Integer.valueOf(h[1]));
             list.add(apply);
         }
+
         final HttpHost[] hosts = list.toArray(new HttpHost[0]);
         final ApacheHttpClient5TransportBuilder builder = ApacheHttpClient5TransportBuilder
                 .builder(hosts);
+
+        // use existing ObjectMapper or create new ObjectMapper and register all modules
+        final ObjectMapper objectMapper = objectMappers.stream().findFirst()
+                .orElse(new ObjectMapper().findAndRegisterModules());
+        builder.setMapper(new JacksonJsonpMapper(objectMapper));
+
         final SSLContext sslContext = SSLContextBuilder.create().build();
 
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
@@ -117,9 +130,15 @@ public final class OpenSearchTransportHelper {
         return builder.build();
     }
 
-    public static AwsSdk2Transport createAwsSdk2Transport(final OpenSearchConfig config) {
+    public static AwsSdk2Transport createAwsSdk2Transport(final OpenSearchConfig config,
+            final Instance<ObjectMapper> objectMappers) {
         final SdkAsyncHttpClient nettyHttpClient = NettyNioAsyncHttpClient.create();
         AwsSdk2TransportOptions.Builder options = AwsSdk2TransportOptions.builder();
+
+        // use existing ObjectMapper or create new ObjectMapper and register all modules
+        final ObjectMapper objectMapper = objectMappers.stream().findFirst()
+                .orElse(new ObjectMapper().findAndRegisterModules());
+        options.setMapper(new JacksonJsonpMapper(objectMapper));
 
         if (config.accessKeyId().isPresent() && config.secretAccessKey().isPresent()) {
             options.setCredentials(AwsCredentialsProviderChain.of(

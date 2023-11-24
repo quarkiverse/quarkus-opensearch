@@ -99,11 +99,6 @@
             </dependency>
             <dependency>
                 <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-rest-high-level-client</artifactId>
                 <version>${project.version}</version>
             </dependency>

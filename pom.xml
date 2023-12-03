@@ -29,8 +29,8 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.2.8.Final</quarkus.version>
-        <opensearch.version>2.11.0</opensearch.version>
+        <quarkus.version>3.5.2</quarkus.version>
+        <opensearch.version>2.11.1</opensearch.version>
         <opensearch.client.version>2.8.1</opensearch.client.version>
         <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
         <apache.httpclient5.version>5.2.1</apache.httpclient5.version>

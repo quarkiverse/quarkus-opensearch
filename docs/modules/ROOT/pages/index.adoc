@@ -8,36 +8,52 @@ The quarkus-opensearch extension allows you to connect to an link:https://opense
 
 OpenSearch provides three different flavours of clients for connecting to the cluster. This extension has support for all three of them.
 
+=== link:https://opensearch.org/docs/latest/clients/java/[OpenSearch Java Client]
+
+This is the latest implementation of the OpenSearch clients, when starting a new project you should use this client and not bother about the others.
+This will be the only OpenSearch Client supported in the future.
+Just like the OpenSearch REST high-level level, the OpenSearch Java client lets you interact with OpenSearch through Java methods and data structures. In comparison to the REST high-level, it has no dependency to `org.opensearch:opensearch` and also provides an async client implementation.
+
+[NOTE]
+.Deprecation
+====
+The OpenSearch REST clients are deprecated. Support will be removed in OpenSearch version 3.0.0.
+
+It is recommended to switch to the Java client.
+We will try to support the REST clients as long as possible, but if you start a new project this is not the client you should use anymore.
+====
+
+=== link:https://opensearch.org/docs/latest/clients/java-rest-high-level/[OpenSearch REST High-Level Client]
+
+The OpenSearch Java high-level REST client lets you interact with your OpenSearch clusters and indices through Java methods and data structures rather than HTTP methods and JSON.
+
 === OpenSearch REST (low-level) client
 
 Core low-level client which lets you interact with OpenSearch clusters through HTTP methods and JSON, it is also used by the two other higher level clients for connecting to the cluster.
 
-=== link:https://opensearch.org/docs/latest/clients/java-rest-high-level/[OpenSearch REST high-level client]
-
-The OpenSearch Java high-level REST client lets you interact with your OpenSearch clusters and indices through Java methods and data structures rather than HTTP methods and JSON.
-
-=== link:https://opensearch.org/docs/latest/clients/java/[OpenSearch Java client]
-
-Just like the OpenSearch REST high-level level, the OpenSearch Java client lets you interact with OpenSearch through Java methods and data structures. In comparison to the REST high-level, it has no dependency to `org.opensearch:opensearch` and also provides an async client implementation.
-
 == Installation
 
-If you want to use this extension, you need to add the `io.quarkiverse.opensearch:quarkus-opensearch-rest-client` extension first to your build file.
+=== OpenSearch Java client
 
-For instance, with Maven, add the following dependency to your POM file:
+The java client does not have any dependencies on the REST client. All clients are sharing most of the configuration properties.
+The AWS related configuration properties `quarkus.opensearch.aws.*` are only applicable to this java client.
+
+If you want to use this client all you need to do is add the `io.quarkiverse.opensearch:quarkus-opensearch-java-client` extension first to your build file.
+
+with Maven, add the following dependency to your POM file:
 
 [source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.opensearch</groupId>
-    <artifactId>quarkus-opensearch-rest-client</artifactId>
+    <artifactId>quarkus-opensearch-java-client</artifactId>
     <version>{project-version}</version>
 </dependency>
 ----
 
-=== OpenSearch REST high-level client
+=== OpenSearch REST High-Level Client
 
-The REST high-level client depends on the REST client and does not require any additional configuration.
+The REST High-Level Client depends on the REST client and does not require any additional configuration.
 
 If you want to use this client all you need to do is add the `io.quarkiverse.opensearch:quarkus-opensearch-rest-high-level-client` extension first to your build file.
 
@@ -52,19 +68,17 @@ with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
-=== OpenSearch Java client
+=== OpenSearch REST Low-Level Client
 
-The java client depends on the REST client and does not require any additional configuration.
+If you want to use this extension, you need to add the `io.quarkiverse.opensearch:quarkus-opensearch-rest-client` extension first to your build file.
 
-If you want to use this client all you need to do is add the `io.quarkiverse.opensearch:quarkus-opensearch-java-client` extension first to your build file.
-
-with Maven, add the following dependency to your POM file:
+For instance, with Maven, add the following dependency to your POM file:
 
 [source,xml,subs=attributes+]
 ----
 <dependency>
     <groupId>io.quarkiverse.opensearch</groupId>
-    <artifactId>quarkus-opensearch-java-client</artifactId>
+    <artifactId>quarkus-opensearch-rest-client</artifactId>
     <version>{project-version}</version>
 </dependency>
 ----

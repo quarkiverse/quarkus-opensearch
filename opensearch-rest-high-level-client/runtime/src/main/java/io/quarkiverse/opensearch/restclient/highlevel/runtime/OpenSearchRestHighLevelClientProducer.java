@@ -6,9 +6,7 @@ import java.util.Collections;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import org.opensearch.client.RestClient;
@@ -17,11 +15,13 @@ import org.opensearch.client.RestHighLevelClient;
 @ApplicationScoped
 public class OpenSearchRestHighLevelClientProducer {
 
-    @Inject
-    @Default
-    RestClient restClient;
+    private final RestClient restClient;
 
     private RestHighLevelClient client;
+
+    public OpenSearchRestHighLevelClientProducer(final RestClient restClient) {
+        this.restClient = restClient;
+    }
 
     @Produces
     @Singleton

@@ -10,6 +10,7 @@ h|[[quarkus-opensearch_configuration]]link:#quarkus-opensearch_configuration[Con
 h|Type
 h|Default
 
+
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.health.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
 
 
@@ -217,6 +218,74 @@ endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
   link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
 |`5M`
+
+
+a| [[quarkus-opensearch_quarkus.opensearch.aws.region]]`link:#quarkus-opensearch_quarkus.opensearch.aws.region[quarkus.opensearch.aws.region]`
+[.description]
+--
+Defines the AWS region when connecting to Amazon OpenSearch Service.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_REGION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_AWS_REGION+++`
+endif::add-copy-button-to-env-var[]
+--|string
+|`us-west-2`
+
+a| [[quarkus-opensearch_quarkus.opensearch.aws.service]]`link:#quarkus-opensearch_quarkus.opensearch.aws.service[quarkus.opensearch.aws.service]`
+[.description]
+--
+When set AwsSdk2Transport is used instead of default ApacheHttpClient5Transport.
+
+Set to "es" or "aoss" to enable AWS OpenSearch Service client.
+
+* es : Amazon OpenSearch Service
+* aoss : Amazon OpenSearch Serverless
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_SERVICE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_AWS_SERVICE+++`
+endif::add-copy-button-to-env-var[]
+--|optional string
+|`-`
+
+a| [[quarkus-opensearch_quarkus.opensearch.aws.access-key-id]]`link:#quarkus-opensearch_quarkus.opensearch.aws.access-key-id[quarkus.opensearch.aws.access-key-id]`
+[.description]
+--
+
+AWS Access Key ID
+
+Use StaticCredentialsProvider using this access key id instead of DefaultCredentialsProvider.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_ID+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_ID+++`
+endif::add-copy-button-to-env-var[]
+--|optional string
+|`-`
+
+a| [[quarkus-opensearch_quarkus.opensearch.aws.access-key-secret]]`link:#quarkus-opensearch_quarkus.opensearch.aws.access-key-secret[quarkus.opensearch.aws.access-key-secret]`
+[.description]
+--
+
+AWS Access Key Secret
+
+Use StaticCredentialsProvider using this access key secret instead of DefaultCredentialsProvider.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_SECRET+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_SECRET+++`
+endif::add-copy-button-to-env-var[]
+--|optional string
+|`-`
 
 |===
 ifndef::no-duration-note[]

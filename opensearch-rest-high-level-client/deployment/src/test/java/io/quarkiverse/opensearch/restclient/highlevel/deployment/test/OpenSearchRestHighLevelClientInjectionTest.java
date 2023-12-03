@@ -12,7 +12,7 @@ import org.opensearch.client.RestHighLevelClient;
 
 import io.quarkus.test.QuarkusUnitTest;
 
-public class OpenSearchRestHighLevelClientInjectionTest {
+class OpenSearchRestHighLevelClientInjectionTest {
     @RegisterExtension
     static final QuarkusUnitTest TEST = new QuarkusUnitTest()
             .setArchiveProducer(
@@ -22,7 +22,7 @@ public class OpenSearchRestHighLevelClientInjectionTest {
     RestHighLevelClient highLevelClient;
 
     @Test
-    public void testRestHighLevelClient() {
+    void testRestHighLevelClient() {
         assertNotNull(highLevelClient.getLowLevelClient());
     }
 

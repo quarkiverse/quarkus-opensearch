@@ -15,7 +15,7 @@ public class DevServicesOpenSearchDevModeTestCase {
                     .addClass(TestResource.class));
 
     @Test
-    public void testDatasource() throws Exception {
+    void testDatasource() throws Exception {
         var fruit = new TestResource.Fruit();
         fruit.id = "1";
         fruit.name = "banana";

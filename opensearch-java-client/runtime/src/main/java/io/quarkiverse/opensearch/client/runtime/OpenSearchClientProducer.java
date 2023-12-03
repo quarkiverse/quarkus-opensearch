@@ -1,9 +1,7 @@
 package io.quarkiverse.opensearch.client.runtime;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import org.opensearch.client.opensearch.OpenSearchAsyncClient;
@@ -13,26 +11,22 @@ import org.opensearch.client.transport.OpenSearchTransport;
 @ApplicationScoped
 public class OpenSearchClientProducer {
 
-    @Inject
-    @Default
-    OpenSearchTransport transport;
+    private final OpenSearchTransport transport;
 
-    private OpenSearchClient client;
-
-    private OpenSearchAsyncClient asyncClient;
+    public OpenSearchClientProducer(final OpenSearchTransport transport) {
+        this.transport = transport;
+    }
 
     @Produces
     @Singleton
     public OpenSearchClient openSearchClient() {
-        this.client = new OpenSearchClient(transport);
-        return this.client;
+        return new OpenSearchClient(transport);
     }
 
     @Produces
     @Singleton
     public OpenSearchAsyncClient openSearchAsyncClient() {
-        this.asyncClient = new OpenSearchAsyncClient(transport);
-        return this.asyncClient;
+        return new OpenSearchAsyncClient(transport);
     }
 
 }

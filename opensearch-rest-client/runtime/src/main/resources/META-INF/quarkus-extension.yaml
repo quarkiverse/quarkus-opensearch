@@ -1,6 +1,6 @@
 ---
 artifact: ${project.groupId}:${project.artifactId}:${project.version}
-name: "OpenSearch REST client"
+name: "OpenSearch REST Client"
 metadata:
   keywords:
   - "opensearch"
@@ -8,4 +8,4 @@ metadata:
   - "search"
   categories:
   - "data"
-  status: "experimental"
+  status: "preview"

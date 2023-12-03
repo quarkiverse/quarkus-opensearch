@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel;
+package io.quarkiverse.opensearch.restclient;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;

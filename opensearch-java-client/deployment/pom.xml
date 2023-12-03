@@ -17,8 +17,12 @@
             <artifactId>quarkus-arc-deployment</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health-deployment</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
+            <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>

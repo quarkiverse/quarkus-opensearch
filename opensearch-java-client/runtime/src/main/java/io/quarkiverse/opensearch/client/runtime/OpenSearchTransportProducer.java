@@ -2,52 +2,60 @@ package io.quarkiverse.opensearch.client.runtime;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-import org.opensearch.client.RestClient;
-import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.transport.OpenSearchTransport;
-import org.opensearch.client.transport.rest_client.RestClientTransport;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.quarkiverse.opensearch.OpenSearchConfig;
 
 @ApplicationScoped
 public class OpenSearchTransportProducer {
 
-    @Inject
-    @Default
-    RestClient restClient;
+    private final Instance<ObjectMapper> objectMappers;
 
-    private OpenSearchTransport transport;
+    private final OpenSearchConfig config;
 
-    @Inject
-    private Instance<ObjectMapper> objectMappers;
+    private Set<OpenSearchTransport> transports = new HashSet<>();
+
+    public OpenSearchTransportProducer(final Instance<ObjectMapper> objectMappers,
+            final OpenSearchConfig config) {
+        this.objectMappers = objectMappers;
+        this.config = config;
+    }
 
     @Produces
     @Singleton
-    public OpenSearchTransport openSearchTransport() {
-        final ObjectMapper objectMapper = objectMappers.stream().findFirst()
-                .orElse(new ObjectMapper().findAndRegisterModules());
-        this.transport = new RestClientTransport(restClient,
-                new JacksonJsonpMapper(objectMapper));
-        return this.transport;
+    public OpenSearchTransport openSearchTransport() throws NoSuchAlgorithmException, KeyManagementException {
+        if (config.awsService().isPresent()) {
+            return addTransport(OpenSearchTransportHelper.createAwsSdk2Transport(config, objectMappers));
+        }
+        return addTransport(OpenSearchTransportHelper.createApacheHttpClient5Transport(config, objectMappers));
+    }
+
+    private OpenSearchTransport addTransport(final OpenSearchTransport transport) {
+        transports.add(transport);
+        return transport;
     }
 
     @PreDestroy
     void destroy() {
-        try {
-            if (this.transport != null) {
-                this.transport.close();
+        for (OpenSearchTransport transport : transports) {
+            try {
+                transport.close();
+            } catch (IOException ioe) {
+                throw new UncheckedIOException(ioe);
             }
-        } catch (IOException ioe) {
-            throw new UncheckedIOException(ioe);
         }
     }
 

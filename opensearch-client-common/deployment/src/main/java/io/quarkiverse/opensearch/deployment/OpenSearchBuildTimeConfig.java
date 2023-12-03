@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.deployment;
 
 import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;

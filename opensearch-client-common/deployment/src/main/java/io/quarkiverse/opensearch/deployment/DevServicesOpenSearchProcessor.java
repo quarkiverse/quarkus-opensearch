@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.deployment;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -62,7 +62,7 @@ public class DevServicesOpenSearchProcessor {
             CuratedApplicationShutdownBuildItem closeBuildItem,
             LoggingSetupBuildItem loggingSetupBuildItem,
             GlobalDevServicesConfig devServicesConfig,
-            List<DevservicesOpenSearchBuildItem> devservicesOpenSearchBuildItems) throws BuildException {
+            List<DevServicesOpenSearchBuildItem> devservicesOpenSearchBuildItems) throws BuildException {
 
         if (devservicesOpenSearchBuildItems.isEmpty()) {
             // safety belt in case a module depends on this one without producing the build item
@@ -204,7 +204,7 @@ public class DevServicesOpenSearchProcessor {
             container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts);
 
             container.start();
-            return new DevServicesResultBuildItem.RunningDevService(OpenSearchLowLevelClientProcessor.FEATURE,
+            return new DevServicesResultBuildItem.RunningDevService(OpenSearchDevServicesProcessor.FEATURE,
                     container.getContainerId(),
                     container::close,
                     buildPropertiesMap(buildItemConfig, container.getHttpHostAddress()));
@@ -212,7 +212,7 @@ public class DevServicesOpenSearchProcessor {
 
         return maybeContainerAddress
                 .map(containerAddress -> new DevServicesResultBuildItem.RunningDevService(
-                        OpenSearchLowLevelClientProcessor.FEATURE,
+                        OpenSearchDevServicesProcessor.FEATURE,
                         containerAddress.getId(),
                         null,
                         buildPropertiesMap(buildItemConfig, containerAddress.getUrl())))
@@ -237,12 +237,12 @@ public class DevServicesOpenSearchProcessor {
         private Set<String> hostsConfigProperties;
         private String version;
 
-        private DevservicesOpenSearchBuildItemsConfiguration(List<DevservicesOpenSearchBuildItem> buildItems)
+        private DevservicesOpenSearchBuildItemsConfiguration(List<DevServicesOpenSearchBuildItem> buildItems)
                 throws BuildException {
             hostsConfigProperties = new HashSet<>(buildItems.size());
 
             // check that all build items agree on the version and distribution to start
-            for (DevservicesOpenSearchBuildItem buildItem : buildItems) {
+            for (DevServicesOpenSearchBuildItem buildItem : buildItems) {
                 if (version == null) {
                     version = buildItem.getVersion();
                 } else if (!version.equals(buildItem.getVersion())) {

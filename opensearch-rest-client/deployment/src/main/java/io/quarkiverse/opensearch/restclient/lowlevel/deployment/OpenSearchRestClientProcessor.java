@@ -2,6 +2,7 @@ package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
 
 import org.jboss.jandex.DotName;
 
+import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
 import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchRestClientProducer;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.health.OpenSearchHealthCheck;

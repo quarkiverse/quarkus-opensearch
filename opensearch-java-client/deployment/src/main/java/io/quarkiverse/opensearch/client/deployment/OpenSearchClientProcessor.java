@@ -6,6 +6,7 @@ import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchClientProducer;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchTransportProducer;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
+import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;
@@ -46,7 +47,7 @@ class OpenSearchClientProcessor {
     }
 
     @BuildStep
-    HealthBuildItem addHealthCheck(OpenSearchClientBuildTimeConfig buildTimeConfig) {
+    HealthBuildItem addHealthCheck(OpenSearchBuildTimeConfig buildTimeConfig) {
         return new HealthBuildItem(OpenSearchHealthCheck.class.getName(),
                 buildTimeConfig.healthEnabled);
     }

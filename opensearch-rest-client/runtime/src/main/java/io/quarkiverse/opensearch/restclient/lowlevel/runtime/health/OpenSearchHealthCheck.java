@@ -1,7 +1,6 @@
 package io.quarkiverse.opensearch.restclient.lowlevel.runtime.health;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 import org.apache.http.util.EntityUtils;
 import org.eclipse.microprofile.health.HealthCheck;
@@ -17,8 +16,12 @@ import io.vertx.core.json.JsonObject;
 @Readiness
 @ApplicationScoped
 public class OpenSearchHealthCheck implements HealthCheck {
-    @Inject
-    RestClient restClient;
+    private static final String STATUS = "status";
+    private final RestClient restClient;
+
+    public OpenSearchHealthCheck(final RestClient restClient) {
+        this.restClient = restClient;
+    }
 
     @Override
     public HealthCheckResponse call() {
@@ -28,11 +31,11 @@ public class OpenSearchHealthCheck implements HealthCheck {
             Response response = restClient.performRequest(request);
             String responseBody = EntityUtils.toString(response.getEntity());
             JsonObject json = new JsonObject(responseBody);
-            String status = json.getString("status");
+            String status = json.getString(STATUS);
             if ("red".equals(status)) {
-                builder.down().withData("status", status);
+                builder.down().withData(STATUS, status);
             } else {
-                builder.up().withData("status", status);
+                builder.up().withData(STATUS, status);
             }
 
         } catch (Exception e) {

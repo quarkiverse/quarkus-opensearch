@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.opensearch</groupId>
-        <artifactId>quarkus-opensearch-rest-client-parent</artifactId>
+        <artifactId>quarkus-opensearch-client-common-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>quarkus-opensearch-rest-client</artifactId>
-    <name>Quarkus - OpenSearch REST client - Runtime</name>
-    <description>Connect to an OpenSearch cluster using the REST low level client</description>
+    <artifactId>quarkus-opensearch-client-common</artifactId>
+    <name>Quarkus - OpenSearch Client Common - Runtime</name>
+    <description>Common library for connecting to an OpenSearch cluster</description>
 
     <dependencies>
         <dependency>
@@ -22,41 +22,9 @@
             <artifactId>quarkus-smallrye-health</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.opensearch.client</groupId>
-            <artifactId>opensearch-rest-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>commons-logging-jboss-logging</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.opensearch.client</groupId>
-            <artifactId>opensearch-rest-client-sniffer</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-client-common</artifactId>
-        </dependency>
-
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5-internal</artifactId>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
     <build>
         <plugins>

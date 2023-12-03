@@ -3,15 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.opensearch</groupId>
-        <artifactId>quarkus-opensearch-rest-client-parent</artifactId>
+        <artifactId>quarkus-opensearch-client-common-parent</artifactId>
         <version>999-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
-    <name>Quarkus - OpenSearch REST client - Deployment</name>
+    <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
+    <name>Quarkus - OpenSearch Client Common - Deployment</name>
 
     <dependencies>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-client-common</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc-deployment</artifactId>
@@ -21,20 +25,22 @@
             <artifactId>quarkus-smallrye-health-deployment</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-client-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-rest-client</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health-spi</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-health-spi</artifactId>
+            <artifactId>quarkus-devservices-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opensearch</groupId>
+            <artifactId>opensearch-testcontainers</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Test dependencies -->

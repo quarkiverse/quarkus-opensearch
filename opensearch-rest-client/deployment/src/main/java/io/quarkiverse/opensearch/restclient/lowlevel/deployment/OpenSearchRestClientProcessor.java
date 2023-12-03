@@ -2,7 +2,8 @@ package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
 
 import org.jboss.jandex.DotName;
 
-import io.quarkiverse.opensearch.restclient.lowlevel.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
+import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchRestClientProducer;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.health.OpenSearchHealthCheck;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
@@ -13,8 +14,7 @@ import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
-class OpenSearchLowLevelClientProcessor {
-
+class OpenSearchRestClientProcessor {
     static final String FEATURE = "opensearch-rest-client";
     private static final DotName OPENSEARCH_CLIENT_CONFIG = DotName.createSimple(OpenSearchClientConfig.class.getName());
 
@@ -42,11 +42,6 @@ class OpenSearchLowLevelClientProcessor {
     HealthBuildItem addHealthCheck(OpenSearchBuildTimeConfig buildTimeConfig) {
         return new HealthBuildItem(OpenSearchHealthCheck.class.getName(),
                 buildTimeConfig.healthEnabled);
-    }
-
-    @BuildStep
-    DevservicesOpenSearchBuildItem devServices() {
-        return new DevservicesOpenSearchBuildItem("quarkus.opensearch.hosts");
     }
 
 }

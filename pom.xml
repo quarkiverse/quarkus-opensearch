@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <name>Quarkus - OpenSearch Client - Parent</name>
     <modules>
+        <module>opensearch-client-common</module>
         <module>opensearch-rest-client</module>
         <module>opensearch-rest-high-level-client</module>
         <module>opensearch-java-client</module>
@@ -28,10 +29,12 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.2.8.Final</quarkus.version>
-        <opensearch.version>2.11.0</opensearch.version>
+        <quarkus.version>3.5.2</quarkus.version>
+        <opensearch.version>2.11.1</opensearch.version>
         <opensearch.client.version>2.8.1</opensearch.client.version>
-        <opensearch-testcontainers.version>2.0.0</opensearch-testcontainers.version>
+        <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
+        <apache.httpclient5.version>5.2.1</apache.httpclient5.version>
+        <awssdk.version>2.21.27</awssdk.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -76,22 +79,17 @@
             </dependency>
             <dependency>
                 <groupId>io.quarkiverse.opensearch</groupId>
+                <artifactId>quarkus-opensearch-client-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.opensearch</groupId>
+                <artifactId>quarkus-opensearch-client-common-deployment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-rest-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-high-level-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkiverse.opensearch</groupId>
-                <artifactId>quarkus-opensearch-rest-high-level-client-deployment</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -118,6 +116,36 @@
                 <groupId>io.quarkiverse.opensearch</groupId>
                 <artifactId>quarkus-opensearch-java-client-deployment</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>${apache.httpclient5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.core5</groupId>
+                <artifactId>httpcore5</artifactId>
+                <version>${apache.httpclient5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>auth</artifactId>
+                <version>${awssdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>apache-client</artifactId>
+                <version>${awssdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>regions</artifactId>
+                <version>${awssdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>netty-nio-client</artifactId>
+                <version>${awssdk.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

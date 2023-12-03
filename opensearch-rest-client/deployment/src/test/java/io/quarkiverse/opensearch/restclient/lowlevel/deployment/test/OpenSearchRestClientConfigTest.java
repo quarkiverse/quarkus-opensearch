@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.RestClientBuilder;
 
-import io.quarkiverse.opensearch.restclient.lowlevel.OpenSearchClientConfig;
-import io.quarkiverse.opensearch.restclient.lowlevel.runtime.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.RestClientBuilderHelper;
 import io.quarkus.test.QuarkusUnitTest;
 
-public class OpenSearchClientConfigTest {
+class OpenSearchRestClientConfigTest {
     @RegisterExtension
     static final QuarkusUnitTest TEST = new QuarkusUnitTest()
             .setArchiveProducer(
@@ -30,7 +30,7 @@ public class OpenSearchClientConfigTest {
     OpenSearchConfig config;
 
     @Test
-    public void testRestClientBuilderHelperWithElasticsearchClientConfig() {
+    void testRestClientBuilderHelperWithOpenSearchClientConfig() {
         RestClientBuilderHelper.createRestClientBuilder(config).build();
         assertTrue(TestConfigurator.invoked);
     }

@@ -1,18 +1,18 @@
-package io.quarkiverse.opensearch.restclient.lowlevel.deployment;
+package io.quarkiverse.opensearch.deployment;
 
 import io.quarkus.builder.item.MultiBuildItem;
 
-public final class DevservicesOpenSearchBuildItem extends MultiBuildItem {
+public final class DevServicesOpenSearchBuildItem extends MultiBuildItem {
     private final String hostsConfigProperty;
 
     private final String version;
 
-    public DevservicesOpenSearchBuildItem(String hostsConfigProperty) {
+    public DevServicesOpenSearchBuildItem(String hostsConfigProperty) {
         this.hostsConfigProperty = hostsConfigProperty;
         this.version = null;
     }
 
-    public DevservicesOpenSearchBuildItem(String configItemName, String version) {
+    public DevServicesOpenSearchBuildItem(String configItemName, String version) {
         this.hostsConfigProperty = configItemName;
         this.version = version;
     }

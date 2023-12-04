@@ -34,7 +34,7 @@
         <opensearch.client.version>2.8.1</opensearch.client.version>
         <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
         <apache.httpclient5.version>5.2.1</apache.httpclient5.version>
-        <awssdk.version>2.21.27</awssdk.version>
+        <awssdk.version>2.21.37</awssdk.version>
     </properties>
     <dependencyManagement>
         <dependencies>

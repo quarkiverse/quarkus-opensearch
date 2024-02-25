@@ -46,6 +46,12 @@ public interface OpenSearchConfig {
     Duration connectionTimeout();
 
     /**
+     * The connection timeout.
+     */
+    @WithDefault("30S")
+    Duration threadTimeout();
+
+    /**
      * The socket timeout.
      */
     @WithDefault("30S")

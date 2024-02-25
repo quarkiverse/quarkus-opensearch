@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse</groupId>
         <artifactId>quarkiverse-parent</artifactId>
-        <version>15</version>
+        <version>16</version>
     </parent>
     <groupId>io.quarkiverse.opensearch</groupId>
     <artifactId>quarkus-opensearch-parent</artifactId>
@@ -29,12 +29,16 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.2.9.Final</quarkus.version>
-        <opensearch.version>2.11.1</opensearch.version>
-        <opensearch.client.version>2.8.1</opensearch.client.version>
+        <quarkus.version>3.2.10.Final</quarkus.version>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+        <quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
+        <quarkus-amazon-services.version>2.4.5</quarkus-amazon-services.version>
+        <opensearch.version>2.12.0</opensearch.version>
+        <opensearch.client.version>2.9.0</opensearch.client.version>
         <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
-        <apache.httpclient5.version>5.2.3</apache.httpclient5.version>
-        <awssdk.version>2.21.42</awssdk.version>
+        <apache.httpccore5.version>5.2.4</apache.httpccore5.version>
+        <apache.httpclient5.version>5.3.1</apache.httpclient5.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -42,6 +46,20 @@
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-bom</artifactId>
                 <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>${quarkus.platform.artifact-id}</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.amazonservices</groupId>
+                <artifactId>quarkus-amazon-services-bom</artifactId>
+                <version>${quarkus-amazon-services.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -125,27 +143,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents.core5</groupId>
                 <artifactId>httpcore5</artifactId>
-                <version>${apache.httpclient5.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>auth</artifactId>
-                <version>${awssdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>apache-client</artifactId>
-                <version>${awssdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>regions</artifactId>
-                <version>${awssdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>software.amazon.awssdk</groupId>
-                <artifactId>netty-nio-client</artifactId>
-                <version>${awssdk.version}</version>
+                <version>${apache.httpccore5.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

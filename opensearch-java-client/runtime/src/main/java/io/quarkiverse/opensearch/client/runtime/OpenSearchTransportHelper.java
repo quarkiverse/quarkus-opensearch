@@ -4,6 +4,8 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 
@@ -36,12 +38,18 @@ import io.quarkiverse.opensearch.client.AwsSdk2TransportOptionsCallback;
 import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
-import software.amazon.awssdk.auth.credentials.*;
+import io.vertx.core.spi.VertxThreadFactory;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.http.async.SdkAsyncHttpClient;
 import software.amazon.awssdk.http.nio.netty.NettyNioAsyncHttpClient;
 import software.amazon.awssdk.regions.Region;
 
 public final class OpenSearchTransportHelper {
+
+    private static final VertxThreadFactory VERTX_THREAD_FACTORY = VertxThreadFactory.INSTANCE;
 
     private OpenSearchTransportHelper() {
         // private constructor
@@ -80,6 +88,7 @@ public final class OpenSearchTransportHelper {
                     .setConnectTimeout(Timeout.of(config.connectionTimeout()))
                     .setSocketTimeout(Timeout.of(config.socketTimeout()))
                     .build();
+
             final PoolingAsyncClientConnectionManager connectionManager = PoolingAsyncClientConnectionManagerBuilder
                     .create()
                     .setTlsStrategy(tlsStrategy)
@@ -101,6 +110,16 @@ public final class OpenSearchTransportHelper {
 
             // Apply configuration from ApacheHttpClient5TransportBuilder.HttpClientConfigCallback implementations annotated with OpenSearchTransportConfig
             HttpAsyncClientBuilder result = httpAsyncClientBuilder.setConnectionManager(connectionManager);
+            if (VERTX_THREAD_FACTORY != null) {
+                result.setThreadFactory(new ThreadFactory() {
+
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        return VERTX_THREAD_FACTORY.newVertxThread(r, "HttpClient5OpenSearchTransport", true,
+                                config.threadTimeout().getSeconds(), TimeUnit.SECONDS);
+                    }
+                });
+            }
             final Iterable<InstanceHandle<ApacheHttpClient5TransportBuilder.HttpClientConfigCallback>> httpClientConfigCallbackHandles = Arc
                     .container()
                     .select(ApacheHttpClient5TransportBuilder.HttpClientConfigCallback.class,

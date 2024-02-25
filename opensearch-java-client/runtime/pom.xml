@@ -18,6 +18,10 @@
             <artifactId>quarkus-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-vertx</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>
             <artifactId>quarkus-opensearch-client-common</artifactId>
         </dependency>

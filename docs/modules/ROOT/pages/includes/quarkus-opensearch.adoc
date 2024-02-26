@@ -10,7 +10,7 @@ h|[[quarkus-opensearch_configuration]]link:#quarkus-opensearch_configuration[Con
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus.opensearch.health.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.health.enabled[quarkus.opensearch.health.enabled]`
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus-opensearch-health-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-health-enabled[quarkus.opensearch.health.enabled]`
 
 
 [.description]
@@ -27,7 +27,7 @@ endif::add-copy-button-to-env-var[]
 |`true`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.hosts]]`link:#quarkus-opensearch_quarkus.opensearch.hosts[quarkus.opensearch.hosts]`
+a| [[quarkus-opensearch_quarkus-opensearch-hosts]]`link:#quarkus-opensearch_quarkus-opensearch-hosts[quarkus.opensearch.hosts]`
 
 
 [.description]
@@ -44,7 +44,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.protocol]]`link:#quarkus-opensearch_quarkus.opensearch.protocol[quarkus.opensearch.protocol]`
+a| [[quarkus-opensearch_quarkus-opensearch-protocol]]`link:#quarkus-opensearch_quarkus-opensearch-protocol[quarkus.opensearch.protocol]`
 
 
 [.description]
@@ -61,7 +61,7 @@ endif::add-copy-button-to-env-var[]
 |`http`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.username]]`link:#quarkus-opensearch_quarkus.opensearch.username[quarkus.opensearch.username]`
+a| [[quarkus-opensearch_quarkus-opensearch-username]]`link:#quarkus-opensearch_quarkus-opensearch-username[quarkus.opensearch.username]`
 
 
 [.description]
@@ -78,7 +78,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.password]]`link:#quarkus-opensearch_quarkus.opensearch.password[quarkus.opensearch.password]`
+a| [[quarkus-opensearch_quarkus-opensearch-password]]`link:#quarkus-opensearch_quarkus-opensearch-password[quarkus.opensearch.password]`
 
 
 [.description]
@@ -95,7 +95,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.connection-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.connection-timeout[quarkus.opensearch.connection-timeout]`
+a| [[quarkus-opensearch_quarkus-opensearch-connection-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-connection-timeout[quarkus.opensearch.connection-timeout]`
 
 
 [.description]
@@ -109,11 +109,11 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`15S`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.thread-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.thread-timeout[quarkus.opensearch.thread-timeout]`
+a| [[quarkus-opensearch_quarkus-opensearch-thread-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-thread-timeout[quarkus.opensearch.thread-timeout]`
 
 
 [.description]
@@ -127,11 +127,11 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`30S`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.socket-timeout]]`link:#quarkus-opensearch_quarkus.opensearch.socket-timeout[quarkus.opensearch.socket-timeout]`
+a| [[quarkus-opensearch_quarkus-opensearch-socket-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-socket-timeout[quarkus.opensearch.socket-timeout]`
 
 
 [.description]
@@ -145,11 +145,11 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`30S`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.max-connections]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections[quarkus.opensearch.max-connections]`
+a| [[quarkus-opensearch_quarkus-opensearch-max-connections]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections[quarkus.opensearch.max-connections]`
 
 
 [.description]
@@ -166,7 +166,7 @@ endif::add-copy-button-to-env-var[]
 |`20`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.max-connections-per-route]]`link:#quarkus-opensearch_quarkus.opensearch.max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
+a| [[quarkus-opensearch_quarkus-opensearch-max-connections-per-route]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
 
 
 [.description]
@@ -183,7 +183,7 @@ endif::add-copy-button-to-env-var[]
 |`10`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.io-thread-counts]]`link:#quarkus-opensearch_quarkus.opensearch.io-thread-counts[quarkus.opensearch.io-thread-counts]`
+a| [[quarkus-opensearch_quarkus-opensearch-io-thread-counts]]`link:#quarkus-opensearch_quarkus-opensearch-io-thread-counts[quarkus.opensearch.io-thread-counts]`
 
 
 [.description]
@@ -202,7 +202,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.aws.region]]`link:#quarkus-opensearch_quarkus.opensearch.aws.region[quarkus.opensearch.aws.region]`
+a| [[quarkus-opensearch_quarkus-opensearch-aws-region]]`link:#quarkus-opensearch_quarkus-opensearch-aws-region[quarkus.opensearch.aws.region]`
 
 
 [.description]
@@ -219,7 +219,7 @@ endif::add-copy-button-to-env-var[]
 |`us-west-2`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.aws.service]]`link:#quarkus-opensearch_quarkus.opensearch.aws.service[quarkus.opensearch.aws.service]`
+a| [[quarkus-opensearch_quarkus-opensearch-aws-service]]`link:#quarkus-opensearch_quarkus-opensearch-aws-service[quarkus.opensearch.aws.service]`
 
 
 [.description]
@@ -236,7 +236,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.aws.access-key-id]]`link:#quarkus-opensearch_quarkus.opensearch.aws.access-key-id[quarkus.opensearch.aws.access-key-id]`
+a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-id]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-id[quarkus.opensearch.aws.access-key-id]`
 
 
 [.description]
@@ -253,7 +253,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.aws.access-key-secret]]`link:#quarkus-opensearch_quarkus.opensearch.aws.access-key-secret[quarkus.opensearch.aws.access-key-secret]`
+a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-secret]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-secret[quarkus.opensearch.aws.access-key-secret]`
 
 
 [.description]
@@ -270,7 +270,7 @@ endif::add-copy-button-to-env-var[]
 |
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.discovery.enabled]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.enabled[quarkus.opensearch.discovery.enabled]`
+a| [[quarkus-opensearch_quarkus-opensearch-discovery-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-enabled[quarkus.opensearch.discovery.enabled]`
 
 
 [.description]
@@ -287,7 +287,7 @@ endif::add-copy-button-to-env-var[]
 |`false`
 
 
-a| [[quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval]]`link:#quarkus-opensearch_quarkus.opensearch.discovery.refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
+a| [[quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
 
 
 [.description]
@@ -301,7 +301,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[], title=More information about the Duration format]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`5M`
 
 |===
@@ -311,7 +311,7 @@ ifndef::no-duration-note[]
 .About the Duration format
 ====
 To write duration values, use the standard `java.time.Duration` format.
-See the link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() javadoc] for more information.
+See the link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() Java API documentation] for more information.
 
 You can also use a simplified format, starting with a number:
 

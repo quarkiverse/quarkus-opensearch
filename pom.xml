@@ -34,11 +34,12 @@
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
         <quarkus-amazon-services.version>2.13.1</quarkus-amazon-services.version>
-        <opensearch.version>2.12.0</opensearch.version>
-        <opensearch.client.version>2.9.1</opensearch.client.version>
+        <opensearch.version>2.13.0</opensearch.version>
+        <opensearch.client.version>2.10.2</opensearch.client.version>
         <opensearch-testcontainers.version>2.0.1</opensearch-testcontainers.version>
         <apache.httpccore5.version>5.2.4</apache.httpccore5.version>
         <apache.httpclient5.version>5.3.1</apache.httpclient5.version>
+        <conscrypt-openjdk-uber.version>2.5.2</conscrypt-openjdk-uber.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -144,6 +145,11 @@
                 <groupId>org.apache.httpcomponents.core5</groupId>
                 <artifactId>httpcore5</artifactId>
                 <version>${apache.httpccore5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.conscrypt</groupId>
+                <artifactId>conscrypt-openjdk-uber</artifactId>
+                <version>${conscrypt-openjdk-uber.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

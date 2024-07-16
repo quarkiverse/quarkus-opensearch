@@ -1,7 +1,11 @@
 package io.quarkiverse.opensearch.client.runtime;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.KeyManagementException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadFactory;
@@ -23,6 +27,7 @@ import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.util.Timeout;
 import org.jboss.logging.Logger;
 import org.opensearch.client.json.jackson.JacksonJsonpMapper;
@@ -59,7 +64,7 @@ public final class OpenSearchTransportHelper {
 
     public static ApacheHttpClient5Transport createApacheHttpClient5Transport(final OpenSearchConfig config,
             final Instance<ObjectMapper> objectMappers)
-            throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException, CertificateException, KeyStoreException, IOException {
         List<HttpHost> list = new ArrayList<>();
         for (String s : config.hosts()
                 .orElse(List.of("127.0.0.1:9200"))) {
@@ -77,8 +82,12 @@ public final class OpenSearchTransportHelper {
                 .orElse(new ObjectMapper().findAndRegisterModules());
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 
-        final SSLContext sslContext = SSLContextBuilder.create().build();
-
+        final SSLContextBuilder sslContextBuilder = config.keyStoreFile().isPresent()?SSLContexts.custom():SSLContextBuilder.create();
+        if (config.keyStoreFile().isPresent()) {
+            final File file = new File(config.keyStoreFile().get());
+            sslContextBuilder.loadTrustMaterial(file, config.keyStorePassword().orElse("changeit").toCharArray());
+        }
+        final SSLContext sslContext = sslContextBuilder.build();
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
 
             final TlsStrategy tlsStrategy = ClientTlsStrategyBuilder.create()

@@ -106,6 +106,18 @@ public interface OpenSearchConfig {
     Optional<String> secretAccessKey();
 
     /**
+     * Optional keyStoreFile to be used when connecting to cluster nodes
+     */
+    @WithName("ssl.certificate.key-store-file")
+    Optional<String> keyStoreFile();
+
+    /**
+     * Optional password for accessing keyStoreFile
+     */
+    @WithName("ssl.certificate.key-store-password")
+    Optional<String> keyStorePassword();
+
+    /**
      * Configuration for the automatic discovery of new OpenSearch nodes.
      */
     DiscoveryConfig discovery();

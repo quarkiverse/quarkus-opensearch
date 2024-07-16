@@ -24,6 +24,8 @@ import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
@@ -82,17 +84,34 @@ public final class OpenSearchTransportHelper {
                 .orElse(new ObjectMapper().findAndRegisterModules());
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 
-        final SSLContextBuilder sslContextBuilder = config.keyStoreFile().isPresent()?SSLContexts.custom():SSLContextBuilder.create();
+        // create custom when key store was provided or ssl verification is disabled
+        final SSLContextBuilder sslContextBuilder = config.keyStoreFile().isPresent() || !config.sslVerify()
+                ? SSLContexts.custom()
+                : SSLContextBuilder.create();
         if (config.keyStoreFile().isPresent()) {
+            // load from keystore
             final File file = new File(config.keyStoreFile().get());
-            sslContextBuilder.loadTrustMaterial(file, config.keyStorePassword().orElse("changeit").toCharArray());
+            if (config.keyStorePassword().isPresent()) {
+                sslContextBuilder.loadTrustMaterial(file, config.keyStorePassword().get().toCharArray());
+            } else {
+                sslContextBuilder.loadTrustMaterial(file);
+            }
+        } else if (!config.sslVerify()) {
+            // load trust all strategy
+            sslContextBuilder.loadTrustMaterial(TrustAllStrategy.INSTANCE);
         }
         final SSLContext sslContext = sslContextBuilder.build();
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
 
-            final TlsStrategy tlsStrategy = ClientTlsStrategyBuilder.create()
-                    .setSslContext(sslContext)
-                    .build();
+            final ClientTlsStrategyBuilder tlsStrategyBuilder = ClientTlsStrategyBuilder.create()
+                    .setSslContext(sslContext);
+
+            // disable hostname verification from config
+            if (!config.sslVerifyHostname() || !config.sslVerify()) {
+                tlsStrategyBuilder.setHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+            }
+
+            final TlsStrategy tlsStrategy = tlsStrategyBuilder.build();
             final ConnectionConfig connectionConfig = ConnectionConfig.custom()
                     .setConnectTimeout(Timeout.of(config.connectionTimeout()))
                     .setSocketTimeout(Timeout.of(config.socketTimeout()))

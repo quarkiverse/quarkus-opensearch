@@ -3,7 +3,9 @@ package io.quarkiverse.opensearch.client.runtime;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.security.KeyManagementException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,7 +38,8 @@ public class OpenSearchTransportProducer {
 
     @Produces
     @Singleton
-    public OpenSearchTransport openSearchTransport() throws NoSuchAlgorithmException, KeyManagementException {
+    public OpenSearchTransport openSearchTransport()
+            throws NoSuchAlgorithmException, KeyManagementException, CertificateException, KeyStoreException, IOException {
         if (config.awsService().isPresent()) {
             return addTransport(OpenSearchTransportHelper.createAwsSdk2Transport(config, objectMappers));
         }

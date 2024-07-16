@@ -1,7 +1,11 @@
 package io.quarkiverse.opensearch.client.runtime;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.KeyManagementException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadFactory;
@@ -20,9 +24,12 @@ import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.util.Timeout;
 import org.jboss.logging.Logger;
 import org.opensearch.client.json.jackson.JacksonJsonpMapper;
@@ -59,7 +66,7 @@ public final class OpenSearchTransportHelper {
 
     public static ApacheHttpClient5Transport createApacheHttpClient5Transport(final OpenSearchConfig config,
             final Instance<ObjectMapper> objectMappers)
-            throws NoSuchAlgorithmException, KeyManagementException {
+            throws NoSuchAlgorithmException, KeyManagementException, CertificateException, KeyStoreException, IOException {
         List<HttpHost> list = new ArrayList<>();
         for (String s : config.hosts()
                 .orElse(List.of("127.0.0.1:9200"))) {
@@ -77,13 +84,34 @@ public final class OpenSearchTransportHelper {
                 .orElse(new ObjectMapper().findAndRegisterModules());
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 
-        final SSLContext sslContext = SSLContextBuilder.create().build();
-
+        // create custom when key store was provided or ssl verification is disabled
+        final SSLContextBuilder sslContextBuilder = config.keyStoreFile().isPresent() || !config.sslVerify()
+                ? SSLContexts.custom()
+                : SSLContextBuilder.create();
+        if (config.keyStoreFile().isPresent()) {
+            // load from keystore
+            final File file = new File(config.keyStoreFile().get());
+            if (config.keyStorePassword().isPresent()) {
+                sslContextBuilder.loadTrustMaterial(file, config.keyStorePassword().get().toCharArray());
+            } else {
+                sslContextBuilder.loadTrustMaterial(file);
+            }
+        } else if (!config.sslVerify()) {
+            // load trust all strategy
+            sslContextBuilder.loadTrustMaterial(TrustAllStrategy.INSTANCE);
+        }
+        final SSLContext sslContext = sslContextBuilder.build();
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
 
-            final TlsStrategy tlsStrategy = ClientTlsStrategyBuilder.create()
-                    .setSslContext(sslContext)
-                    .build();
+            final ClientTlsStrategyBuilder tlsStrategyBuilder = ClientTlsStrategyBuilder.create()
+                    .setSslContext(sslContext);
+
+            // disable hostname verification from config
+            if (!config.sslVerifyHostname() || !config.sslVerify()) {
+                tlsStrategyBuilder.setHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+            }
+
+            final TlsStrategy tlsStrategy = tlsStrategyBuilder.build();
             final ConnectionConfig connectionConfig = ConnectionConfig.custom()
                     .setConnectTimeout(Timeout.of(config.connectionTimeout()))
                     .setSocketTimeout(Timeout.of(config.socketTimeout()))

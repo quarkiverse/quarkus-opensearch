@@ -106,6 +106,32 @@ public interface OpenSearchConfig {
     Optional<String> secretAccessKey();
 
     /**
+     * Optional keyStoreFile to be used when connecting to cluster nodes
+     */
+    @WithName("ssl.certificate.key-store-file")
+    Optional<String> keyStoreFile();
+
+    /**
+     * Optional password for accessing keyStoreFile
+     */
+    @WithName("ssl.certificate.key-store-password")
+    Optional<String> keyStorePassword();
+
+    /**
+     * SSL Verify Hostname
+     */
+    @WithName("ssl.verify-hostname")
+    @WithDefault("true")
+    boolean sslVerifyHostname();
+
+    /**
+     * Verify SSL Certificates
+     */
+    @WithName("ssl.verify")
+    @WithDefault("true")
+    boolean sslVerify();
+
+    /**
      * Configuration for the automatic discovery of new OpenSearch nodes.
      */
     DiscoveryConfig discovery();

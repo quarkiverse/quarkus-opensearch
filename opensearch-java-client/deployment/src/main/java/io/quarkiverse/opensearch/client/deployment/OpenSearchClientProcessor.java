@@ -13,6 +13,7 @@ import io.quarkus.arc.processor.DotNames;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
 class OpenSearchClientProcessor {
@@ -50,6 +51,17 @@ class OpenSearchClientProcessor {
     HealthBuildItem addHealthCheck(OpenSearchBuildTimeConfig buildTimeConfig) {
         return new HealthBuildItem(OpenSearchHealthCheck.class.getName(),
                 buildTimeConfig.healthEnabled);
+    }
+
+    @BuildStep
+    ReflectiveClassBuildItem addReflectiveClassBuildItem() {
+        return ReflectiveClassBuildItem.builder("org.apache.hc.client5.http.impl.auth.BasicScheme")
+                .constructors()
+                .fields()
+                .methods()
+                .serialization()
+                .unsafeAllocated()
+                .build();
     }
 
 }

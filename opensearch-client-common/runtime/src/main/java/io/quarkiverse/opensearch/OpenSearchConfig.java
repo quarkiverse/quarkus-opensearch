@@ -108,13 +108,13 @@ public interface OpenSearchConfig {
     /**
      * Optional keyStoreFile to be used when connecting to cluster nodes
      */
-    @WithName("ssl.certificate.key-store-file")
+    @WithName("ssl.key-store-file")
     Optional<String> keyStoreFile();
 
     /**
      * Optional password for accessing keyStoreFile
      */
-    @WithName("ssl.certificate.key-store-password")
+    @WithName("ssl.key-store-password")
     Optional<String> keyStorePassword();
 
     /**

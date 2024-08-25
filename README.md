@@ -19,6 +19,7 @@ The Java Client is not dependent on the REST client anymore and supports Apache 
 ## Version Matrix 
 |       | Quarkus      | OpenSearch | OpenSearch Java Client |
 |-------|--------------|------------|------------------------|
+| 1.9.4 | 3.11.3       | 2.16.0     | 2.13.0                 |
 | 1.9.3 | 3.11.3       | 2.14.0     | 2.11.0                 |
 | 1.9.2 | 3.11.3       | 2.14.0     | 2.10.4                 |
 | 1.9.0 | 3.11.0       | 2.14.0     | 2.10.3                 |
@@ -30,6 +31,7 @@ The Java Client is not dependent on the REST client anymore and supports Apache 
 | 1.7.3 | 3.9.5        | 2.14.0     | 2.10.4                 |
 | 1.7.1 | 3.9.5        | 2.14.0     | 2.10.3                 |
 | 1.7.0 | 3.9.5        | 2.13.0     | 2.10.2                 |
+| 1.6.7 | 3.8.5        | 2.16.0     | 2.13.0                 |
 | 1.6.8 | 3.8.5        | 2.14.0     | 2.11.0                 |
 | 1.6.7 | 3.8.5        | 2.14.0     | 2.10.4                 |
 | 1.6.5 | 3.8.4        | 2.14.0     | 2.10.3                 |

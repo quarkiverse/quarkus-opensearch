@@ -16,7 +16,6 @@
         <module>opensearch-rest-client</module>
         <module>opensearch-rest-high-level-client</module>
         <module>opensearch-java-client</module>
-        <module>docs</module>
     </modules>
     <scm>
       <connection>scm:git:git@github.com:quarkiverse/quarkus-opensearch.git</connection>
@@ -179,6 +178,18 @@
         </pluginManagement>
     </build>
     <profiles>
+        <profile>
+            <id>docs</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>!true</value>
+                </property>
+            </activation>
+            <modules>
+                <module>docs</module>
+            </modules>
+        </profile>
         <profile>
             <id>it</id>
             <activation>

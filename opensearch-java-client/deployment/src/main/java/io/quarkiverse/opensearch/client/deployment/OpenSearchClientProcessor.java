@@ -57,7 +57,10 @@ class OpenSearchClientProcessor {
     ReflectiveClassBuildItem addReflectiveClassBuildItem() {
         return ReflectiveClassBuildItem.builder(
                 "org.apache.hc.client5.http.impl.auth.BasicScheme",
-                "org.apache.hc.client5.http.auth.UsernamePasswordCredentials")
+                "org.apache.hc.client5.http.auth.UsernamePasswordCredentials",
+                "org.apache.hc.client5.http.auth.BasicUserPrincipal",
+                "java.lang.String",
+                "java.util.HashMap")
                 .constructors()
                 .fields()
                 .methods()

@@ -1,6 +1,5 @@
 package io.quarkiverse.opensearch.client.runtime;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -25,11 +24,8 @@ import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
-import org.apache.hc.client5.http.ssl.TrustAllStrategy;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
-import org.apache.hc.core5.ssl.SSLContextBuilder;
-import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.util.Timeout;
 import org.jboss.logging.Logger;
 import org.opensearch.client.json.jackson.JacksonJsonpMapper;
@@ -41,6 +37,7 @@ import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBui
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.SSLContextHelper;
 import io.quarkiverse.opensearch.client.AwsSdk2TransportOptionsCallback;
 import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
 import io.quarkus.arc.Arc;
@@ -84,23 +81,8 @@ public final class OpenSearchTransportHelper {
                 .orElse(new ObjectMapper().findAndRegisterModules());
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 
-        // create custom when key store was provided or ssl verification is disabled
-        final SSLContextBuilder sslContextBuilder = config.keyStoreFile().isPresent() || !config.sslVerify()
-                ? SSLContexts.custom()
-                : SSLContextBuilder.create();
-        if (config.keyStoreFile().isPresent()) {
-            // load from keystore
-            final File file = new File(config.keyStoreFile().get());
-            if (config.keyStorePassword().isPresent()) {
-                sslContextBuilder.loadTrustMaterial(file, config.keyStorePassword().get().toCharArray());
-            } else {
-                sslContextBuilder.loadTrustMaterial(file);
-            }
-        } else if (!config.sslVerify()) {
-            // load trust all strategy
-            sslContextBuilder.loadTrustMaterial(TrustAllStrategy.INSTANCE);
-        }
-        final SSLContext sslContext = sslContextBuilder.build();
+        final SSLContext sslContext = SSLContextHelper.createSSLContext(config);
+
         builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
 
             final ClientTlsStrategyBuilder tlsStrategyBuilder = ClientTlsStrategyBuilder.create()

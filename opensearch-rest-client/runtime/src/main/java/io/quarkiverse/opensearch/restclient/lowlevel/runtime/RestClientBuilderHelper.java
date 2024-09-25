@@ -3,14 +3,20 @@ package io.quarkiverse.opensearch.restclient.lowlevel.runtime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.http.impl.nio.reactor.IOReactorConfig;
 import org.apache.http.nio.conn.NoopIOSessionStrategy;
+import org.apache.http.nio.conn.SchemeIOSessionStrategy;
+import org.apache.http.nio.conn.ssl.SSLIOSessionStrategy;
 import org.jboss.logging.Logger;
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestClientBuilder;
@@ -20,9 +26,11 @@ import org.opensearch.client.sniff.Sniffer;
 import org.opensearch.client.sniff.SnifferBuilder;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.SSLContextHelper;
 import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
+import io.quarkus.logging.Log;
 
 public final class RestClientBuilderHelper {
 
@@ -74,6 +82,21 @@ public final class RestClientBuilderHelper {
                 // In this case disable the SSL capability as it might have an impact on
                 // bootstrap time, for example consuming entropy for no reason
                 httpClientBuilder.setSSLStrategy(NoopIOSessionStrategy.INSTANCE);
+            }
+
+            // setup SSLContext
+            try {
+                final SSLContext sslContext = SSLContextHelper.createSSLContext(config);
+                httpClientBuilder.setSSLContext(sslContext);
+                // setup ssl verification
+                if (!config.sslVerifyHostname() || !config.sslVerify()) {
+                    final HostnameVerifier hostnameVerifier = new NoopHostnameVerifier();
+                    final SchemeIOSessionStrategy sessionStrategy = new SSLIOSessionStrategy(sslContext, hostnameVerifier);
+                    httpClientBuilder.setSSLHostnameVerifier(hostnameVerifier);
+                    httpClientBuilder.setSSLStrategy(sessionStrategy);
+                }
+            } catch (Exception e) {
+                Log.error(e.getMessage(), e);
             }
 
             // Apply configuration from RestClientBuilder.HttpClientConfigCallback implementations annotated with OpenSearchClientConfig

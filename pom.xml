@@ -37,7 +37,7 @@
         <opensearch.client.version>2.14.0</opensearch.client.version>
         <opensearch-testcontainers.version>2.1.1</opensearch-testcontainers.version>
         <apache.httpccore5.version>5.3.1</apache.httpccore5.version>
-        <apache.httpclient5.version>5.4</apache.httpclient5.version>
+        <apache.httpclient5.version>5.4.1</apache.httpclient5.version>
         <conscrypt-openjdk-uber.version>2.5.2</conscrypt-openjdk-uber.version>
     </properties>
     <dependencyManagement>

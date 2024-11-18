@@ -8,15 +8,15 @@
 
 This extension allows you to connect to an [OpenSearch cluster](https://opensearch.org/) using the clients provided by the OpenSearch project.
 
-## Supported OpenSearch Clients
+## Supported OpenSearch Clients 
 - [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/)
 - OpenSearch REST client (core client)
 - [OpenSearch REST high-level client](https://opensearch.org/docs/latest/clients/java-rest-high-level/)
 
 Since version 1.2.5 (LTS) and 1.3.1 support for the REST clients is deprecated, please use the Java Client instead.
-The Java Client is not dependent on the REST client anymore and supports Apache HttpClient 5 Transport as well as AWS SDK2 Transport.
+The Java Client is not dependent on the REST client anymore and supports Apache HttpClient 5 Transport as well as AWS SDK2 Transport. 
 
-## Version Matrix
+## Version Matrix 
 |         | Quarkus      | OpenSearch | OpenSearch Java Client |
 |---------|--------------|------------|------------------------|
 | 1.9.7   | 3.11.3       | 2.16.0     | 2.13.0                 |

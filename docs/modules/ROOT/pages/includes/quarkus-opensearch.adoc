@@ -23,7 +23,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean
+--|boolean 
 |`true`
 
 
@@ -40,7 +40,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_HOSTS+++`
 endif::add-copy-button-to-env-var[]
---|list of string
+--|list of string 
 |
 
 
@@ -57,7 +57,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_PROTOCOL+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |`http`
 
 
@@ -74,7 +74,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_USERNAME+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |
 
 
@@ -91,7 +91,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_PASSWORD+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |
 
 
@@ -109,7 +109,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`15S`
 
 
@@ -127,7 +127,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`30S`
 
 
@@ -145,7 +145,7 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`30S`
 
 
@@ -162,7 +162,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++`
 endif::add-copy-button-to-env-var[]
---|int
+--|int 
 |`20`
 
 
@@ -179,7 +179,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++`
 endif::add-copy-button-to-env-var[]
---|int
+--|int 
 |`10`
 
 
@@ -198,7 +198,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_IO_THREAD_COUNTS+++`
 endif::add-copy-button-to-env-var[]
---|int
+--|int 
 |
 
 
@@ -215,7 +215,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_AWS_REGION+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |`us-west-2`
 
 
@@ -232,7 +232,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_AWS_SERVICE+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |
 
 
@@ -249,7 +249,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_ID+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |
 
 
@@ -266,7 +266,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_SECRET+++`
 endif::add-copy-button-to-env-var[]
---|string
+--|string 
 |
 
 
@@ -351,7 +351,7 @@ endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
---|boolean
+--|boolean 
 |`false`
 
 
@@ -369,76 +369,8 @@ ifndef::add-copy-button-to-env-var[]
 Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
-link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
 |`5M`
-
-
-a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-file]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-file[quarkus.opensearch.ssl.key-store-file]`
-
-
-[.description]
---
-Optional keyStoreFile to be used when connecting to cluster nodes.
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++`
-endif::add-copy-button-to-env-var[]
---|string
-|
-
-
-a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-password]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-password[quarkus.opensearch.ssl.key-store-password]`
-
-
-[.description]
---
-Optional password for accessing keyStoreFile
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++`
-endif::add-copy-button-to-env-var[]
---|string
-|
-
-
-a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname[quarkus.opensearch.ssl.verify-hostname]`
-
-
-[.description]
---
-SSL Verify Hostname, setting to false will disable hostname verification only
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++`
-endif::add-copy-button-to-env-var[]
---|boolean
-|`true`
-
-
-a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify[quarkus.opensearch.ssl.verify]`
-
-
-[.description]
---
-SSL Verify, setting to false will disable all SSL verification
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY+++`
-endif::add-copy-button-to-env-var[]
---|boolean
-|`true`
 
 |===
 ifndef::no-duration-note[]

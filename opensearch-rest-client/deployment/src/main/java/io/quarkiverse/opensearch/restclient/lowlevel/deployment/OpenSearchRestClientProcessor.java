@@ -41,7 +41,7 @@ class OpenSearchRestClientProcessor {
     @BuildStep
     HealthBuildItem addHealthCheck(OpenSearchBuildTimeConfig buildTimeConfig) {
         return new HealthBuildItem(OpenSearchHealthCheck.class.getName(),
-                buildTimeConfig.healthEnabled);
+                buildTimeConfig.healthEnabled());
     }
 
 }

@@ -149,7 +149,7 @@ public class DevServicesOpenSearchProcessor {
             OpenSearchDevServicesBuildTimeConfig config,
             DevservicesOpenSearchBuildItemsConfiguration buildItemConfig,
             LaunchModeBuildItem launchMode, boolean useSharedNetwork, Optional<Duration> timeout) throws BuildException {
-        if (!config.enabled.orElse(true)) {
+        if (!config.enabled().orElse(true)) {
             // explicitly disabled
             log.debug("Not starting dev services for OpenSearch, as it has been disabled in the config.");
             return null;
@@ -163,7 +163,7 @@ public class DevServicesOpenSearchProcessor {
             }
         }
 
-        if (!dockerStatusBuildItem.isDockerAvailable()) {
+        if (!dockerStatusBuildItem.isContainerRuntimeAvailable()) {
             log.warnf("Docker isn't working, please configure the OpenSearch hosts property (%s).",
                     displayProperties(buildItemConfig.hostsConfigProperties));
             return null;
@@ -172,10 +172,10 @@ public class DevServicesOpenSearchProcessor {
         // Hibernate Search OpenSearch have a version configuration property, we need to check that it is coherent
         // with the image we are about to launch
         if (buildItemConfig.version != null) {
-            String containerTag = config.imageName.substring(config.imageName.indexOf(':') + 1);
+            String containerTag = config.imageName().substring(config.imageName().indexOf(':') + 1);
             if (!containerTag.startsWith(buildItemConfig.version)) {
                 throw new BuildException(
-                        "Dev services for OpenSearch detected a version mismatch, container image is " + config.imageName
+                        "Dev services for OpenSearch detected a version mismatch, container image is " + config.imageName()
                                 + " but the configured version is " + buildItemConfig.version +
                                 ". Either configure a different image or disable dev services for OpenSearch.",
                         Collections.emptyList());
@@ -183,25 +183,25 @@ public class DevServicesOpenSearchProcessor {
         }
 
         final Optional<ContainerAddress> maybeContainerAddress = openSearchContainerLocator.locateContainer(
-                config.serviceName,
-                config.shared,
+                config.serviceName(),
+                config.shared(),
                 launchMode.getLaunchMode());
 
         // Starting the server
         final Supplier<DevServicesResultBuildItem.RunningDevService> defaultOpenSearchSupplier = () -> {
             // OpensearchContainer has security disabled by default
             OpensearchContainer container = new OpensearchContainer(
-                    DockerImageName.parse(config.imageName).asCompatibleSubstituteFor("opensearchproject/opensearch"));
+                    DockerImageName.parse(config.imageName()).asCompatibleSubstituteFor("opensearchproject/opensearch"));
 
             // share network fails - need to investigate
             // ConfigureUtil.configureSharedNetwork(container, "opensearch");
 
-            if (config.serviceName != null) {
-                container.withLabel(DEV_SERVICE_LABEL, config.serviceName);
+            if (config.serviceName() != null) {
+                container.withLabel(DEV_SERVICE_LABEL, config.serviceName());
             }
-            config.port.ifPresent(integer -> container.setPortBindings(List.of(integer + ":" + integer)));
+            config.port().ifPresent(integer -> container.setPortBindings(List.of(integer + ":" + integer)));
             timeout.ifPresent(container::withStartupTimeout);
-            container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts);
+            container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts());
 
             container.start();
             return new DevServicesResultBuildItem.RunningDevService(OpenSearchDevServicesProcessor.FEATURE,

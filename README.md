@@ -16,7 +16,16 @@ This extension allows you to connect to an [OpenSearch cluster](https://opensear
 Since version 1.2.5 (LTS) and 1.3.1 support for the REST clients is deprecated, please use the Java Client instead.
 The Java Client is not dependent on the REST client anymore and supports Apache HttpClient 5 Transport as well as AWS SDK2 Transport. 
 
-## Version Matrix 
+## Latest Releases
+For latest Release Information see:
+https://github.com/quarkiverse/quarkus-opensearch/releases
+
+from now on, you find all required information here: [Releases](https://github.com/quarkiverse/quarkus-opensearch/releases)
+
+### Version Matrix for Previous Versions
+
+the following table will not be updated after 2024/11 - 
+
 |         | Quarkus      | OpenSearch | OpenSearch Java Client |
 |---------|--------------|------------|------------------------|
 | 1.9.7   | 3.11.3       | 2.16.0     | 2.13.0                 |

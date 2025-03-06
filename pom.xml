@@ -34,7 +34,7 @@
         <quarkus.platform.version>3.19.2</quarkus.platform.version>
         <quarkus-amazon-services.version>3.2.0</quarkus-amazon-services.version>
         <opensearch.version>2.19.1</opensearch.version>
-        <opensearch.client.version>2.19.0</opensearch.client.version>
+        <opensearch.client.version>2.21.0</opensearch.client.version>
         <opensearch-testcontainers.version>2.1.2</opensearch-testcontainers.version>
         <apache.httpccore5.version>5.3.3</apache.httpccore5.version>
         <apache.httpclient5.version>5.4.2</apache.httpclient5.version>

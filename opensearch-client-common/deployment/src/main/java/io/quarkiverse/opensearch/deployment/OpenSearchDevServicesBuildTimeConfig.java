@@ -1,43 +1,44 @@
 package io.quarkiverse.opensearch.deployment;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
-import io.smallrye.config.ConfigMapping;
-import io.smallrye.config.WithDefault;
 
-@ConfigRoot(phase = ConfigPhase.BUILD_TIME)
-@ConfigMapping(prefix = "quarkus.opensearch.devservices")
-public interface OpenSearchDevServicesBuildTimeConfig {
+@ConfigRoot(name = "opensearch.devservices", phase = ConfigPhase.BUILD_TIME)
+public class OpenSearchDevServicesBuildTimeConfig {
 
     /**
      * If Dev Services for OpenSearch has been explicitly enabled or disabled. Dev Services are generally enabled
      * by default, unless there is an existing configuration present. For OpenSearch, Dev Services starts a server unless
      * {@code quarkiverse.opensearch.hosts} is set.
      */
-    Optional<Boolean> enabled();
+    @ConfigItem
+    public Optional<Boolean> enabled = Optional.empty();
 
     /**
      * Optional fixed port the dev service will listen to.
      * <p>
      * If not defined, the port will be chosen randomly.
      */
-    Optional<Integer> port();
+    @ConfigItem
+    public Optional<Integer> port;
 
     /**
      * The OpenSearch container image to use.
      * Defaults to the opensearch image provided by OpenSearch.
      */
-    @WithDefault("docker.io/opensearchproject/opensearch:2.19.1")
-    String imageName();
+    @ConfigItem(defaultValue = "docker.io/opensearchproject/opensearch:2.19.2")
+    public String imageName;
 
     /**
      * The value for the OPENSEARCH_JAVA_OPTS env variable.
      * Defaults to setting the heap to 512MB min - 1GB max.
      */
-    @WithDefault("-Xms512m -Xmx1g")
-    public String javaOpts();
+    @ConfigItem(defaultValue = "-Xms512m -Xmx1g")
+    public String javaOpts;
 
     /**
      * Indicates if the OpenSearch server managed by Quarkus Dev Services is shared.
@@ -50,8 +51,8 @@ public interface OpenSearchDevServicesBuildTimeConfig {
      * <p>
      * Container sharing is only used in dev mode.
      */
-    @WithDefault("true")
-    boolean shared();
+    @ConfigItem(defaultValue = "true")
+    public boolean shared;
 
     /**
      * The value of the {@code quarkus-dev-service-opensearch} label attached to the started container.
@@ -63,6 +64,26 @@ public interface OpenSearchDevServicesBuildTimeConfig {
      * <p>
      * This property is used when you need multiple shared OpenSearch servers.
      */
-    @WithDefault("opensearch")
-    String serviceName();
+    @ConfigItem(defaultValue = "opensearch")
+    public String serviceName;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        OpenSearchDevServicesBuildTimeConfig that = (OpenSearchDevServicesBuildTimeConfig) o;
+        return Objects.equals(shared, that.shared)
+                && Objects.equals(enabled, that.enabled)
+                && Objects.equals(port, that.port)
+                && Objects.equals(imageName, that.imageName)
+                && Objects.equals(javaOpts, that.javaOpts)
+                && Objects.equals(serviceName, that.serviceName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(enabled, port, imageName, javaOpts, shared, serviceName);
+    }
 }

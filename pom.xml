@@ -25,19 +25,19 @@
   </scm>  
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.15.3.1</quarkus.version>
+        <quarkus.version>3.8.6.1</quarkus.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.15.3.1</quarkus.platform.version>
-        <quarkus-amazon-services.version>3.1.0</quarkus-amazon-services.version>
-        <opensearch.version>2.19.1</opensearch.version>
-        <opensearch.client.version>2.21.0</opensearch.client.version>
-        <opensearch-testcontainers.version>2.1.2</opensearch-testcontainers.version>
-        <apache.httpccore5.version>5.3.3</apache.httpccore5.version>
-        <apache.httpclient5.version>5.4.2</apache.httpclient5.version>
+        <quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
+        <quarkus-amazon-services.version>2.12.3</quarkus-amazon-services.version>
+        <opensearch.version>2.19.2</opensearch.version>
+        <opensearch.client.version>2.24.0</opensearch.client.version>
+        <opensearch-testcontainers.version>2.1.1</opensearch-testcontainers.version>
+        <apache.httpccore5.version>5.3.4</apache.httpccore5.version>
+        <apache.httpclient5.version>5.4.4</apache.httpclient5.version>
         <conscrypt-openjdk-uber.version>2.5.2</conscrypt-openjdk-uber.version>
     </properties>
     <dependencyManagement>
@@ -146,6 +146,11 @@
                 <version>${apache.httpccore5.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.httpcomponents.core5</groupId>
+                <artifactId>httpcore5-h2</artifactId>
+                <version>${apache.httpccore5.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.conscrypt</groupId>
                 <artifactId>conscrypt-openjdk-uber</artifactId>
                 <version>${conscrypt-openjdk-uber.version}</version>
@@ -172,7 +177,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.8.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>

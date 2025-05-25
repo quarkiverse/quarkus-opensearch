@@ -29,7 +29,7 @@ public interface OpenSearchDevServicesBuildTimeConfig {
      * The OpenSearch container image to use.
      * Defaults to the opensearch image provided by OpenSearch.
      */
-    @WithDefault("docker.io/opensearchproject/opensearch:2.19.1")
+    @WithDefault("docker.io/opensearchproject/opensearch:2.19.2")
     String imageName();
 
     /**

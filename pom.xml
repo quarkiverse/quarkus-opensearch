@@ -8,7 +8,7 @@
     </parent>
     <groupId>io.quarkiverse.opensearch</groupId>
     <artifactId>quarkus-opensearch-parent</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>1.17.1</version>
     <packaging>pom</packaging>
     <name>Quarkus - OpenSearch Client - Parent</name>
     <modules>
@@ -21,7 +21,7 @@
       <connection>scm:git:git@github.com:quarkiverse/quarkus-opensearch.git</connection>
       <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-opensearch.git</developerConnection>
       <url>https://github.com/quarkiverse/quarkus-opensearch</url>
-      <tag>HEAD</tag>
+      <tag>1.17.1</tag>
   </scm>  
     <properties>
         <compiler-plugin.version>3.10.1</compiler-plugin.version>

@@ -2,11 +2,11 @@ package io.quarkiverse.opensearch.client.deployment;
 
 import org.jboss.jandex.DotName;
 
-import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchClientProducer;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchTransportProducer;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
 import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
+import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;

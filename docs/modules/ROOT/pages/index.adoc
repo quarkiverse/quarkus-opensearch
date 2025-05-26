@@ -51,6 +51,31 @@ with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
+=== Choosing Transport Providers via SPI
+
+This extension supports runtime selection of transport providers using Java's `ServiceLoader` (SPI) mechanism.
+
+To enable one of the providers, add the appropriate module to your project:
+
+[source,xml]
+----
+<!-- Apache HttpClient5 -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-apache</artifactId>
+</dependency>
+
+<!-- AWS SDK -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-aws</artifactId>
+</dependency>
+----
+
+[NOTE]
+If no transport provider is found, the application will fail with an exception.
+
+
 === OpenSearch REST High-Level Client
 
 The REST High-Level Client depends on the REST client and does not require any additional configuration.

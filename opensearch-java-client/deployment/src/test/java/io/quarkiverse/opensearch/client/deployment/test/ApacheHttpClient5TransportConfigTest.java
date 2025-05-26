@@ -18,8 +18,8 @@ import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBui
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchConfig;
-import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchTransportHelper;
+import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkus.test.QuarkusUnitTest;
 
 class ApacheHttpClient5TransportConfigTest {
@@ -40,7 +40,7 @@ class ApacheHttpClient5TransportConfigTest {
 
     @Test
     void testOpenSearchTransportHelperWithOpenSearchClientConfig() throws Exception {
-        OpenSearchTransportHelper.createApacheHttpClient5Transport(config, objectMappers);
+        OpenSearchTransportHelper.createTransport(config, objectMappers);
         assertTrue(HttpClientTestConfigurator.invoked);
         assertTrue(RequestConfigTestConfigurator.invoked);
     }

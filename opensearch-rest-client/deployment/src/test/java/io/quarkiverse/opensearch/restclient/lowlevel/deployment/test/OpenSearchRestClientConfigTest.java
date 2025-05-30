@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.opensearch.client.RestClientBuilder;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
-import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.OpenSearchClientsConfig;
 import io.quarkiverse.opensearch.restclient.lowlevel.runtime.RestClientBuilderHelper;
 import io.quarkus.test.QuarkusUnitTest;
 
@@ -27,15 +27,15 @@ class OpenSearchRestClientConfigTest {
                                     "application.properties"));
 
     @Inject
-    OpenSearchConfig config;
+    OpenSearchClientsConfig config;
 
     @Test
     void testRestClientBuilderHelperWithOpenSearchClientConfig() {
-        RestClientBuilderHelper.createRestClientBuilder(config).build();
+        RestClientBuilderHelper.createRestClientBuilder(config.defaultClient()).build();
         assertTrue(TestConfigurator.invoked);
     }
 
-    @OpenSearchClientConfig
+    @io.quarkiverse.opensearch.restclient.OpenSearchClientConfig
     @ApplicationScoped
     public static class TestConfigurator implements RestClientBuilder.HttpClientConfigCallback {
 

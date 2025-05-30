@@ -15,10 +15,10 @@ import org.opensearch.client.transport.aws.AwsSdk2TransportOptions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
-import io.quarkiverse.opensearch.client.AwsSdk2TransportOptionsCallback;
-import io.quarkiverse.opensearch.client.OpenSearchTransportConfig;
+import io.quarkiverse.opensearch.OpenSearchClientsConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchTransportHelper;
+import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
+import io.quarkiverse.opensearch.transport.aws.AwsSdk2TransportOptionsCallback;
 import io.quarkus.test.QuarkusUnitTest;
 
 class AwsSdk2TransportConfigTest {
@@ -32,14 +32,14 @@ class AwsSdk2TransportConfigTest {
                                     "application.properties"));
 
     @Inject
-    OpenSearchConfig config;
+    OpenSearchClientsConfig config;
 
     @Inject
     Instance<ObjectMapper> objectMappers;
 
     @Test
     void testOpenSearchTransportHelperWithOpenSearchClientConfig() throws Exception {
-        OpenSearchTransportHelper.createAwsSdk2Transport(config, objectMappers);
+        OpenSearchTransportHelper.createTransport(config.defaultClient(), objectMappers);
         assertTrue(AwsSdk2TransportOptionsTestConfigurator.invoked);
     }
 

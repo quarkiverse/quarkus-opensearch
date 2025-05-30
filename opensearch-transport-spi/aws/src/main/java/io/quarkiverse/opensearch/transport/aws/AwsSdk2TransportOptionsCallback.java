@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.client;
+package io.quarkiverse.opensearch.transport.aws;
 
 import org.opensearch.client.transport.aws.AwsSdk2TransportOptions;
 

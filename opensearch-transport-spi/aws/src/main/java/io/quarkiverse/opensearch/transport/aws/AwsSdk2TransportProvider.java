@@ -9,7 +9,7 @@ import org.opensearch.client.transport.aws.AwsSdk2TransportOptions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProvider;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProviderException;
@@ -23,12 +23,12 @@ import software.amazon.awssdk.regions.Region;
 public class AwsSdk2TransportProvider implements OpenSearchTransportProvider {
 
     @Override
-    public boolean supports(OpenSearchConfig config) {
+    public boolean supports(OpenSearchClientConfig config) {
         return config.awsService().isPresent();
     }
 
     @Override
-    public OpenSearchTransport create(OpenSearchConfig config, ObjectMapper objectMapper)
+    public OpenSearchTransport create(OpenSearchClientConfig config, ObjectMapper objectMapper)
             throws OpenSearchTransportProviderException {
 
         try {

@@ -26,7 +26,7 @@ import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBui
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.SSLContextHelper;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProvider;
@@ -39,12 +39,12 @@ import io.vertx.core.spi.VertxThreadFactory;
 public class ApacheHttpTransportProvider implements OpenSearchTransportProvider {
 
     @Override
-    public boolean supports(OpenSearchConfig config) {
+    public boolean supports(OpenSearchClientConfig config) {
         return !config.awsService().isPresent();
     }
 
     @Override
-    public OpenSearchTransport create(OpenSearchConfig config, ObjectMapper objectMapper)
+    public OpenSearchTransport create(OpenSearchClientConfig config, ObjectMapper objectMapper)
             throws OpenSearchTransportProviderException {
         List<HttpHost> list = new ArrayList<>();
         for (String s : config.hosts().orElse(List.of("127.0.0.1:9200"))) {
@@ -108,32 +108,34 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
                     });
                 }
 
-                final Iterable<InstanceHandle<ApacheHttpClient5TransportBuilder.HttpClientConfigCallback>> httpClientConfigCallbackHandles = Arc
-                        .container()
-                        .select(ApacheHttpClient5TransportBuilder.HttpClientConfigCallback.class,
-                                new OpenSearchTransportConfig.Literal())
-                        .handles();
-                for (InstanceHandle<ApacheHttpClient5TransportBuilder.HttpClientConfigCallback> handle : httpClientConfigCallbackHandles) {
-                    result = handle.get().customizeHttpClient(result);
-                    handle.close();
-                }
-
-                return result;
-            });
-
-            builder.setRequestConfigCallback(requestConfigBuilder -> {
-                RequestConfig.Builder result = requestConfigBuilder;
-                final Iterable<InstanceHandle<ApacheHttpClient5TransportBuilder.RequestConfigCallback>> requestConfigBuilderHandles = Arc
-                        .container()
-                        .select(ApacheHttpClient5TransportBuilder.RequestConfigCallback.class,
-                                new OpenSearchTransportConfig.Literal())
-                        .handles();
-                for (InstanceHandle<ApacheHttpClient5TransportBuilder.RequestConfigCallback> handle : requestConfigBuilderHandles) {
-                    result = handle.get().customizeRequestConfig(result);
-                    handle.close();
+                if (Arc.container() != null) {
+                    final Iterable<InstanceHandle<ApacheHttpClient5TransportBuilder.HttpClientConfigCallback>> httpClientConfigCallbackHandles = Arc
+                            .container()
+                            .select(ApacheHttpClient5TransportBuilder.HttpClientConfigCallback.class,
+                                    new OpenSearchTransportConfig.Literal())
+                            .handles();
+                    for (InstanceHandle<ApacheHttpClient5TransportBuilder.HttpClientConfigCallback> handle : httpClientConfigCallbackHandles) {
+                        result = handle.get().customizeHttpClient(result);
+                        handle.close();
+                    }
                 }
                 return result;
             });
+            if (Arc.container() != null) {
+                builder.setRequestConfigCallback(requestConfigBuilder -> {
+                    RequestConfig.Builder result = requestConfigBuilder;
+                    final Iterable<InstanceHandle<ApacheHttpClient5TransportBuilder.RequestConfigCallback>> requestConfigBuilderHandles = Arc
+                            .container()
+                            .select(ApacheHttpClient5TransportBuilder.RequestConfigCallback.class,
+                                    new OpenSearchTransportConfig.Literal())
+                            .handles();
+                    for (InstanceHandle<ApacheHttpClient5TransportBuilder.RequestConfigCallback> handle : requestConfigBuilderHandles) {
+                        result = handle.get().customizeRequestConfig(result);
+                        handle.close();
+                    }
+                    return result;
+                });
+            }
 
             return builder.build();
         } catch (Exception e) {
@@ -141,7 +143,7 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
         }
     }
 
-    private TlsStrategy buildTlsStrategy(OpenSearchConfig config, SSLContext sslContext) {
+    private TlsStrategy buildTlsStrategy(OpenSearchClientConfig config, SSLContext sslContext) {
         ClientTlsStrategyBuilder builder = ClientTlsStrategyBuilder.create().setSslContext(sslContext);
         if (!config.sslVerifyHostname() || !config.sslVerify()) {
             builder.setHostnameVerifier(NoopHostnameVerifier.INSTANCE);

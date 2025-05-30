@@ -9,7 +9,7 @@ import javax.net.ssl.*;
 
 public class SSLContextHelper {
 
-    public static SSLContext createSSLContext(OpenSearchConfig config)
+    public static SSLContext createSSLContext(OpenSearchClientConfig config)
             throws GeneralSecurityException, IOException {
 
         SSLContext sslContext = SSLContext.getInstance("TLS");

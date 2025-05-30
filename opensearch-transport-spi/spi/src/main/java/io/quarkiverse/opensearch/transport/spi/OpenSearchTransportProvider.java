@@ -4,12 +4,12 @@ import org.opensearch.client.transport.OpenSearchTransport;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
 
 public interface OpenSearchTransportProvider {
-    boolean supports(OpenSearchConfig config);
+    boolean supports(OpenSearchClientConfig config);
 
-    OpenSearchTransport create(OpenSearchConfig config, ObjectMapper mapper) throws OpenSearchTransportProviderException;
+    OpenSearchTransport create(OpenSearchClientConfig config, ObjectMapper mapper) throws OpenSearchTransportProviderException;
 
     String name();
 }

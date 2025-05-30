@@ -4,15 +4,12 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
-import io.smallrye.config.ConfigMapping;
+import io.quarkus.runtime.annotations.ConfigGroup;
 import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
-@ConfigMapping(prefix = "quarkus.opensearch")
-@ConfigRoot(phase = ConfigPhase.RUN_TIME)
-public interface OpenSearchConfig {
+@ConfigGroup
+public interface OpenSearchClientConfig {
 
     /**
      * The list of hosts of the OpenSearch servers, when accessing AWS OpenSearch set to AWS endpoint name.

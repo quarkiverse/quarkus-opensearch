@@ -75,6 +75,54 @@ To enable one of the providers, add the appropriate module to your project:
 [NOTE]
 If no transport provider is found, the application will fail with an exception.
 
+==== Configuring Additional Named Clients
+
+This extension supports defining and injecting multiple named OpenSearch clients,
+useful when your application needs to connect to different OpenSearch clusters
+(e.g., for analytics, logging, or operational data).
+
+A named client can be configured using `quarkus.opensearch."client-name".*`.
+
+===== Example: Default and Additional Client
+
+[source,properties]
+----
+# Default client (unnamed)
+quarkus.opensearch.hosts=localhost:9200
+
+# Additional client named "analytics"
+quarkus.opensearch.analytics.hosts=analytics-cluster.internal:9200
+quarkus.opensearch.analytics.username=some-user
+quarkus.opensearch.analytics.password=some-password
+quarkus.opensearch.analytics.aws.region=us-west-2
+----
+
+===== Injecting Named Clients in Your Code
+
+To use a named client in your application, inject it using the `@OpenSearchClientName` qualifier:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import io.quarkiverse.opensearch.OpenSearchClientName;
+import org.opensearch.client.opensearch.OpenSearchClient;
+
+public class ReportService {
+
+    @Inject
+    @OpenSearchClientName("analytics")
+    OpenSearchClient analyticsClient;
+
+    public void runQuery() {
+        // Use the analyticsClient to run a search
+    }
+}
+----
+
+[NOTE]
+====
+The `@OpenSearchClientName("<client-name>")` injection is only supported for the OpenSearch Java Client module.
+====
 
 === OpenSearch REST High-Level Client
 

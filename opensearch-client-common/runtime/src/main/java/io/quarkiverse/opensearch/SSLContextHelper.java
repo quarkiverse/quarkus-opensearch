@@ -20,16 +20,22 @@ import io.quarkus.tls.TlsConfigurationRegistry;
 /**
  * Utility class for creating an {@link SSLContext} based on {@link OpenSearchClientConfig} settings.
  *
- * <p>This helper supports three mechanisms for SSL context creation:</p>
+ * <p>
+ * This helper supports three mechanisms for SSL context creation:
+ * </p>
  * <ul>
- *   <li>Integration with the Quarkus TLS Registry (if available), allowing reuse of configured TLS contexts</li>
- *   <li>Custom trust store loading from a provided keystore file</li>
- *   <li>Fallback to system default trust manager, or optionally disable SSL verification</li>
+ * <li>Integration with the Quarkus TLS Registry (if available), allowing reuse of configured TLS contexts</li>
+ * <li>Custom trust store loading from a provided keystore file</li>
+ * <li>Fallback to system default trust manager, or optionally disable SSL verification</li>
  * </ul>
  *
- * <p>If TLS support is configured via {@code TlsConfigurationRegistry}, it will take precedence over manual options.</p>
+ * <p>
+ * If TLS support is configured via {@code TlsConfigurationRegistry}, it will take precedence over manual options.
+ * </p>
  *
- * <p>This class is used internally to configure secure connections to OpenSearch endpoints.</p>
+ * <p>
+ * This class is used internally to configure secure connections to OpenSearch endpoints.
+ * </p>
  */
 public class SSLContextHelper {
 

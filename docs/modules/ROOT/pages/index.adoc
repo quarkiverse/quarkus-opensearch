@@ -97,6 +97,27 @@ quarkus.opensearch.analytics.password=some-password
 quarkus.opensearch.analytics.aws.region=us-west-2
 ----
 
+===== Injecting the Default Client
+
+If you're using only a single OpenSearch cluster, you can inject the default client without any qualifiers:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import org.opensearch.client.opensearch.OpenSearchClient;
+
+public class MyService {
+
+    @Inject
+    OpenSearchClient defaultClient;
+
+    public void run() {
+        // Use the defaultClient to interact with OpenSearch
+    }
+}
+----
+
+
 ===== Injecting Named Clients in Your Code
 
 To use a named client in your application, inject it using the `@OpenSearchClientName` qualifier:

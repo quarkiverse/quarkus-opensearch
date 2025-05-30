@@ -103,15 +103,34 @@ public interface OpenSearchClientConfig {
     Optional<String> secretAccessKey();
 
     /**
+     * TLS configuration.
+     * Allows referencing a named TLS configuration defined elsewhere in the application,
+     * such as via the Quarkus `quarkus.tls.*` configuration properties. This enables centralized
+     * and reusable TLS settings, including trust stores, key stores, and verification behavior.
+     */
+    Optional<Tls> tls();
+
+    interface Tls {
+        /**
+         * The name of the TLS configuration to use.
+         * This refers to a configuration group defined under `quarkus.tls.*`. If not set,
+         * no explicit TLS configuration will be applied beyond the default JDK behavior.
+         */
+        String tlsConfigurationName();
+    }
+
+    /**
      * Optional keyStoreFile to be used when connecting to cluster nodes
      */
     @WithName("ssl.key-store-file")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     Optional<String> keyStoreFile();
 
     /**
      * Optional password for accessing keyStoreFile
      */
     @WithName("ssl.key-store-password")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     Optional<String> keyStorePassword();
 
     /**
@@ -119,6 +138,7 @@ public interface OpenSearchClientConfig {
      */
     @WithName("ssl.verify-hostname")
     @WithDefault("true")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     boolean sslVerifyHostname();
 
     /**
@@ -126,6 +146,7 @@ public interface OpenSearchClientConfig {
      */
     @WithName("ssl.verify")
     @WithDefault("true")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     boolean sslVerify();
 
     /**

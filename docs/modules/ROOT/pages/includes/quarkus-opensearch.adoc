@@ -29,6 +29,8 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-hosts]]`link:#quarkus-opensearch_quarkus-opensearch-hosts[quarkus.opensearch.hosts]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-hosts]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-hosts[quarkus.opensearch."client-name".hosts]`
+
 
 [.description]
 --
@@ -45,6 +47,8 @@ endif::add-copy-button-to-env-var[]
 
 
 a| [[quarkus-opensearch_quarkus-opensearch-protocol]]`link:#quarkus-opensearch_quarkus-opensearch-protocol[quarkus.opensearch.protocol]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-protocol]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-protocol[quarkus.opensearch."client-name".protocol]`
 
 
 [.description]
@@ -63,6 +67,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-username]]`link:#quarkus-opensearch_quarkus-opensearch-username[quarkus.opensearch.username]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-username]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-username[quarkus.opensearch."client-name".username]`
 
 [.description]
 --
@@ -80,6 +85,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-password]]`link:#quarkus-opensearch_quarkus-opensearch-password[quarkus.opensearch.password]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-password]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-password[quarkus.opensearch."client-name".password]`
 
 [.description]
 --
@@ -97,6 +103,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-connection-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-connection-timeout[quarkus.opensearch.connection-timeout]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-connection-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-connection-timeout[quarkus.opensearch."client-name".connection-timeout]`
 
 [.description]
 --
@@ -115,6 +122,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-thread-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-thread-timeout[quarkus.opensearch.thread-timeout]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-thread-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-thread-timeout[quarkus.opensearch."client-name".thread-timeout]`
 
 [.description]
 --
@@ -133,6 +141,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-socket-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-socket-timeout[quarkus.opensearch.socket-timeout]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-socket-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-socket-timeout[quarkus.opensearch."client-name".socket-timeout]`
 
 [.description]
 --
@@ -151,6 +160,8 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-max-connections]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections[quarkus.opensearch.max-connections]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-max-connections]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-max-connections[quarkus.opensearch."client-name".max-connections]`
+
 
 [.description]
 --
@@ -168,6 +179,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-max-connections-per-route]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-max-connections-per-route]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-max-connections-per-route[quarkus.opensearch."client-name".max-connections-per-route]`
 
 [.description]
 --
@@ -185,6 +197,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-io-thread-counts]]`link:#quarkus-opensearch_quarkus-opensearch-io-thread-counts[quarkus.opensearch.io-thread-counts]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-io-thread-counts]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-io-thread-counts[quarkus.opensearch."client-name".io-thread-counts]`
 
 [.description]
 --
@@ -204,6 +217,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-aws-region]]`link:#quarkus-opensearch_quarkus-opensearch-aws-region[quarkus.opensearch.aws.region]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-region]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-region[quarkus.opensearch."client-name".aws.region]`
 
 [.description]
 --
@@ -221,6 +235,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-aws-service]]`link:#quarkus-opensearch_quarkus-opensearch-aws-service[quarkus.opensearch.aws.service]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-service]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-service[quarkus.opensearch."client-name".aws.service]`
 
 [.description]
 --
@@ -238,6 +253,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-id]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-id[quarkus.opensearch.aws.access-key-id]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-id]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-id[quarkus.opensearch."client-name".aws.access-key-id]`
 
 [.description]
 --
@@ -255,6 +271,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-secret]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-secret[quarkus.opensearch.aws.access-key-secret]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-secret]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-secret[quarkus.opensearch."client-name".aws.access-key-secret]`
 
 [.description]
 --
@@ -272,6 +289,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-file]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-file[quarkus.opensearch.ssl.key-store-file]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-file]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-file[quarkus.opensearch."client-name".ssl.key-store-file]`
 
 [.description]
 --
@@ -289,6 +307,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-password]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-password[quarkus.opensearch.ssl.key-store-password]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-password]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-password[quarkus.opensearch."client-name".ssl.key-store-password]`
 
 [.description]
 --
@@ -306,6 +325,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname[quarkus.opensearch.ssl.verify-hostname]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify-hostname]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify-hostname[quarkus.opensearch."client-name".ssl.verify-hostname]`
 
 [.description]
 --
@@ -323,6 +343,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify[quarkus.opensearch.ssl.verify]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify[quarkus.opensearch."client-name".ssl.verify]`
 
 [.description]
 --
@@ -340,6 +361,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-discovery-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-enabled[quarkus.opensearch.discovery.enabled]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-discovery-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-discovery-enabled[quarkus.opensearch."client-name".discovery.enabled]`
 
 [.description]
 --
@@ -357,6 +379,7 @@ endif::add-copy-button-to-env-var[]
 
 a| [[quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
 
+[[quarkus-opensearch_quarkus-opensearch-client-name-discovery-refresh-interval]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-discovery-refresh-interval[quarkus.opensearch."client-name".discovery.refresh-interval]`
 
 [.description]
 --

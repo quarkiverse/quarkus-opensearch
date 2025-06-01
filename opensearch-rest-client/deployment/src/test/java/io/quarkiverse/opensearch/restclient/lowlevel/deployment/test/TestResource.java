@@ -20,6 +20,7 @@ import io.vertx.core.json.JsonObject;
 
 @Path("/fruits")
 public class TestResource {
+
     @Inject
     RestClient restClient;
 

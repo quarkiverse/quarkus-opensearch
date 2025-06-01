@@ -25,14 +25,13 @@ import org.opensearch.client.sniff.OpenSearchNodesSniffer;
 import org.opensearch.client.sniff.Sniffer;
 import org.opensearch.client.sniff.SnifferBuilder;
 
-import io.quarkiverse.opensearch.OpenSearchConfig;
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.SSLContextHelper;
-import io.quarkiverse.opensearch.restclient.OpenSearchClientConfig;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
 import io.quarkus.logging.Log;
 
-public final class RestClientBuilderHelper {
+public class RestClientBuilderHelper {
 
     private static final Logger LOG = Logger.getLogger(RestClientBuilderHelper.class);
 
@@ -40,7 +39,7 @@ public final class RestClientBuilderHelper {
         // avoid instantiation
     }
 
-    public static RestClientBuilder createRestClientBuilder(OpenSearchConfig config) {
+    public static RestClientBuilder createRestClientBuilder(OpenSearchClientConfig config) {
         List<HttpHost> hosts = new ArrayList<>();
         if (config.hosts().isPresent()) {
             for (String host : config.hosts().get()) {
@@ -102,7 +101,8 @@ public final class RestClientBuilderHelper {
             // Apply configuration from RestClientBuilder.HttpClientConfigCallback implementations annotated with OpenSearchClientConfig
             HttpAsyncClientBuilder result = httpClientBuilder;
             Iterable<InstanceHandle<RestClientBuilder.HttpClientConfigCallback>> handles = Arc.container()
-                    .select(RestClientBuilder.HttpClientConfigCallback.class, new OpenSearchClientConfig.Literal())
+                    .select(RestClientBuilder.HttpClientConfigCallback.class,
+                            new io.quarkiverse.opensearch.restclient.OpenSearchClientConfig.Literal())
                     .handles();
             for (InstanceHandle<RestClientBuilder.HttpClientConfigCallback> handle : handles) {
                 result = handle.get().customizeHttpClient(result);
@@ -114,7 +114,7 @@ public final class RestClientBuilderHelper {
         return builder;
     }
 
-    public static Sniffer createSniffer(RestClient client, OpenSearchConfig config) {
+    public static Sniffer createSniffer(RestClient client, OpenSearchClientConfig config) {
         SnifferBuilder builder = Sniffer.builder(client)
                 .setSniffIntervalMillis((int) config.discovery().refreshInterval().toMillis());
 

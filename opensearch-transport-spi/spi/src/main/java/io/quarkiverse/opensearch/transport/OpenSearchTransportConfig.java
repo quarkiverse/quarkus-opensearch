@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.client;
+package io.quarkiverse.opensearch.transport;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

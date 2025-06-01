@@ -31,7 +31,7 @@ import io.quarkus.arc.Arc;
 import io.quarkus.arc.InstanceHandle;
 import io.quarkus.logging.Log;
 
-public final class RestClientBuilderHelper {
+public class RestClientBuilderHelper {
 
     private static final Logger LOG = Logger.getLogger(RestClientBuilderHelper.class);
 

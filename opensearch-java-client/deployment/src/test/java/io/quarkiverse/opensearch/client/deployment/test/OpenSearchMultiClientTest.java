@@ -23,7 +23,7 @@ public class OpenSearchMultiClientTest {
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class)
                     .addAsResource(new StringAsset(
                             // Dummy config triggers analytics client but lets Dev Services start it
-                            "quarkus.opensearch.analytics.username=dummy\nquarkus.opensearch.username=dummy"),
+                            "quarkus.opensearch.analytics.username=dummy\nquarkus.opensearch.reporting.aws.access-key-id=dummy\nquarkus.opensearch.username=dummy\nquarkus.opensearch.aws.access-key-id=dummy"),
                             "application.properties"));
 
     @Inject
@@ -32,6 +32,10 @@ public class OpenSearchMultiClientTest {
     @Inject
     @OpenSearchClientName("analytics")
     OpenSearchClient analyticsClient;
+
+    @Inject
+    @OpenSearchClientName("reporting")
+    OpenSearchClient reportingClient;
 
     @Test
     void defaultClient_shouldBeHealthy() throws Exception {
@@ -46,6 +50,16 @@ public class OpenSearchMultiClientTest {
     @Test
     void analyticsClient_shouldBeHealthy() throws Exception {
         HealthResponse response = analyticsClient.cluster().health();
+        String status = response.status().jsonValue();
+        assertNotNull(status);
+        assertTrue(
+                status.equals("green") || status.equals("yellow"),
+                "Expected analytics cluster status to be green or yellow, but was: " + status);
+    }
+
+    @Test
+    void reportingClient_shouldBeHealthy() throws Exception {
+        HealthResponse response = reportingClient.cluster().health();
         String status = response.status().jsonValue();
         assertNotNull(status);
         assertTrue(

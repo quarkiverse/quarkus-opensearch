@@ -5,6 +5,7 @@ import java.io.UncheckedIOException;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Singleton;
 
@@ -29,6 +30,7 @@ public class OpenSearchRestClientProducer {
 
     @Produces
     @Singleton
+    @Default
     public RestClient restClient() {
         RestClientBuilder builder = RestClientBuilderHelper.createRestClientBuilder(config.defaultClient());
 

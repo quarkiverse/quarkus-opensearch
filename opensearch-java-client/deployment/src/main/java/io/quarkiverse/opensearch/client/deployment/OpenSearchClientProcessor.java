@@ -2,7 +2,6 @@ package io.quarkiverse.opensearch.client.deployment;
 
 import org.jboss.jandex.DotName;
 
-import io.quarkiverse.opensearch.OpenSearchClientsConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchClientsProducer;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
 import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
@@ -12,7 +11,6 @@ import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
-import io.quarkus.deployment.builditem.ConfigMappingBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
@@ -65,17 +63,6 @@ class OpenSearchClientProcessor {
      * );
      * }
      */
-    @BuildStep
-    void registerOpenSearchClientsConfig(BuildProducer<ConfigMappingBuildItem> configMappings) {
-        configMappings.produce(new ConfigMappingBuildItem(
-                OpenSearchClientsConfig.class,
-                "quarkus.opensearch"));
-    }
-
-    @BuildStep
-    void produceConfigMappingBean(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        additionalBeans.produce(AdditionalBeanBuildItem.unremovableOf(OpenSearchClientsConfig.class));
-    }
     /*
      * @BuildStep
      *

@@ -216,7 +216,7 @@ public class DevServicesOpenSearchProcessor {
                     throw new BuildException("Multiple extensions requested OpenSearch Dev Services with different versions.",
                             Collections.emptyList());
                 }
-                hostsConfigProperties.add(item.getHostsConfigProperty());
+                hostsConfigProperties.addAll(item.getHostsConfigProperties());
             }
             this.version = detectedVersion;
         }

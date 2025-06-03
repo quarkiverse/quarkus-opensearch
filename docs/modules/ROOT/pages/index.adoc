@@ -83,7 +83,40 @@ For instance, with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
+== Configuring Opensearch
+The main property to configure is the URL to connect to the Opensearch cluster.
+
+For a typical clustered Opensearch service, a sample configuration would look like the following:
+
+[source,properties]
+----
+# configure the Elasticsearch client for a cluster of two nodes
+quarkus.opensearch.hosts = opensearch-01:9200,opensearch-02:9200
+----
+
+In this case, we are using a single instance running on localhost:
+
+[source,properties]
+----
+# configure the Opensearch client for a single instance on localhost
+quarkus.opensearch.hosts = localhost:9200
+----
+
+If you need a more advanced configuration, you can find the comprehensive list of supported configuration properties at the end of this guide.
+
+[[dev-services]]
+=== Dev Services
+
+Quarkus supports a feature called Dev Services that allows you to start various containers without any config.
+In the case of Opensearch, this support extends to the default Opensearch connection.
+What that means practically is that, if you have not configured `quarkus.opensearch.hosts`, Quarkus will automatically
+start an Opensearch container when running tests or dev mode, and automatically configure the connection.
+
+When running the production version of the application, the Opensearch connection needs to be configured as usual,
+so if you want to include a production database config in your `application.properties` and continue to use Dev Services
+we recommend that you use the `%prod.` profile to define your Opensearch settings.
+
 [[extension-configuration-reference]]
 == Extension Configuration Reference
 
-include::includes/quarkus-opensearch.adoc[leveloffset=+1, opts=optional]
+include::includes/quarkus-opensearch-client.adoc[leveloffset=+1, opts=optional]

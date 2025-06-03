@@ -69,8 +69,8 @@
                             <outputDirectory>${project.basedir}/modules/ROOT/pages/includes/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/../target/asciidoc/generated/config/</directory>
-                                    <include>quarkus-opensearch.adoc</include>
+                                    <directory>${project.basedir}/../target/quarkus-generated-doc/config/</directory>
+                                    <include>quarkus-opensearch-client.adoc</include>
                                     <filtering>false</filtering>
                                 </resource>
                                 <resource>
@@ -96,6 +96,21 @@
                                 </resource>
                             </resources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-config-doc-maven-plugin</artifactId>
+                <version>${quarkus.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>default-generate-asciidoc</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>generate-asciidoc</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

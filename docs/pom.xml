@@ -25,20 +25,9 @@
         </dependency>
     </dependencies>
 
+
     <build>
-        <sourceDirectory>modules/ROOT/examples</sourceDirectory>
         <plugins>
-            <plugin>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>it.ozimov</groupId>
                 <artifactId>yaml-properties-maven-plugin</artifactId>
@@ -57,6 +46,14 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-config-doc-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <targetDirectory>${project.basedir}/modules/ROOT/pages/includes/</targetDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -68,11 +65,6 @@
                         <configuration>
                             <outputDirectory>${project.basedir}/modules/ROOT/pages/includes/</outputDirectory>
                             <resources>
-                                <resource>
-                                    <directory>${project.basedir}/../target/quarkus-generated-doc/config/</directory>
-                                    <include>quarkus-opensearch-client.adoc</include>
-                                    <filtering>false</filtering>
-                                </resource>
                                 <resource>
                                     <directory>${project.basedir}/templates/includes</directory>
                                     <include>attributes.adoc</include>
@@ -96,21 +88,6 @@
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-config-doc-maven-plugin</artifactId>
-                <version>${quarkus.version}</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>default-generate-asciidoc</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>generate-asciidoc</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>

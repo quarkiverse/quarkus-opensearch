@@ -25,7 +25,7 @@ import io.quarkus.deployment.builditem.DockerStatusBuildItem;
 import io.quarkus.deployment.builditem.LaunchModeBuildItem;
 import io.quarkus.deployment.console.ConsoleInstalledBuildItem;
 import io.quarkus.deployment.console.StartupLogCompressor;
-import io.quarkus.deployment.dev.devservices.GlobalDevServicesConfig;
+import io.quarkus.deployment.dev.devservices.DevServicesConfig;
 import io.quarkus.deployment.logging.LoggingSetupBuildItem;
 import io.quarkus.devservices.common.ContainerAddress;
 import io.quarkus.devservices.common.ContainerLocator;
@@ -34,7 +34,7 @@ import io.quarkus.runtime.configuration.ConfigUtils;
 /**
  * Starts an OpenSearch server as dev service if needed.
  */
-@BuildSteps(onlyIfNot = IsNormal.class, onlyIf = GlobalDevServicesConfig.Enabled.class)
+@BuildSteps(onlyIfNot = IsNormal.class, onlyIf = DevServicesConfig.Enabled.class)
 public class DevServicesOpenSearchProcessor {
     private static final Logger log = Logger.getLogger(DevServicesOpenSearchProcessor.class);
 
@@ -61,7 +61,7 @@ public class DevServicesOpenSearchProcessor {
             Optional<ConsoleInstalledBuildItem> consoleInstalledBuildItem,
             CuratedApplicationShutdownBuildItem closeBuildItem,
             LoggingSetupBuildItem loggingSetupBuildItem,
-            GlobalDevServicesConfig devServicesConfig,
+            DevServicesConfig devServicesConfig,
             List<DevServicesOpenSearchBuildItem> devservicesOpenSearchBuildItems) throws BuildException {
 
         if (devservicesOpenSearchBuildItems.isEmpty()) {
@@ -87,7 +87,7 @@ public class DevServicesOpenSearchProcessor {
         try {
             devService = startOpenSearch(dockerStatusBuildItem, configuration, buildItemsConfig, launchMode,
                     !devServicesSharedNetworkBuildItem.isEmpty(),
-                    devServicesConfig.timeout);
+                    devServicesConfig.timeout());
             if (devService == null) {
                 compressor.closeAndDumpCaptured();
             } else {

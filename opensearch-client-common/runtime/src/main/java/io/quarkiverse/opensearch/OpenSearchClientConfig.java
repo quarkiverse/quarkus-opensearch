@@ -4,15 +4,12 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
-import io.quarkus.runtime.annotations.ConfigPhase;
-import io.quarkus.runtime.annotations.ConfigRoot;
-import io.smallrye.config.ConfigMapping;
+import io.quarkus.runtime.annotations.ConfigGroup;
 import io.smallrye.config.WithDefault;
 import io.smallrye.config.WithName;
 
-@ConfigMapping(prefix = "quarkus.opensearch")
-@ConfigRoot(phase = ConfigPhase.RUN_TIME)
-public interface OpenSearchConfig {
+@ConfigGroup
+public interface OpenSearchClientConfig {
 
     /**
      * The list of hosts of the OpenSearch servers, when accessing AWS OpenSearch set to AWS endpoint name.
@@ -106,15 +103,34 @@ public interface OpenSearchConfig {
     Optional<String> secretAccessKey();
 
     /**
+     * TLS configuration.
+     * Allows referencing a named TLS configuration defined elsewhere in the application,
+     * such as via the Quarkus `quarkus.tls.*` configuration properties. This enables centralized
+     * and reusable TLS settings, including trust stores, key stores, and verification behavior.
+     */
+    Optional<Tls> tls();
+
+    interface Tls {
+        /**
+         * The name of the TLS configuration to use.
+         * This refers to a configuration group defined under `quarkus.tls.*`. If not set,
+         * no explicit TLS configuration will be applied beyond the default JDK behavior.
+         */
+        String tlsConfigurationName();
+    }
+
+    /**
      * Optional keyStoreFile to be used when connecting to cluster nodes
      */
     @WithName("ssl.key-store-file")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     Optional<String> keyStoreFile();
 
     /**
      * Optional password for accessing keyStoreFile
      */
     @WithName("ssl.key-store-password")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     Optional<String> keyStorePassword();
 
     /**
@@ -122,6 +138,7 @@ public interface OpenSearchConfig {
      */
     @WithName("ssl.verify-hostname")
     @WithDefault("true")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     boolean sslVerifyHostname();
 
     /**
@@ -129,6 +146,7 @@ public interface OpenSearchConfig {
      */
     @WithName("ssl.verify")
     @WithDefault("true")
+    @Deprecated(forRemoval = true, since = "2.0.0")
     boolean sslVerify();
 
     /**

@@ -51,6 +51,106 @@ with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
+=== Transport Provider (Required)
+
+The Java client requires a transport provider to communicate with OpenSearch. You **must** add one of the following transport dependencies:
+
+[source,xml]
+----
+<!-- Apache HttpClient5 (recommended for most use cases) -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-apache</artifactId>
+</dependency>
+----
+
+Or for AWS OpenSearch Service:
+
+[source,xml]
+----
+<!-- AWS SDK2 (for AWS OpenSearch Service) -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-aws</artifactId>
+</dependency>
+----
+
+[IMPORTANT]
+====
+If no transport provider is found, the application will fail at runtime with:
+`IllegalStateException: No OpenSearchTransportProvider found for config`
+====
+
+==== Configuring Additional Named Clients
+
+This extension supports defining and injecting multiple named OpenSearch clients,
+useful when your application needs to connect to different OpenSearch clusters
+(e.g., for analytics, logging, or operational data).
+
+A named client can be configured using `quarkus.opensearch."client-name".*`.
+
+===== Example: Default and Additional Client
+
+[source,properties]
+----
+# Default client (unnamed)
+quarkus.opensearch.hosts=localhost:9200
+
+# Additional client named "analytics"
+quarkus.opensearch.analytics.hosts=analytics-cluster.internal:9200
+quarkus.opensearch.analytics.username=some-user
+quarkus.opensearch.analytics.password=some-password
+quarkus.opensearch.analytics.aws.region=us-west-2
+----
+
+===== Injecting the Default Client
+
+If you're using only a single OpenSearch cluster, you can inject the default client without any qualifiers:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import org.opensearch.client.opensearch.OpenSearchClient;
+
+public class MyService {
+
+    @Inject
+    OpenSearchClient defaultClient;
+
+    public void run() {
+        // Use the defaultClient to interact with OpenSearch
+    }
+}
+----
+
+
+===== Injecting Named Clients in Your Code
+
+To use a named client in your application, inject it using the `@OpenSearchClientName` qualifier:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import io.quarkiverse.opensearch.OpenSearchClientName;
+import org.opensearch.client.opensearch.OpenSearchClient;
+
+public class ReportService {
+
+    @Inject
+    @OpenSearchClientName("analytics")
+    OpenSearchClient analyticsClient;
+
+    public void runQuery() {
+        // Use the analyticsClient to run a search
+    }
+}
+----
+
+[NOTE]
+====
+The `@OpenSearchClientName("<client-name>")` injection is only supported for the OpenSearch Java Client module.
+====
+
 === OpenSearch REST High-Level Client
 
 The REST High-Level Client depends on the REST client and does not require any additional configuration.

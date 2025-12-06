@@ -7,6 +7,27 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-health-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-enabled[`quarkus.opensearch.health.enabled`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch.health.enabled+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Whether a health check is published in case the smallrye-health extension is present.
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`+++true+++`
+
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-enabled[`quarkus.opensearch.devservices.enabled`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.enabled+++[]
@@ -70,7 +91,7 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`docker.io/opensearchproject/opensearch:2.19.2`
+|`+++docker.io/opensearchproject/opensearch:2.19.2+++`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts[`quarkus.opensearch.devservices.java-opts`]##
 ifdef::add-copy-button-to-config-props[]
@@ -91,7 +112,7 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_JAVA_OPTS+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`-Xms512m -Xmx1g`
+|`+++-Xms512m -Xmx1g+++`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-shared]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-shared[`quarkus.opensearch.devservices.shared`]##
 ifdef::add-copy-button-to-config-props[]
@@ -116,7 +137,7 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_SHARED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`true`
+|`+++true+++`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-service-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-service-name[`quarkus.opensearch.devservices.service-name`]##
 ifdef::add-copy-button-to-config-props[]
@@ -139,34 +160,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_SERVICE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`opensearch`
-
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-health-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-enabled[`quarkus.opensearch.health.enabled`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.health.enabled+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-Whether a health check is published in case the smallrye-health extension is present.
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
-endif::add-copy-button-to-env-var[]
---
-|boolean
-|`true`
+|`+++opensearch+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-hosts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-hosts[`quarkus.opensearch.hosts`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.hosts+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".hosts`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".hosts+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -189,6 +194,11 @@ config_property_copy_button:+++quarkus.opensearch.protocol+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".protocol`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".protocol+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 The protocol to use when contacting OpenSearch servers. Set to "https" to enable SSL/TLS.
@@ -202,13 +212,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_PROTOCOL+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`http`
+|`+++http+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-username]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-username[`quarkus.opensearch.username`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.username+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".username`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".username+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -231,6 +246,11 @@ config_property_copy_button:+++quarkus.opensearch.password+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".password`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".password+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 The password for basic HTTP authentication.
@@ -252,6 +272,11 @@ config_property_copy_button:+++quarkus.opensearch.connection-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".connection-timeout`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".connection-timeout+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 The connection timeout.
@@ -265,13 +290,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`15S`
+|`+++15S+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-thread-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-thread-timeout[`quarkus.opensearch.thread-timeout`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.thread-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".thread-timeout`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".thread-timeout+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -286,13 +316,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`30S`
+|`+++30S+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-socket-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-socket-timeout[`quarkus.opensearch.socket-timeout`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.socket-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".socket-timeout`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".socket-timeout+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -307,13 +342,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`30S`
+|`+++30S+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections[`quarkus.opensearch.max-connections`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.max-connections+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".max-connections`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".max-connections+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -328,13 +368,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`20`
+|`+++20+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route[`quarkus.opensearch.max-connections-per-route`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.max-connections-per-route+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".max-connections-per-route`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".max-connections-per-route+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -349,13 +394,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`10`
+|`+++10+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-io-thread-counts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-io-thread-counts[`quarkus.opensearch.io-thread-counts`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.io-thread-counts+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".io-thread-counts`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".io-thread-counts+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -380,6 +430,11 @@ config_property_copy_button:+++quarkus.opensearch.aws.region+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".aws.region`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".aws.region+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 AWS Region
@@ -393,13 +448,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_AWS_REGION+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`us-west-2`
+|`+++us-west-2+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-aws-service]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-service[`quarkus.opensearch.aws.service`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.aws.service+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".aws.service`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".aws.service+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -422,6 +482,11 @@ config_property_copy_button:+++quarkus.opensearch.aws.access-key-id+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".aws.access-key-id`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".aws.access-key-id+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 AWS Secret Access Key for setting up StaticCredentialsProvider
@@ -443,6 +508,11 @@ config_property_copy_button:+++quarkus.opensearch.aws.access-key-secret+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".aws.access-key-secret`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".aws.access-key-secret+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
 AWS Secret Access Key Secret for setting up StaticCredentialsProvider
@@ -458,95 +528,42 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file[`quarkus.opensearch.ssl.key-store-file`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name[`quarkus.opensearch.tls.tls-configuration-name`]##
 ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.ssl.key-store-file+++[]
+config_property_copy_button:+++quarkus.opensearch.tls.tls-configuration-name+++[]
 endif::add-copy-button-to-config-props[]
 
 
+`quarkus.opensearch."client-name".tls.tls-configuration-name`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".tls.tls-configuration-name+++[]
+endif::add-copy-button-to-config-props[]
+
 [.description]
 --
-Optional keyStoreFile to be used when connecting to cluster nodes
+The name of the TLS configuration to use. This refers to a configuration group defined under `quarkus.tls.++*++`. If not set, no explicit TLS configuration will be applied beyond the default JDK behavior.
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_TLS_TLS_CONFIGURATION_NAME+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++`
+Environment variable: `+++QUARKUS_OPENSEARCH_TLS_TLS_CONFIGURATION_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|
-
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password[`quarkus.opensearch.ssl.key-store-password`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.ssl.key-store-password+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-Optional password for accessing keyStoreFile
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++`
-endif::add-copy-button-to-env-var[]
---
-|string
-|
-
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname[`quarkus.opensearch.ssl.verify-hostname`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.ssl.verify-hostname+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-SSL Verify Hostname
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++`
-endif::add-copy-button-to-env-var[]
---
-|boolean
-|`true`
-
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify[`quarkus.opensearch.ssl.verify`]##
-ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.ssl.verify+++[]
-endif::add-copy-button-to-config-props[]
-
-
-[.description]
---
-Verify SSL Certificates
-
-
-ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY+++[]
-endif::add-copy-button-to-env-var[]
-ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY+++`
-endif::add-copy-button-to-env-var[]
---
-|boolean
-|`true`
+|required icon:exclamation-circle[title=Configuration property is required]
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-enabled[`quarkus.opensearch.discovery.enabled`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.discovery.enabled+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".discovery.enabled`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".discovery.enabled+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -561,13 +578,18 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`false`
+|`+++false+++`
 
 a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval[`quarkus.opensearch.discovery.refresh-interval`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.discovery.refresh-interval+++[]
 endif::add-copy-button-to-config-props[]
 
+
+`quarkus.opensearch."client-name".discovery.refresh-interval`
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".discovery.refresh-interval+++[]
+endif::add-copy-button-to-config-props[]
 
 [.description]
 --
@@ -582,7 +604,119 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`5M`
+|`+++5M+++`
+
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file[[.line-through]#`quarkus.opensearch.ssl.key-store-file`#]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch.ssl.key-store-file+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.line-through]#`quarkus.opensearch."client-name".ssl.key-store-file`#
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".ssl.key-store-file+++[]
+endif::add-copy-button-to-config-props[]
+
+[.description]
+--
+_This property is deprecated since `2.0.0`._
+
+Optional keyStoreFile to be used when connecting to cluster nodes
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password[[.line-through]#`quarkus.opensearch.ssl.key-store-password`#]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch.ssl.key-store-password+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.line-through]#`quarkus.opensearch."client-name".ssl.key-store-password`#
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".ssl.key-store-password+++[]
+endif::add-copy-button-to-config-props[]
+
+[.description]
+--
+_This property is deprecated since `2.0.0`._
+
+Optional password for accessing keyStoreFile
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|
+
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname[[.line-through]#`quarkus.opensearch.ssl.verify-hostname`#]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch.ssl.verify-hostname+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.line-through]#`quarkus.opensearch."client-name".ssl.verify-hostname`#
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".ssl.verify-hostname+++[]
+endif::add-copy-button-to-config-props[]
+
+[.description]
+--
+_This property is deprecated since `2.0.0`._
+
+SSL Verify Hostname
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`+++true+++`
+
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify[[.line-through]#`quarkus.opensearch.ssl.verify`#]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch.ssl.verify+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.line-through]#`quarkus.opensearch."client-name".ssl.verify`#
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++quarkus.opensearch."client-name".ssl.verify+++[]
+endif::add-copy-button-to-config-props[]
+
+[.description]
+--
+_This property is deprecated since `2.0.0`._
+
+Verify SSL Certificates
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY+++`
+endif::add-copy-button-to-env-var[]
+--
+|boolean
+|`+++true+++`
 
 |===
 

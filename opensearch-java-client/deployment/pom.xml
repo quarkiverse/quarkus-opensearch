@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>quarkus-opensearch-java-client-deployment</artifactId>
-    <name>Quarkus - OpenSearch Java client - Deployment</name>
+    <name>Quarkus - OpenSearch Java Client - Deployment</name>
 
     <dependencies>
         <dependency>
@@ -28,6 +28,11 @@
             <groupId>io.quarkiverse.opensearch</groupId>
             <artifactId>quarkus-opensearch-java-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-transport-spi</artifactId>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -37,6 +42,31 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5</artifactId>
+            <scope>test</scope>
+        </dependency>
+            <dependency>
+            <groupId>org.apache.httpcomponents.core5</groupId>
+            <artifactId>httpcore5-h2</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+                <scope>test</scope>
+            </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-transport-aws</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.opensearch</groupId>
+            <artifactId>quarkus-opensearch-transport-apache</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

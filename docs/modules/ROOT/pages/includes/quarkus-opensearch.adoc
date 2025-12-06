@@ -1,0 +1,417 @@
+
+:summaryTableId: quarkus-opensearch
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[[quarkus-opensearch_configuration]]link:#quarkus-opensearch_configuration[Configuration property]
+
+h|Type
+h|Default
+
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch_quarkus-opensearch-health-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-health-enabled[quarkus.opensearch.health.enabled]`
+
+
+[.description]
+--
+Whether a health check is published in case the smallrye-health extension is present.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-hosts]]`link:#quarkus-opensearch_quarkus-opensearch-hosts[quarkus.opensearch.hosts]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-hosts]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-hosts[quarkus.opensearch."client-name".hosts]`
+
+
+[.description]
+--
+The list of hosts of the OpenSearch servers, when accessing AWS OpenSearch set to AWS endpoint name. Host Example: opensearch-01:9200,opensearch-02:9200 AWS Endpoint Example: search-domain-name-identifier.region.es.amazonaws.com
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HOSTS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_HOSTS+++`
+endif::add-copy-button-to-env-var[]
+--|list of string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-protocol]]`link:#quarkus-opensearch_quarkus-opensearch-protocol[quarkus.opensearch.protocol]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-protocol]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-protocol[quarkus.opensearch."client-name".protocol]`
+
+
+[.description]
+--
+The protocol to use when contacting OpenSearch servers. Set to "https" to enable SSL/TLS.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_PROTOCOL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_PROTOCOL+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`http`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-username]]`link:#quarkus-opensearch_quarkus-opensearch-username[quarkus.opensearch.username]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-username]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-username[quarkus.opensearch."client-name".username]`
+
+[.description]
+--
+The username for basic HTTP authentication.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_USERNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_USERNAME+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-password]]`link:#quarkus-opensearch_quarkus-opensearch-password[quarkus.opensearch.password]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-password]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-password[quarkus.opensearch."client-name".password]`
+
+[.description]
+--
+The password for basic HTTP authentication.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-connection-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-connection-timeout[quarkus.opensearch.connection-timeout]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-connection-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-connection-timeout[quarkus.opensearch."client-name".connection-timeout]`
+
+[.description]
+--
+The connection timeout.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+|`15S`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-thread-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-thread-timeout[quarkus.opensearch.thread-timeout]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-thread-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-thread-timeout[quarkus.opensearch."client-name".thread-timeout]`
+
+[.description]
+--
+The connection timeout.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+|`30S`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-socket-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-socket-timeout[quarkus.opensearch.socket-timeout]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-socket-timeout]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-socket-timeout[quarkus.opensearch."client-name".socket-timeout]`
+
+[.description]
+--
+The socket timeout.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+|`30S`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-max-connections]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections[quarkus.opensearch.max-connections]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-max-connections]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-max-connections[quarkus.opensearch."client-name".max-connections]`
+
+
+[.description]
+--
+The maximum number of connections to all the OpenSearch servers.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`20`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-max-connections-per-route]]`link:#quarkus-opensearch_quarkus-opensearch-max-connections-per-route[quarkus.opensearch.max-connections-per-route]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-max-connections-per-route]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-max-connections-per-route[quarkus.opensearch."client-name".max-connections-per-route]`
+
+[.description]
+--
+The maximum number of connections per OpenSearch server.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|`10`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-io-thread-counts]]`link:#quarkus-opensearch_quarkus-opensearch-io-thread-counts[quarkus.opensearch.io-thread-counts]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-io-thread-counts]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-io-thread-counts[quarkus.opensearch."client-name".io-thread-counts]`
+
+[.description]
+--
+The number of IO thread. By default, this is the number of locally detected processors.
+
+Thread counts higher than the number of processors should not be necessary because the I/O threads rely on non-blocking operations, but you may want to use a thread count lower than the number of processors.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_IO_THREAD_COUNTS+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_IO_THREAD_COUNTS+++`
+endif::add-copy-button-to-env-var[]
+--|int 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-aws-region]]`link:#quarkus-opensearch_quarkus-opensearch-aws-region[quarkus.opensearch.aws.region]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-region]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-region[quarkus.opensearch."client-name".aws.region]`
+
+[.description]
+--
+AWS Region
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_REGION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_REGION+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|`us-west-2`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-aws-service]]`link:#quarkus-opensearch_quarkus-opensearch-aws-service[quarkus.opensearch.aws.service]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-service]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-service[quarkus.opensearch."client-name".aws.service]`
+
+[.description]
+--
+Set to "es" or "aoss" to use AWS OpenSearch Service. es : Amazon OpenSearch Service aoss : Amazon OpenSearch Serverless
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_SERVICE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_SERVICE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-id]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-id[quarkus.opensearch.aws.access-key-id]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-id]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-id[quarkus.opensearch."client-name".aws.access-key-id]`
+
+[.description]
+--
+AWS Secret Access Key for setting up StaticCredentialsProvider
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_ID+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_ID+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-aws-access-key-secret]]`link:#quarkus-opensearch_quarkus-opensearch-aws-access-key-secret[quarkus.opensearch.aws.access-key-secret]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-secret]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-aws-access-key-secret[quarkus.opensearch."client-name".aws.access-key-secret]`
+
+[.description]
+--
+AWS Secret Access Key Secret for setting up StaticCredentialsProvider
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_SECRET+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_AWS_ACCESS_KEY_SECRET+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-file]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-file[quarkus.opensearch.ssl.key-store-file]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-file]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-file[quarkus.opensearch."client-name".ssl.key-store-file]`
+
+[.description]
+--
+Optional keyStoreFile to be used when connecting to cluster nodes
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_FILE+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-ssl-key-store-password]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-key-store-password[quarkus.opensearch.ssl.key-store-password]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-password]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-key-store-password[quarkus.opensearch."client-name".ssl.key-store-password]`
+
+[.description]
+--
+Optional password for accessing keyStoreFile
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_KEY_STORE_PASSWORD+++`
+endif::add-copy-button-to-env-var[]
+--|string 
+|
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify-hostname[quarkus.opensearch.ssl.verify-hostname]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify-hostname]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify-hostname[quarkus.opensearch."client-name".ssl.verify-hostname]`
+
+[.description]
+--
+SSL Verify Hostname
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-ssl-verify]]`link:#quarkus-opensearch_quarkus-opensearch-ssl-verify[quarkus.opensearch.ssl.verify]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-ssl-verify[quarkus.opensearch."client-name".ssl.verify]`
+
+[.description]
+--
+Verify SSL Certificates
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_SSL_VERIFY+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`true`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-discovery-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-enabled[quarkus.opensearch.discovery.enabled]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-discovery-enabled]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-discovery-enabled[quarkus.opensearch."client-name".discovery.enabled]`
+
+[.description]
+--
+Defines if automatic discovery is enabled.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++`
+endif::add-copy-button-to-env-var[]
+--|boolean 
+|`false`
+
+
+a| [[quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval]]`link:#quarkus-opensearch_quarkus-opensearch-discovery-refresh-interval[quarkus.opensearch.discovery.refresh-interval]`
+
+[[quarkus-opensearch_quarkus-opensearch-client-name-discovery-refresh-interval]]`link:#quarkus-opensearch_quarkus-opensearch-client-name-discovery-refresh-interval[quarkus.opensearch."client-name".discovery.refresh-interval]`
+
+[.description]
+--
+Refresh interval of the node list.
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
+endif::add-copy-button-to-env-var[]
+--|link:https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html[Duration]
+  link:#duration-note-anchor-{summaryTableId}[icon:question-circle[title=More information about the Duration format]]
+|`5M`
+
+|===
+ifndef::no-duration-note[]
+[NOTE]
+[id='duration-note-anchor-{summaryTableId}']
+.About the Duration format
+====
+To write duration values, use the standard `java.time.Duration` format.
+See the link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html#parse(java.lang.CharSequence)[Duration#parse() Java API documentation] for more information.
+
+You can also use a simplified format, starting with a number:
+
+* If the value is only a number, it represents time in seconds.
+* If the value is a number followed by `ms`, it represents time in milliseconds.
+
+In other cases, the simplified format is translated to the `java.time.Duration` format for parsing:
+
+* If the value is a number followed by `h`, `m`, or `s`, it is prefixed with `PT`.
+* If the value is a number followed by `d`, it is prefixed with `P`.
+====
+endif::no-duration-note[]

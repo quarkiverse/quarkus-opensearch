@@ -51,29 +51,35 @@ with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
-=== Choosing Transport Providers via SPI
+=== Transport Provider (Required)
 
-This extension supports runtime selection of transport providers using Java's `ServiceLoader` (SPI) mechanism.
-
-To enable one of the providers, add the appropriate module to your project:
+The Java client requires a transport provider to communicate with OpenSearch. You **must** add one of the following transport dependencies:
 
 [source,xml]
 ----
-<!-- Apache HttpClient5 -->
+<!-- Apache HttpClient5 (recommended for most use cases) -->
 <dependency>
   <groupId>io.quarkiverse.opensearch</groupId>
   <artifactId>quarkus-opensearch-transport-apache</artifactId>
 </dependency>
+----
 
-<!-- AWS SDK -->
+Or for AWS OpenSearch Service:
+
+[source,xml]
+----
+<!-- AWS SDK2 (for AWS OpenSearch Service) -->
 <dependency>
   <groupId>io.quarkiverse.opensearch</groupId>
   <artifactId>quarkus-opensearch-transport-aws</artifactId>
 </dependency>
 ----
 
-[NOTE]
-If no transport provider is found, the application will fail with an exception.
+[IMPORTANT]
+====
+If no transport provider is found, the application will fail at runtime with:
+`IllegalStateException: No OpenSearchTransportProvider found for config`
+====
 
 ==== Configuring Additional Named Clients
 

@@ -53,32 +53,76 @@ with Maven, add the following dependency to your POM file:
 
 === Transport Provider (Required)
 
-The Java client requires a transport provider to communicate with OpenSearch. You **must** add one of the following transport dependencies:
+The Java client requires a transport provider to communicate with OpenSearch. You **must** add one of the following transport dependencies based on your deployment target.
+
+==== Apache HttpClient5 Transport (Recommended)
+
+Use this transport for:
+
+* Local development with Dev Services
+* Self-hosted OpenSearch clusters
+* Any non-AWS deployment
 
 [source,xml]
 ----
-<!-- Apache HttpClient5 (recommended for most use cases) -->
 <dependency>
   <groupId>io.quarkiverse.opensearch</groupId>
   <artifactId>quarkus-opensearch-transport-apache</artifactId>
 </dependency>
 ----
 
-Or for AWS OpenSearch Service:
+==== AWS SDK2 Transport
+
+Use this transport **only** when connecting to AWS OpenSearch Service or AWS OpenSearch Serverless. This transport requires the `quarkus.opensearch.aws.service` configuration property to be set.
 
 [source,xml]
 ----
-<!-- AWS SDK2 (for AWS OpenSearch Service) -->
 <dependency>
   <groupId>io.quarkiverse.opensearch</groupId>
   <artifactId>quarkus-opensearch-transport-aws</artifactId>
 </dependency>
 ----
 
+[source,properties]
+----
+# Required for AWS transport to activate
+quarkus.opensearch.aws.service=es    # or 'aoss' for OpenSearch Serverless
+quarkus.opensearch.aws.region=us-west-2
+----
+
+==== Using Both Transports
+
+If you deploy to AWS but also use Dev Services for local development, you can include both transport dependencies. The appropriate transport will be selected automatically based on your configuration:
+
+* When `quarkus.opensearch.aws.service` is set → AWS transport is used
+* When `quarkus.opensearch.aws.service` is not set → Apache transport is used
+
+[source,xml]
+----
+<!-- For local development and Dev Services -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-apache</artifactId>
+</dependency>
+
+<!-- For AWS deployment -->
+<dependency>
+  <groupId>io.quarkiverse.opensearch</groupId>
+  <artifactId>quarkus-opensearch-transport-aws</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+# Only set AWS config in production profile
+%prod.quarkus.opensearch.aws.service=es
+%prod.quarkus.opensearch.aws.region=us-west-2
+%prod.quarkus.opensearch.hosts=search-mydomain.us-west-2.es.amazonaws.com
+----
+
 [IMPORTANT]
 ====
-If no transport provider is found, the application will fail at runtime with:
-`IllegalStateException: No OpenSearchTransportProvider found for config`
+If no matching transport provider is found, the application will fail at runtime with a detailed error message explaining which providers are available and what configuration is needed.
 ====
 
 ==== Configuring Additional Named Clients
@@ -203,6 +247,75 @@ quarkus.opensearch.hosts = localhost:9200
 ----
 
 If you need a more advanced configuration, you can find the comprehensive list of supported configuration properties at the end of this guide.
+
+=== SSL/TLS Configuration
+
+When connecting to OpenSearch over HTTPS, you can configure TLS settings using the Quarkus TLS registry. This is the recommended approach for managing SSL/TLS configuration.
+
+==== Basic HTTPS Connection
+
+For HTTPS connections with valid certificates trusted by the JVM:
+
+[source,properties]
+----
+quarkus.opensearch.hosts=opensearch.example.com:9200
+quarkus.opensearch.protocol=https
+quarkus.opensearch.username=admin
+quarkus.opensearch.password=admin
+----
+
+==== Using a Custom Trust Store
+
+To use a custom trust store (e.g., for self-signed certificates):
+
+[source,properties]
+----
+quarkus.opensearch.hosts=opensearch.example.com:9200
+quarkus.opensearch.protocol=https
+quarkus.opensearch.tls.tls-configuration-name=opensearch-tls
+
+# Define the TLS configuration
+quarkus.tls.opensearch-tls.trust-store.p12.path=/path/to/truststore.p12
+quarkus.tls.opensearch-tls.trust-store.p12.password=changeit
+----
+
+==== Disabling SSL Verification (Development Only)
+
+[WARNING]
+====
+Disabling SSL verification should **only** be used in development environments. Never disable SSL verification in production.
+====
+
+For development environments where you don't have valid certificates:
+
+[source,properties]
+----
+quarkus.opensearch.hosts=opensearch.example.com:9200
+quarkus.opensearch.protocol=https
+quarkus.opensearch.tls.tls-configuration-name=opensearch-dev
+
+# Trust all certificates and disable hostname verification
+quarkus.tls.opensearch-dev.trust-all=true
+quarkus.tls.opensearch-dev.hostname-verification-algorithm=NONE
+----
+
+You can scope this to development mode only using profiles:
+
+[source,properties]
+----
+# Production uses proper certificates
+%prod.quarkus.opensearch.protocol=https
+
+# Development trusts all certificates
+%dev.quarkus.opensearch.tls.tls-configuration-name=dev-tls
+%dev.quarkus.tls.dev-tls.trust-all=true
+%dev.quarkus.tls.dev-tls.hostname-verification-algorithm=NONE
+----
+
+[NOTE]
+====
+The legacy `quarkus.opensearch.ssl.*` properties are deprecated and will be removed in a future version. Please migrate to the Quarkus TLS registry configuration shown above.
+====
 
 [[dev-services]]
 === Dev Services

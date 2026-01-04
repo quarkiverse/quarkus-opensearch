@@ -8,24 +8,32 @@
 
 This extension allows you to connect to an [OpenSearch cluster](https://opensearch.org/) using the clients provided by the OpenSearch project.
 
-## Supported OpenSearch Clients
-- [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/)
-- OpenSearch REST client (core client)
-- [OpenSearch REST high-level client](https://opensearch.org/docs/latest/clients/java-rest-high-level/)
+## Version Compatibility
 
-Since version 1.2.5 (LTS) and 1.3.1 support for the REST clients is deprecated, please use the Java Client instead.
-The Java Client is not dependent on the REST client anymore and supports Apache HttpClient 5 Transport as well as AWS SDK2 Transport.
+| Extension | OpenSearch | Quarkus | JDK | Status |
+|-----------|------------|---------|-----|--------|
+| **3.x** | 3.x | 3.27 LTS+ | 21+ | Active |
+| **2.x** | 2.x | 3.27 LTS | 17+ | Maintenance |
+
+**Important:** Extension 3.x requires JDK 21 (OpenSearch 3.x requirement) and only supports the OpenSearch Java Client.
+
+## Supported OpenSearch Clients
+
+- [OpenSearch Java Client](https://opensearch.org/docs/latest/clients/java/) - **Recommended for all new projects**
+
+The deprecated REST clients (low-level and high-level) have been removed in extension 3.x. Use extension 2.x if you need REST client support.
+
+## New in 3.0.0
+
+- **OpenSearch 3.x support** - Full compatibility with OpenSearch 3.x server and client libraries
+- **JDK 21 required** - Minimum Java version increased to match OpenSearch 3.x requirements
+- **OpenSearch Java Client only** - Deprecated REST clients removed (use extension 2.x for REST client support)
 
 ## New in 2.0.0
 
-The next major release brings several new features and improvements:
-
 - **SPI-based class loading** for 3rd party dependencies such as Apache HttpClient5 and AWS SDK2 Transport to reduce the dependency footprint and improve modularity.
-- **Named client support**  
-  Enables support for multiple OpenSearch client configurations.  
-  This resolves [issue #334](https://github.com/quarkiverse/quarkus-opensearch/issues/334).
-- **Support for Quarkus TLS Registry**  
-  Integrates with the Quarkus TLS configuration registry to allow secure client setup via shared TLS contexts.
+- **Named client support** - Enables support for multiple OpenSearch client configurations ([issue #334](https://github.com/quarkiverse/quarkus-opensearch/issues/334))
+- **Support for Quarkus TLS Registry** - Integrates with the Quarkus TLS configuration registry to allow secure client setup via shared TLS contexts
 
 ## Latest Releases
 For latest Release Information see:

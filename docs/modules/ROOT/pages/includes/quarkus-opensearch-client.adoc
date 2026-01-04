@@ -91,7 +91,7 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++docker.io/opensearchproject/opensearch:2.19.2+++`
+|`+++docker.io/opensearchproject/opensearch:3.3.2+++`
 
 a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts[`quarkus.opensearch.devservices.java-opts`]##
 ifdef::add-copy-button-to-config-props[]

@@ -4,32 +4,23 @@ include::./includes/attributes.adoc[]
 
 The quarkus-opensearch extension allows you to connect to an link:https://opensearch.org/[OpenSearch cluster] using the clients provided by the OpenSearch project.
 
-== OpenSearch Clients
+[IMPORTANT]
+.OpenSearch 3.x Support
+====
+This version supports **OpenSearch 3.x** which requires:
 
-OpenSearch provides three different flavours of clients for connecting to the cluster. This extension has support for all three of them.
+* **JDK 21 minimum** - OpenSearch 3.0 requires Java 21 as the minimum runtime
+* **OpenSearch Java Client only** - The deprecated REST clients have been removed
+
+If you need OpenSearch 2.x support, use an earlier version of this extension.
+====
+
+== OpenSearch Clients
 
 === link:https://opensearch.org/docs/latest/clients/java/[OpenSearch Java Client]
 
-This is the latest implementation of the OpenSearch clients, when starting a new project you should use this client and not bother about the others.
-This will be the only OpenSearch Client supported in the future.
-Just like the OpenSearch REST high-level level, the OpenSearch Java client lets you interact with OpenSearch through Java methods and data structures. In comparison to the REST high-level, it has no dependency to `org.opensearch:opensearch` and also provides an async client implementation.
-
-[NOTE]
-.Deprecation
-====
-The OpenSearch REST clients are deprecated. Support will be removed in OpenSearch version 3.0.0.
-
-It is recommended to switch to the Java client.
-We will try to support the REST clients as long as possible, but if you start a new project this is not the client you should use anymore.
-====
-
-=== link:https://opensearch.org/docs/latest/clients/java-rest-high-level/[OpenSearch REST High-Level Client]
-
-The OpenSearch Java high-level REST client lets you interact with your OpenSearch clusters and indices through Java methods and data structures rather than HTTP methods and JSON.
-
-=== OpenSearch REST (low-level) client
-
-Core low-level client which lets you interact with OpenSearch clusters through HTTP methods and JSON, it is also used by the two other higher level clients for connecting to the cluster.
+This is the recommended and only supported OpenSearch client for OpenSearch 3.x.
+The OpenSearch Java client lets you interact with OpenSearch through Java methods and data structures, and provides both synchronous and asynchronous client implementations.
 
 == Installation
 

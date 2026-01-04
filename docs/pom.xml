@@ -15,12 +15,7 @@
         <!-- Make sure the doc is built after the other artifacts -->
         <dependency>
             <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-rest-client-deployment</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkiverse.opensearch</groupId>
-            <artifactId>quarkus-opensearch-rest-high-level-client-deployment</artifactId>
+            <artifactId>quarkus-opensearch-java-client-deployment</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -172,6 +172,7 @@ public interface OpenSearchClientConfig {
     /**
      * Health check configuration for this client.
      */
+    @WithName("health-check")
     HealthConfig health();
 
     interface HealthConfig {

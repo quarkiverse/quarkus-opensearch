@@ -25,7 +25,7 @@ public class OpenSearchHealthCheckConfigTest {
                     .addAsResource(new StringAsset(
                             "quarkus.opensearch.username=dummy\n" +
                                     "quarkus.opensearch.analytics.username=dummy\n" +
-                                    "quarkus.opensearch.analytics.health.enabled=false"),
+                                    "quarkus.opensearch.analytics.health-check.enabled=false"),
                             "application.properties"));
 
     @Inject

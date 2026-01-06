@@ -169,4 +169,19 @@ public interface OpenSearchClientConfig {
         Duration refreshInterval();
     }
 
+    /**
+     * Health check configuration for this client.
+     */
+    HealthConfig health();
+
+    interface HealthConfig {
+
+        /**
+         * Whether this client should be included in health checks.
+         * When set to false, this client will be excluded from the OpenSearch health check endpoint.
+         */
+        @WithDefault("true")
+        boolean enabled();
+    }
+
 }

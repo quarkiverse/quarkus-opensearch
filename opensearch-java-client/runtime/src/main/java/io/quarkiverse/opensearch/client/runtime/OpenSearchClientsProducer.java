@@ -129,4 +129,8 @@ public class OpenSearchClientsProducer {
     public Map<String, OpenSearchAsyncClient> getAllAsyncClients() {
         return asyncClients;
     }
+
+    public OpenSearchClientConfig getClientConfig(String name) {
+        return resolveConfig(name);
+    }
 }

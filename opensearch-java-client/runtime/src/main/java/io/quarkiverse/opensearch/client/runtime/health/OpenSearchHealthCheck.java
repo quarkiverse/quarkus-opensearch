@@ -14,6 +14,7 @@ import org.opensearch.client.opensearch.OpenSearchAsyncClient;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch.cluster.HealthResponse;
 
+import io.quarkiverse.opensearch.OpenSearchClientConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchClientsProducer;
 
 @Readiness
@@ -30,6 +31,9 @@ public class OpenSearchHealthCheck implements HealthCheck {
         final Map<String, OpenSearchAsyncClient> asyncClients = transportProducer.getAllAsyncClients();
         for (Map.Entry<String, OpenSearchAsyncClient> entry : asyncClients.entrySet()) {
             String clientName = entry.getKey();
+            if (!isHealthCheckEnabled(clientName)) {
+                continue;
+            }
             OpenSearchAsyncClient client = entry.getValue();
             try {
                 HealthResponse response = client.cluster().health().get(10, TimeUnit.SECONDS);
@@ -48,6 +52,9 @@ public class OpenSearchHealthCheck implements HealthCheck {
         final Map<String, OpenSearchClient> clients = transportProducer.getAllClients();
         for (Map.Entry<String, OpenSearchClient> entry : clients.entrySet()) {
             String clientName = entry.getKey();
+            if (!isHealthCheckEnabled(clientName)) {
+                continue;
+            }
             OpenSearchClient client = entry.getValue();
             try {
                 HealthResponse response = client.cluster().health();
@@ -64,5 +71,10 @@ public class OpenSearchHealthCheck implements HealthCheck {
         }
 
         return allHealthy ? builder.up().build() : builder.down().build();
+    }
+
+    private boolean isHealthCheckEnabled(String clientName) {
+        OpenSearchClientConfig config = transportProducer.getClientConfig(clientName);
+        return config.health().enabled();
     }
 }

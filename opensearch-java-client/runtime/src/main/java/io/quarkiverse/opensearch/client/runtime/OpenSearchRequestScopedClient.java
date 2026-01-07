@@ -3,7 +3,6 @@ package io.quarkiverse.opensearch.client.runtime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Any;
@@ -126,23 +125,29 @@ public class OpenSearchRequestScopedClient {
             return null;
         }
 
-        TransportOptions.Builder mergedBuilder = null;
-
+        // Collect all provided options first
+        List<TransportOptions> allOptions = new ArrayList<>();
         for (OpenSearchTransportOptionsProvider provider : providers) {
-            Optional<TransportOptions> options = provider.getTransportOptions(clientName);
-            if (options.isPresent()) {
-                if (mergedBuilder == null) {
-                    mergedBuilder = options.get().toBuilder();
-                } else {
-                    // Merge headers from this provider into the builder
-                    TransportOptions opts = options.get();
-                    opts.headers().forEach(header -> mergedBuilder.addHeader(header.getKey(), header.getValue()));
-                    opts.queryParameters().forEach(mergedBuilder::setParameter);
-                }
+            provider.getTransportOptions(clientName).ifPresent(allOptions::add);
+        }
+
+        if (allOptions.isEmpty()) {
+            return null;
+        }
+
+        // Use first options as base, merge remaining
+        TransportOptions.Builder mergedBuilder = allOptions.get(0).toBuilder();
+        for (int i = 1; i < allOptions.size(); i++) {
+            TransportOptions opts = allOptions.get(i);
+            for (var header : opts.headers()) {
+                mergedBuilder.addHeader(header.getKey(), header.getValue());
+            }
+            for (var param : opts.queryParameters().entrySet()) {
+                mergedBuilder.setParameter(param.getKey(), param.getValue());
             }
         }
 
-        return mergedBuilder != null ? mergedBuilder.build() : null;
+        return mergedBuilder.build();
     }
 
     /**

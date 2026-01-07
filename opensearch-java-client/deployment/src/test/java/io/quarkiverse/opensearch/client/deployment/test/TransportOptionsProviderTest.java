@@ -19,6 +19,8 @@ import io.quarkiverse.opensearch.OpenSearchClientName;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchRequestScopedClient;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportOptionsConfig;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportOptionsProvider;
+import io.quarkus.arc.Arc;
+import io.quarkus.arc.ManagedContext;
 import io.quarkus.test.QuarkusUnitTest;
 
 /**
@@ -48,49 +50,73 @@ class TransportOptionsProviderTest {
 
     @Test
     void testProviderIsInvoked() {
-        // Reset invocation flags
-        TestAuthTokenProvider.invoked = false;
-        TestTenantHeaderProvider.invoked = false;
+        ManagedContext requestContext = Arc.container().requestContext();
+        requestContext.activate();
+        try {
+            // Reset invocation flags
+            TestAuthTokenProvider.invoked = false;
+            TestTenantHeaderProvider.invoked = false;
 
-        // Getting the client should trigger provider invocation
-        OpenSearchClient client = requestScopedClient.getClient();
-        assertNotNull(client);
+            // Getting the client should trigger provider invocation
+            OpenSearchClient client = requestScopedClient.getClient();
+            assertNotNull(client);
 
-        // Providers should have been invoked during options resolution
-        assertTrue(TestAuthTokenProvider.invoked, "Auth token provider should be invoked");
-        assertTrue(TestTenantHeaderProvider.invoked, "Tenant header provider should be invoked");
+            // Providers should have been invoked during options resolution
+            assertTrue(TestAuthTokenProvider.invoked, "Auth token provider should be invoked");
+            assertTrue(TestTenantHeaderProvider.invoked, "Tenant header provider should be invoked");
+        } finally {
+            requestContext.terminate();
+        }
     }
 
     @Test
     void testProviderPriorityOrder() {
-        // Reset
-        TestAuthTokenProvider.invokeOrder = 0;
-        TestTenantHeaderProvider.invokeOrder = 0;
-        TestLowPriorityProvider.invokeOrder = 0;
-        invocationCounter = 0;
+        ManagedContext requestContext = Arc.container().requestContext();
+        requestContext.activate();
+        try {
+            // Reset
+            TestAuthTokenProvider.invokeOrder = 0;
+            TestTenantHeaderProvider.invokeOrder = 0;
+            TestLowPriorityProvider.invokeOrder = 0;
+            invocationCounter = 0;
 
-        requestScopedClient.getClient();
+            requestScopedClient.getClient();
 
-        // Higher priority (lower number) should be invoked first
-        assertTrue(TestAuthTokenProvider.invokeOrder < TestTenantHeaderProvider.invokeOrder,
-                "Auth provider (priority 10) should run before tenant provider (priority 50)");
-        assertTrue(TestTenantHeaderProvider.invokeOrder < TestLowPriorityProvider.invokeOrder,
-                "Tenant provider (priority 50) should run before low priority provider (priority 200)");
+            // Higher priority (lower number) should be invoked first
+            assertTrue(TestAuthTokenProvider.invokeOrder < TestTenantHeaderProvider.invokeOrder,
+                    "Auth provider (priority 10) should run before tenant provider (priority 50)");
+            assertTrue(TestTenantHeaderProvider.invokeOrder < TestLowPriorityProvider.invokeOrder,
+                    "Tenant provider (priority 50) should run before low priority provider (priority 200)");
+        } finally {
+            requestContext.terminate();
+        }
     }
 
     @Test
     void testClientNamePassedToProvider() {
-        TestAuthTokenProvider.lastClientName = null;
+        ManagedContext requestContext = Arc.container().requestContext();
+        requestContext.activate();
+        try {
+            TestAuthTokenProvider.lastClientName = null;
 
-        requestScopedClient.getClient();
-        assertEquals(OpenSearchClientName.DEFAULT, TestAuthTokenProvider.lastClientName,
-                "Default client name should be passed to provider");
+            requestScopedClient.getClient();
+            assertEquals(OpenSearchClientName.DEFAULT, TestAuthTokenProvider.lastClientName,
+                    "Default client name should be passed to provider");
+        } finally {
+            requestContext.terminate();
+        }
     }
 
     @Test
     void testProviderCanReturnEmpty() {
-        // TestLowPriorityProvider returns empty - should not cause issues
-        assertDoesNotThrow(() -> requestScopedClient.getClient());
+        ManagedContext requestContext = Arc.container().requestContext();
+        requestContext.activate();
+        try {
+            // TestLowPriorityProvider returns empty - should not cause issues
+            assertDoesNotThrow(() -> requestScopedClient.getClient());
+        } finally {
+            requestContext.terminate();
+        }
     }
 
     // Shared counter for tracking invocation order

@@ -34,10 +34,59 @@ import io.quarkus.tls.TlsConfigurationRegistry;
  * </p>
  *
  * <p>
+ * For certificate reload support, use {@link #createReloadableSSLContext(OpenSearchClientConfig)} which
+ * returns a {@link ReloadableSSLContext} that can refresh certificates without application restart.
+ * </p>
+ *
+ * <p>
  * This class is used internally to configure secure connections to OpenSearch endpoints.
  * </p>
+ *
+ * @see ReloadableSSLContext
  */
 public class SSLContextHelper {
+
+    /**
+     * Creates a {@link ReloadableSSLContext} that supports certificate reloading.
+     * <p>
+     * When using the Quarkus TLS Registry, the returned context can be reloaded to pick up
+     * rotated certificates. For static configurations (keystore files), the context is
+     * non-reloadable but wrapped for API consistency.
+     *
+     * @param config The OpenSearch client configuration
+     * @return A reloadable SSLContext wrapper
+     * @throws GeneralSecurityException If SSL setup fails
+     * @throws IOException If keystore files cannot be read
+     */
+    public static ReloadableSSLContext createReloadableSSLContext(OpenSearchClientConfig config)
+            throws GeneralSecurityException, IOException {
+        // Try to use TLS configuration from the Quarkus TLS registry, if available
+        final Instance<TlsConfigurationRegistry> certs = CDI.current().select(TlsConfigurationRegistry.class);
+        if (certs.isResolvable()) {
+            try {
+                // Use named TLS configuration if defined
+                if (config.tls().isPresent()) {
+                    var cert = certs.get().get(config.tls().get().tlsConfigurationName());
+                    if (cert.isPresent()) {
+                        return ReloadableSSLContext.from(cert.get());
+                    }
+                    throw new RuntimeException(
+                            "unable to find TLS configuration for " + config.tls().get().tlsConfigurationName());
+                }
+                // Use default TLS configuration if no name is specified
+                else if (certs.get().getDefault().isPresent()) {
+                    return ReloadableSSLContext.from(certs.get().getDefault().get());
+                }
+            } catch (RuntimeException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // Fallback: create non-reloadable SSLContext
+        return ReloadableSSLContext.nonReloadable(createSSLContextInternal(config));
+    }
 
     /**
      * Creates an {@link SSLContext} instance based on the provided OpenSearch client configuration.
@@ -71,6 +120,15 @@ public class SSLContextHelper {
         }
 
         // Fallback: create SSLContext manually
+        return createSSLContextInternal(config);
+    }
+
+    /**
+     * Internal method to create SSLContext without TLS Registry lookup.
+     * Used by both createSSLContext and createReloadableSSLContext for fallback scenarios.
+     */
+    private static SSLContext createSSLContextInternal(OpenSearchClientConfig config)
+            throws GeneralSecurityException, IOException {
         SSLContext sslContext = SSLContext.getInstance("TLS");
         TrustManager[] trustManagers;
 

@@ -133,4 +133,24 @@ public class OpenSearchClientsProducer {
     public OpenSearchClientConfig getClientConfig(String name) {
         return resolveConfig(name);
     }
+
+    /**
+     * Get or create a client by name. Useful for programmatic access.
+     *
+     * @param name the client name
+     * @return the OpenSearch client
+     */
+    public OpenSearchClient getClientByName(String name) {
+        return getOrCreateClient(name);
+    }
+
+    /**
+     * Get or create an async client by name. Useful for programmatic access.
+     *
+     * @param name the client name
+     * @return the OpenSearch async client
+     */
+    public OpenSearchAsyncClient getAsyncClientByName(String name) {
+        return getOrCreateAsync(name);
+    }
 }

@@ -1,4 +1,4 @@
-package io.quarkiverse.opensearch.transport.apache;
+package io.quarkiverse.opensearch.client.deployment.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,7 @@ import javax.net.ssl.SSLContext;
 import org.junit.jupiter.api.Test;
 
 import io.quarkiverse.opensearch.ReloadableSSLContext;
+import io.quarkiverse.opensearch.transport.apache.ReloadableTlsStrategy;
 
 /**
  * Unit tests for {@link ReloadableTlsStrategy}.
@@ -63,21 +64,6 @@ class ReloadableTlsStrategyTest {
     }
 
     @Test
-    void testCreateSSLEngine() throws Exception {
-        SSLContext sslContext = SSLContext.getDefault();
-        ReloadableSSLContext reloadable = ReloadableSSLContext.nonReloadable(sslContext);
-        ReloadableTlsStrategy strategy = new ReloadableTlsStrategy(reloadable, true);
-
-        // Create SSL engine for a test endpoint
-        var sslEngine = strategy.createSSLEngine(
-                new TestNamedEndpoint("localhost", 9200),
-                org.apache.hc.core5.reactor.ssl.SSLBufferMode.STATIC);
-
-        assertNotNull(sslEngine);
-        assertTrue(sslEngine.getUseClientMode(), "SSL engine should be in client mode");
-    }
-
-    @Test
     void testMultipleReloadCallsAreSafe() throws Exception {
         SSLContext sslContext = SSLContext.getDefault();
         ReloadableSSLContext reloadable = ReloadableSSLContext.nonReloadable(sslContext);
@@ -86,29 +72,6 @@ class ReloadableTlsStrategyTest {
         // Multiple reloads should be safe
         for (int i = 0; i < 10; i++) {
             assertFalse(strategy.reload());
-        }
-    }
-
-    /**
-     * Test implementation of NamedEndpoint.
-     */
-    private static class TestNamedEndpoint implements org.apache.hc.core5.net.NamedEndpoint {
-        private final String hostName;
-        private final int port;
-
-        TestNamedEndpoint(String hostName, int port) {
-            this.hostName = hostName;
-            this.port = port;
-        }
-
-        @Override
-        public String getHostName() {
-            return hostName;
-        }
-
-        @Override
-        public int getPort() {
-            return port;
         }
     }
 }

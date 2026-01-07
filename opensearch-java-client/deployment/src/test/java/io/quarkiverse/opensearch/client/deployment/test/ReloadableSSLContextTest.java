@@ -1,10 +1,12 @@
-package io.quarkiverse.opensearch;
+package io.quarkiverse.opensearch.client.deployment.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import javax.net.ssl.SSLContext;
 
 import org.junit.jupiter.api.Test;
+
+import io.quarkiverse.opensearch.ReloadableSSLContext;
 
 /**
  * Unit tests for {@link ReloadableSSLContext}.

@@ -606,15 +606,15 @@ endif::add-copy-button-to-env-var[]
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
 |`+++5M+++`
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-health-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-enabled[`quarkus.opensearch.health.enabled`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-health-check-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-check-enabled[`quarkus.opensearch.health-check.enabled`]##
 ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch.health.enabled+++[]
+config_property_copy_button:+++quarkus.opensearch.health-check.enabled+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".health.enabled`
+`quarkus.opensearch."client-name".health-check.enabled`
 ifdef::add-copy-button-to-config-props[]
-config_property_copy_button:+++quarkus.opensearch."client-name".health.enabled+++[]
+config_property_copy_button:+++quarkus.opensearch."client-name".health-check.enabled+++[]
 endif::add-copy-button-to-config-props[]
 
 [.description]
@@ -623,10 +623,10 @@ Whether this client should be included in health checks. When set to false, this
 
 
 ifdef::add-copy-button-to-env-var[]
-Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++[]
+Environment variable: env_var_with_copy_button:+++QUARKUS_OPENSEARCH_HEALTH_CHECK_ENABLED+++[]
 endif::add-copy-button-to-env-var[]
 ifndef::add-copy-button-to-env-var[]
-Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
+Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_CHECK_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean

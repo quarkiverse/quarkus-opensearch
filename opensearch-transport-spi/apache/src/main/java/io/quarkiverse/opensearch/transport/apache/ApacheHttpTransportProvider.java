@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.SSLContext;
-
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.config.ConnectionConfig;
@@ -15,8 +13,6 @@ import org.apache.hc.client5.http.impl.async.HttpAsyncClientBuilder;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
-import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
-import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.util.Timeout;
@@ -27,6 +23,7 @@ import org.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBui
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkiverse.opensearch.OpenSearchClientConfig;
+import io.quarkiverse.opensearch.ReloadableSSLContext;
 import io.quarkiverse.opensearch.SSLContextHelper;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProvider;
@@ -64,10 +61,16 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
         builder.setMapper(new JacksonJsonpMapper(objectMapper));
 
         try {
-            final SSLContext sslContext = SSLContextHelper.createSSLContext(config);
+            final ReloadableSSLContext reloadableSSLContext = SSLContextHelper.createReloadableSSLContext(config);
+            final ReloadableTlsStrategy reloadableTlsStrategy = ReloadableTlsStrategy.create(reloadableSSLContext, config);
+
+            // Register the reloadable strategy for potential certificate reload operations
+            if (Arc.container() != null && reloadableSSLContext.isReloadable()) {
+                registerReloadableTlsStrategy(reloadableTlsStrategy);
+            }
 
             builder.setHttpClientConfigCallback(httpAsyncClientBuilder -> {
-                final TlsStrategy tlsStrategy = buildTlsStrategy(config, sslContext);
+                final TlsStrategy tlsStrategy = reloadableTlsStrategy;
 
                 final ConnectionConfig connectionConfig = ConnectionConfig.custom()
                         .setConnectTimeout(Timeout.of(config.connectionTimeout()))
@@ -143,16 +146,52 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
         }
     }
 
-    private TlsStrategy buildTlsStrategy(OpenSearchClientConfig config, SSLContext sslContext) {
-        ClientTlsStrategyBuilder builder = ClientTlsStrategyBuilder.create().setSslContext(sslContext);
-        if (!config.sslVerifyHostname() || !config.sslVerify()) {
-            builder.setHostnameVerifier(NoopHostnameVerifier.INSTANCE);
-        }
-        return builder.build();
-    }
-
     @Override
     public String name() {
         return "apache-http-client5";
+    }
+
+    // --- Certificate Reload Support ---
+
+    private static final List<ReloadableTlsStrategy> reloadableStrategies = new ArrayList<>();
+
+    /**
+     * Register a reloadable TLS strategy for certificate reload operations.
+     */
+    private static synchronized void registerReloadableTlsStrategy(ReloadableTlsStrategy strategy) {
+        reloadableStrategies.add(strategy);
+    }
+
+    /**
+     * Reload certificates for all registered TLS strategies.
+     * <p>
+     * This method triggers a certificate reload for all OpenSearch connections that were
+     * created with a reloadable TLS configuration. New connections will use the updated
+     * certificates; existing connections are not affected.
+     * <p>
+     * Typically called in response to a certificate update event or on a scheduled basis.
+     *
+     * @return the number of strategies that were successfully reloaded
+     */
+    public static synchronized int reloadAllCertificates() {
+        int reloaded = 0;
+        for (ReloadableTlsStrategy strategy : reloadableStrategies) {
+            if (strategy.reload()) {
+                reloaded++;
+                Log.info("Reloaded TLS certificates for OpenSearch connection");
+            }
+        }
+        return reloaded;
+    }
+
+    /**
+     * Get the list of registered reloadable TLS strategies.
+     * <p>
+     * This can be used to manually trigger reloads or check reload status.
+     *
+     * @return unmodifiable list of reloadable strategies
+     */
+    public static synchronized List<ReloadableTlsStrategy> getReloadableStrategies() {
+        return List.copyOf(reloadableStrategies);
     }
 }

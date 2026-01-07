@@ -3,9 +3,11 @@ package io.quarkiverse.opensearch.client.deployment;
 import org.jboss.jandex.DotName;
 
 import io.quarkiverse.opensearch.client.runtime.OpenSearchClientsProducer;
+import io.quarkiverse.opensearch.client.runtime.OpenSearchRequestScopedClient;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
 import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
+import io.quarkiverse.opensearch.transport.OpenSearchTransportOptionsConfig;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;
@@ -20,6 +22,8 @@ class OpenSearchClientProcessor {
     private static final String FEATURE = "opensearch-java-client";
 
     private static final DotName OPENSEARCH_TRANSPORT_CONFIG = DotName.createSimple(OpenSearchTransportConfig.class.getName());
+    private static final DotName OPENSEARCH_TRANSPORT_OPTIONS_CONFIG = DotName
+            .createSimple(OpenSearchTransportOptionsConfig.class.getName());
 
     @BuildStep
     FeatureBuildItem feature() {
@@ -29,6 +33,11 @@ class OpenSearchClientProcessor {
     @BuildStep()
     AdditionalBeanBuildItem buildOpenSearchTransportProducer() {
         return AdditionalBeanBuildItem.unremovableOf(OpenSearchClientsProducer.class);
+    }
+
+    @BuildStep()
+    AdditionalBeanBuildItem buildOpenSearchRequestScopedClient() {
+        return AdditionalBeanBuildItem.unremovableOf(OpenSearchRequestScopedClient.class);
     }
 
     @BuildStep
@@ -53,6 +62,12 @@ class OpenSearchClientProcessor {
         additionalBeans.produce(AdditionalBeanBuildItem.builder().addBeanClass(OpenSearchTransportConfig.class).build());
         definingAnnotations.produce(new BeanDefiningAnnotationBuildItem(
                 OPENSEARCH_TRANSPORT_CONFIG, DotNames.APPLICATION_SCOPED, false));
+
+        // Register OpenSearchTransportOptionsConfig qualifier for transport options providers
+        additionalBeans
+                .produce(AdditionalBeanBuildItem.builder().addBeanClass(OpenSearchTransportOptionsConfig.class).build());
+        definingAnnotations.produce(new BeanDefiningAnnotationBuildItem(
+                OPENSEARCH_TRANSPORT_OPTIONS_CONFIG, DotNames.APPLICATION_SCOPED, false));
     }
 
     /*

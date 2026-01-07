@@ -1,10 +1,8 @@
 package io.quarkiverse.opensearch.transport.apache;
 
 import java.net.SocketAddress;
-import java.util.concurrent.Future;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
 
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
@@ -12,8 +10,6 @@ import org.apache.hc.core5.concurrent.FutureCallback;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.net.NamedEndpoint;
-import org.apache.hc.core5.reactor.ssl.SSLBufferMode;
-import org.apache.hc.core5.reactor.ssl.TlsDetails;
 import org.apache.hc.core5.reactor.ssl.TransportSecurityLayer;
 import org.apache.hc.core5.util.Timeout;
 
@@ -58,6 +54,7 @@ public class ReloadableTlsStrategy implements TlsStrategy {
      * @param config the OpenSearch client configuration
      * @return a new ReloadableTlsStrategy
      */
+    @SuppressWarnings("deprecation")
     public static ReloadableTlsStrategy create(ReloadableSSLContext reloadableSSLContext, OpenSearchClientConfig config) {
         boolean verifyHostname = config.sslVerifyHostname() && config.sslVerify();
         return new ReloadableTlsStrategy(reloadableSSLContext, verifyHostname);
@@ -108,18 +105,7 @@ public class ReloadableTlsStrategy implements TlsStrategy {
 
     // Delegate all TlsStrategy methods to the current delegate
 
-    @Override
-    public Future<TlsDetails> upgrade(
-            TransportSecurityLayer tlsSession,
-            HttpHost host,
-            SocketAddress localAddress,
-            SocketAddress remoteAddress,
-            Object attachment,
-            Timeout handshakeTimeout,
-            FutureCallback<TlsDetails> callback) {
-        return delegate.upgrade(tlsSession, host, localAddress, remoteAddress, attachment, handshakeTimeout, callback);
-    }
-
+    @SuppressWarnings("deprecation")
     @Override
     public boolean upgrade(
             TransportSecurityLayer tlsSession,
@@ -131,23 +117,13 @@ public class ReloadableTlsStrategy implements TlsStrategy {
         return delegate.upgrade(tlsSession, host, localAddress, remoteAddress, attachment, handshakeTimeout);
     }
 
-    // Additional interface methods that may be needed depending on Apache HC5 version
-
-    /**
-     * Create an SSL engine for the given endpoint.
-     * <p>
-     * This method uses the current SSLContext from the reloadable wrapper.
-     *
-     * @param endpoint the target endpoint
-     * @param sslBufferMode the SSL buffer mode
-     * @return a new SSL engine
-     */
-    public SSLEngine createSSLEngine(NamedEndpoint endpoint, SSLBufferMode sslBufferMode) {
-        SSLContext sslContext = reloadableSSLContext.get();
-        SSLEngine sslEngine = sslContext.createSSLEngine(
-                endpoint.getHostName(),
-                endpoint.getPort());
-        sslEngine.setUseClientMode(true);
-        return sslEngine;
+    @Override
+    public void upgrade(
+            TransportSecurityLayer tlsSession,
+            NamedEndpoint endpoint,
+            Object attachment,
+            Timeout handshakeTimeout,
+            FutureCallback<TransportSecurityLayer> callback) {
+        delegate.upgrade(tlsSession, endpoint, attachment, handshakeTimeout, callback);
     }
 }

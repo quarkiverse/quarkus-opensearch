@@ -308,6 +308,256 @@ You can scope this to development mode only using profiles:
 The legacy `quarkus.opensearch.ssl.*` properties are deprecated and will be removed in a future version. Please migrate to the Quarkus TLS registry configuration shown above.
 ====
 
+==== mTLS with Certificate Reload
+
+For environments using mutual TLS (mTLS) with automatic certificate rotation (e.g., Kubernetes with cert-manager), you can configure automatic certificate reload:
+
+[source,properties]
+----
+quarkus.opensearch.hosts=opensearch.example.com:9200
+quarkus.opensearch.protocol=https
+quarkus.opensearch.tls.tls-configuration-name=opensearch-mtls
+
+# Client certificate (mTLS)
+quarkus.tls.opensearch-mtls.key-store.p12.path=/certs/client.p12
+quarkus.tls.opensearch-mtls.key-store.p12.password=${KEYSTORE_PASSWORD}
+
+# Trust store for server certificate
+quarkus.tls.opensearch-mtls.trust-store.pem.certs=/certs/ca.pem
+
+# Automatic reload every 5 minutes
+quarkus.tls.opensearch-mtls.reload-period=5m
+----
+
+When certificates are rotated (e.g., by cert-manager), the extension automatically picks up the new certificates without requiring an application restart. New connections will use the updated certificates.
+
+[TIP]
+====
+For programmatic certificate reload, you can call:
+[source,java]
+----
+import io.quarkiverse.opensearch.transport.apache.ApacheHttpTransportProvider;
+
+// Trigger immediate reload of all certificates
+int reloadedCount = ApacheHttpTransportProvider.reloadAllCertificates();
+----
+====
+
+=== Per-Request Transport Options
+
+The extension provides an SPI (Service Provider Interface) for injecting per-request transport options into OpenSearch requests. This is useful for:
+
+* **OIDC/OAuth2 token propagation** - Pass bearer tokens to OpenSearch Security plugin
+* **Multi-tenant headers** - Inject tenant identifiers for Document Level Security (DLS)
+* **Request tracing** - Add correlation IDs and tracing headers
+* **Custom authentication** - Implement custom authentication schemes
+
+==== Implementing a Transport Options Provider
+
+Create a CDI bean that implements `OpenSearchTransportOptionsProvider` and annotate it with `@OpenSearchTransportOptionsConfig`:
+
+[source,java]
+----
+import java.util.Optional;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+import org.opensearch.client.transport.TransportOptions;
+
+import io.quarkus.security.identity.SecurityIdentity;
+import io.quarkiverse.opensearch.transport.OpenSearchTransportOptionsConfig;
+import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportOptionsProvider;
+
+@ApplicationScoped
+@OpenSearchTransportOptionsConfig  // Required qualifier
+public class OidcTokenProvider implements OpenSearchTransportOptionsProvider {
+
+    @Inject
+    SecurityIdentity securityIdentity;
+
+    @Override
+    public Optional<TransportOptions> getTransportOptions(String clientName) {
+        if (securityIdentity.isAnonymous()) {
+            return Optional.empty();
+        }
+
+        var credential = securityIdentity.getCredential(
+                io.quarkus.oidc.AccessTokenCredential.class);
+        if (credential == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(TransportOptions.builder()
+                .addHeader("Authorization", "Bearer " + credential.getToken())
+                .build());
+    }
+
+    @Override
+    public int priority() {
+        return 10; // Lower number = higher priority
+    }
+}
+----
+
+[IMPORTANT]
+====
+The `@OpenSearchTransportOptionsConfig` qualifier is **required** for the provider to be discovered.
+====
+
+==== Using the Request-Scoped Client
+
+To use per-request transport options, inject `OpenSearchRequestScopedClient` instead of the regular `OpenSearchClient`:
+
+[source,java]
+----
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+
+import org.opensearch.client.opensearch.OpenSearchClient;
+import org.opensearch.client.opensearch.core.SearchResponse;
+
+import io.quarkiverse.opensearch.client.runtime.OpenSearchRequestScopedClient;
+
+@Path("/search")
+public class SearchResource {
+
+    @Inject
+    OpenSearchRequestScopedClient requestScopedClient;
+
+    @GET
+    public String search() throws Exception {
+        // Client automatically includes headers from all registered providers
+        OpenSearchClient client = requestScopedClient.getClient();
+
+        SearchResponse<MyDocument> response = client.search(s -> s
+                .index("my-index")
+                .query(q -> q.matchAll(m -> m)),
+                MyDocument.class);
+
+        return "Found " + response.hits().total().value() + " documents";
+    }
+}
+----
+
+For named clients:
+
+[source,java]
+----
+// Get a specific named client with per-request options
+OpenSearchClient analyticsClient = requestScopedClient.getClient("analytics");
+OpenSearchAsyncClient asyncClient = requestScopedClient.getAsyncClient("analytics");
+----
+
+==== Multiple Providers
+
+You can register multiple providers. They are invoked in priority order (lower number = higher priority) and their transport options are merged:
+
+[source,java]
+----
+// Provider 1: Authentication (priority 10 - runs first)
+@ApplicationScoped
+@OpenSearchTransportOptionsConfig
+public class AuthProvider implements OpenSearchTransportOptionsProvider {
+    @Override
+    public Optional<TransportOptions> getTransportOptions(String clientName) {
+        return Optional.of(TransportOptions.builder()
+                .addHeader("Authorization", "Bearer " + getToken())
+                .build());
+    }
+
+    @Override
+    public int priority() { return 10; }
+}
+
+// Provider 2: Tenant headers (priority 50)
+@ApplicationScoped
+@OpenSearchTransportOptionsConfig
+public class TenantProvider implements OpenSearchTransportOptionsProvider {
+    @Inject
+    SecurityIdentity identity;
+
+    @Override
+    public Optional<TransportOptions> getTransportOptions(String clientName) {
+        String tenant = identity.getAttribute("tenant_id");
+        return Optional.of(TransportOptions.builder()
+                .addHeader("X-Tenant-Id", tenant != null ? tenant : "default")
+                .build());
+    }
+
+    @Override
+    public int priority() { return 50; }
+}
+
+// Provider 3: Tracing (priority 100 - runs last)
+@ApplicationScoped
+@OpenSearchTransportOptionsConfig
+public class TracingProvider implements OpenSearchTransportOptionsProvider {
+    @Override
+    public Optional<TransportOptions> getTransportOptions(String clientName) {
+        return Optional.of(TransportOptions.builder()
+                .addHeader("X-Request-Id", UUID.randomUUID().toString())
+                .build());
+    }
+
+    @Override
+    public int priority() { return 100; }
+}
+----
+
+==== Client-Specific Options
+
+Providers can return different options based on the client name:
+
+[source,java]
+----
+@ApplicationScoped
+@OpenSearchTransportOptionsConfig
+public class ClientSpecificProvider implements OpenSearchTransportOptionsProvider {
+
+    @Override
+    public Optional<TransportOptions> getTransportOptions(String clientName) {
+        return switch (clientName) {
+            case "analytics" -> Optional.of(TransportOptions.builder()
+                    .addHeader("X-Priority", "low")
+                    .setParameter("timeout", "60s")
+                    .build());
+            case "search" -> Optional.of(TransportOptions.builder()
+                    .addHeader("X-Priority", "high")
+                    .build());
+            default -> Optional.empty(); // No options for other clients
+        };
+    }
+}
+----
+
+==== When to Use Request-Scoped vs Regular Client
+
+|===
+|Use Case |Client |Reason
+
+|Static credentials (username/password)
+|`@Inject OpenSearchClient`
+|Credentials don't change per request
+
+|OIDC token propagation
+|`@Inject OpenSearchRequestScopedClient`
+|Token is different for each user/request
+
+|Multi-tenant applications
+|`@Inject OpenSearchRequestScopedClient`
+|Tenant context changes per request
+
+|Background jobs (no user context)
+|`@Inject OpenSearchClient`
+|No request context available
+
+|Request tracing/correlation
+|`@Inject OpenSearchRequestScopedClient`
+|Headers are request-specific
+|===
+
 [[dev-services]]
 === Dev Services
 

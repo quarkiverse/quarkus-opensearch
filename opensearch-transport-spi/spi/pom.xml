@@ -3,7 +3,7 @@
     <parent>
         <groupId>io.quarkiverse.opensearch</groupId>
         <artifactId>opensearch-transport-parent</artifactId>
-        <version>999-SNAPSHOT</version>
+        <version>3.2.2</version>
     </parent>
 
     <artifactId>quarkus-opensearch-transport-spi</artifactId>

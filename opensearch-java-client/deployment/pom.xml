@@ -3,7 +3,7 @@
     <parent>
         <groupId>io.quarkiverse.opensearch</groupId>
         <artifactId>quarkus-opensearch-java-client-parent</artifactId>
-        <version>999-SNAPSHOT</version>
+        <version>3.2.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>

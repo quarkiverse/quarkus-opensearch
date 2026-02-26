@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 import org.jboss.logging.Logger;
-import org.opensearch.testcontainers.OpensearchContainer;
+import org.opensearch.testcontainers.OpenSearchContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import io.quarkus.builder.BuildException;
@@ -157,7 +157,7 @@ public class DevServicesOpenSearchProcessor {
                 config.serviceName(), config.shared(), launchMode.getLaunchMode());
 
         Supplier<DevServicesResultBuildItem.RunningDevService> startContainer = () -> {
-            OpensearchContainer container = new OpensearchContainer(
+            OpenSearchContainer container = new OpenSearchContainer(
                     DockerImageName.parse(config.imageName())
                             .asCompatibleSubstituteFor("opensearchproject/opensearch"));
 

@@ -7,7 +7,7 @@ h|[.header-title]##Configuration property##
 h|Type
 h|Default
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-health-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-enabled[`quarkus.opensearch.health.enabled`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-health-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-health-enabled[`+++quarkus.opensearch.health.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.health.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -26,9 +26,9 @@ Environment variable: `+++QUARKUS_OPENSEARCH_HEALTH_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`+++true+++`
+|true
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-enabled[`quarkus.opensearch.devservices.enabled`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-enabled[`+++quarkus.opensearch.devservices.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -49,7 +49,7 @@ endif::add-copy-button-to-env-var[]
 |boolean
 |
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-port]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-port[`quarkus.opensearch.devservices.port`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-port]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-port[`+++quarkus.opensearch.devservices.port+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.port+++[]
 endif::add-copy-button-to-config-props[]
@@ -72,7 +72,7 @@ endif::add-copy-button-to-env-var[]
 |int
 |
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-image-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-image-name[`quarkus.opensearch.devservices.image-name`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-image-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-image-name[`+++quarkus.opensearch.devservices.image-name+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.image-name+++[]
 endif::add-copy-button-to-config-props[]
@@ -91,9 +91,9 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_IMAGE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++docker.io/opensearchproject/opensearch:3.3.2+++`
+|docker.io/opensearchproject/opensearch:3.3.2
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts[`quarkus.opensearch.devservices.java-opts`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-java-opts[`+++quarkus.opensearch.devservices.java-opts+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.java-opts+++[]
 endif::add-copy-button-to-config-props[]
@@ -112,9 +112,9 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_JAVA_OPTS+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++-Xms512m -Xmx1g+++`
+|-Xms512m -Xmx1g
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-shared]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-shared[`quarkus.opensearch.devservices.shared`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-shared]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-shared[`+++quarkus.opensearch.devservices.shared+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.shared+++[]
 endif::add-copy-button-to-config-props[]
@@ -137,9 +137,9 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_SHARED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`+++true+++`
+|true
 
-a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-service-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-service-name[`quarkus.opensearch.devservices.service-name`]##
+a|icon:lock[title=Fixed at build time] [[quarkus-opensearch-client_quarkus-opensearch-devservices-service-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-devservices-service-name[`+++quarkus.opensearch.devservices.service-name+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.devservices.service-name+++[]
 endif::add-copy-button-to-config-props[]
@@ -160,15 +160,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DEVSERVICES_SERVICE_NAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++opensearch+++`
+|opensearch
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-hosts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-hosts[`quarkus.opensearch.hosts`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-hosts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-hosts[`+++quarkus.opensearch.hosts+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.hosts+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".hosts`
+`+++quarkus.opensearch."client-name".hosts+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".hosts+++[]
 endif::add-copy-button-to-config-props[]
@@ -188,13 +188,13 @@ endif::add-copy-button-to-env-var[]
 |list of string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-protocol]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-protocol[`quarkus.opensearch.protocol`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-protocol]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-protocol[`+++quarkus.opensearch.protocol+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.protocol+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".protocol`
+`+++quarkus.opensearch."client-name".protocol+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".protocol+++[]
 endif::add-copy-button-to-config-props[]
@@ -212,15 +212,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_PROTOCOL+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++http+++`
+|http
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-username]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-username[`quarkus.opensearch.username`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-username]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-username[`+++quarkus.opensearch.username+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.username+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".username`
+`+++quarkus.opensearch."client-name".username+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".username+++[]
 endif::add-copy-button-to-config-props[]
@@ -240,13 +240,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-password[`quarkus.opensearch.password`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-password[`+++quarkus.opensearch.password+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.password+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".password`
+`+++quarkus.opensearch."client-name".password+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".password+++[]
 endif::add-copy-button-to-config-props[]
@@ -266,13 +266,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-connection-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-connection-timeout[`quarkus.opensearch.connection-timeout`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-connection-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-connection-timeout[`+++quarkus.opensearch.connection-timeout+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.connection-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".connection-timeout`
+`+++quarkus.opensearch."client-name".connection-timeout+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".connection-timeout+++[]
 endif::add-copy-button-to-config-props[]
@@ -290,15 +290,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_CONNECTION_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`+++15S+++`
+|15S
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-thread-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-thread-timeout[`quarkus.opensearch.thread-timeout`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-thread-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-thread-timeout[`+++quarkus.opensearch.thread-timeout+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.thread-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".thread-timeout`
+`+++quarkus.opensearch."client-name".thread-timeout+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".thread-timeout+++[]
 endif::add-copy-button-to-config-props[]
@@ -316,15 +316,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_THREAD_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`+++30S+++`
+|30S
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-socket-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-socket-timeout[`quarkus.opensearch.socket-timeout`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-socket-timeout]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-socket-timeout[`+++quarkus.opensearch.socket-timeout+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.socket-timeout+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".socket-timeout`
+`+++quarkus.opensearch."client-name".socket-timeout+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".socket-timeout+++[]
 endif::add-copy-button-to-config-props[]
@@ -342,15 +342,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_SOCKET_TIMEOUT+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`+++30S+++`
+|30S
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections[`quarkus.opensearch.max-connections`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections[`+++quarkus.opensearch.max-connections+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.max-connections+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".max-connections`
+`+++quarkus.opensearch."client-name".max-connections+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".max-connections+++[]
 endif::add-copy-button-to-config-props[]
@@ -368,15 +368,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`+++20+++`
+|20
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route[`quarkus.opensearch.max-connections-per-route`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-max-connections-per-route[`+++quarkus.opensearch.max-connections-per-route+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.max-connections-per-route+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".max-connections-per-route`
+`+++quarkus.opensearch."client-name".max-connections-per-route+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".max-connections-per-route+++[]
 endif::add-copy-button-to-config-props[]
@@ -394,15 +394,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_MAX_CONNECTIONS_PER_ROUTE+++`
 endif::add-copy-button-to-env-var[]
 --
 |int
-|`+++10+++`
+|10
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-io-thread-counts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-io-thread-counts[`quarkus.opensearch.io-thread-counts`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-io-thread-counts]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-io-thread-counts[`+++quarkus.opensearch.io-thread-counts+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.io-thread-counts+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".io-thread-counts`
+`+++quarkus.opensearch."client-name".io-thread-counts+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".io-thread-counts+++[]
 endif::add-copy-button-to-config-props[]
@@ -424,13 +424,13 @@ endif::add-copy-button-to-env-var[]
 |int
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-aws-region]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-region[`quarkus.opensearch.aws.region`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-aws-region]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-region[`+++quarkus.opensearch.aws.region+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.aws.region+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".aws.region`
+`+++quarkus.opensearch."client-name".aws.region+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".aws.region+++[]
 endif::add-copy-button-to-config-props[]
@@ -448,15 +448,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_AWS_REGION+++`
 endif::add-copy-button-to-env-var[]
 --
 |string
-|`+++us-west-2+++`
+|us-west-2
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-aws-service]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-service[`quarkus.opensearch.aws.service`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-aws-service]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-service[`+++quarkus.opensearch.aws.service+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.aws.service+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".aws.service`
+`+++quarkus.opensearch."client-name".aws.service+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".aws.service+++[]
 endif::add-copy-button-to-config-props[]
@@ -476,13 +476,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-aws-access-key-id]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-access-key-id[`quarkus.opensearch.aws.access-key-id`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-aws-access-key-id]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-access-key-id[`+++quarkus.opensearch.aws.access-key-id+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.aws.access-key-id+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".aws.access-key-id`
+`+++quarkus.opensearch."client-name".aws.access-key-id+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".aws.access-key-id+++[]
 endif::add-copy-button-to-config-props[]
@@ -502,13 +502,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-aws-access-key-secret]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-access-key-secret[`quarkus.opensearch.aws.access-key-secret`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-aws-access-key-secret]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-aws-access-key-secret[`+++quarkus.opensearch.aws.access-key-secret+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.aws.access-key-secret+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".aws.access-key-secret`
+`+++quarkus.opensearch."client-name".aws.access-key-secret+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".aws.access-key-secret+++[]
 endif::add-copy-button-to-config-props[]
@@ -528,13 +528,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name[`quarkus.opensearch.tls.tls-configuration-name`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-tls-tls-configuration-name[`+++quarkus.opensearch.tls.tls-configuration-name+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.tls.tls-configuration-name+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".tls.tls-configuration-name`
+`+++quarkus.opensearch."client-name".tls.tls-configuration-name+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".tls.tls-configuration-name+++[]
 endif::add-copy-button-to-config-props[]
@@ -554,13 +554,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |required icon:exclamation-circle[title=Configuration property is required]
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-enabled[`quarkus.opensearch.discovery.enabled`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-enabled]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-enabled[`+++quarkus.opensearch.discovery.enabled+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.discovery.enabled+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".discovery.enabled`
+`+++quarkus.opensearch."client-name".discovery.enabled+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".discovery.enabled+++[]
 endif::add-copy-button-to-config-props[]
@@ -578,15 +578,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_ENABLED+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`+++false+++`
+|false
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval[`quarkus.opensearch.discovery.refresh-interval`]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-discovery-refresh-interval[`+++quarkus.opensearch.discovery.refresh-interval+++`]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.discovery.refresh-interval+++[]
 endif::add-copy-button-to-config-props[]
 
 
-`quarkus.opensearch."client-name".discovery.refresh-interval`
+`+++quarkus.opensearch."client-name".discovery.refresh-interval+++`
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".discovery.refresh-interval+++[]
 endif::add-copy-button-to-config-props[]
@@ -604,15 +604,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_DISCOVERY_REFRESH_INTERVAL+++`
 endif::add-copy-button-to-env-var[]
 --
 |link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html[Duration] link:#duration-note-anchor-quarkus-opensearch-client_quarkus-opensearch[icon:question-circle[title=More information about the Duration format]]
-|`+++5M+++`
+|5M
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file[[.line-through]#`quarkus.opensearch.ssl.key-store-file`#]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-file[[.line-through]#`+++quarkus.opensearch.ssl.key-store-file+++`#]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.ssl.key-store-file+++[]
 endif::add-copy-button-to-config-props[]
 
 
-[.line-through]#`quarkus.opensearch."client-name".ssl.key-store-file`#
+[.line-through]#`+++quarkus.opensearch."client-name".ssl.key-store-file+++`#
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".ssl.key-store-file+++[]
 endif::add-copy-button-to-config-props[]
@@ -634,13 +634,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password[[.line-through]#`quarkus.opensearch.ssl.key-store-password`#]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-key-store-password[[.line-through]#`+++quarkus.opensearch.ssl.key-store-password+++`#]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.ssl.key-store-password+++[]
 endif::add-copy-button-to-config-props[]
 
 
-[.line-through]#`quarkus.opensearch."client-name".ssl.key-store-password`#
+[.line-through]#`+++quarkus.opensearch."client-name".ssl.key-store-password+++`#
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".ssl.key-store-password+++[]
 endif::add-copy-button-to-config-props[]
@@ -662,13 +662,13 @@ endif::add-copy-button-to-env-var[]
 |string
 |
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname[[.line-through]#`quarkus.opensearch.ssl.verify-hostname`#]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify-hostname[[.line-through]#`+++quarkus.opensearch.ssl.verify-hostname+++`#]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.ssl.verify-hostname+++[]
 endif::add-copy-button-to-config-props[]
 
 
-[.line-through]#`quarkus.opensearch."client-name".ssl.verify-hostname`#
+[.line-through]#`+++quarkus.opensearch."client-name".ssl.verify-hostname+++`#
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".ssl.verify-hostname+++[]
 endif::add-copy-button-to-config-props[]
@@ -688,15 +688,15 @@ Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY_HOSTNAME+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`+++true+++`
+|true
 
-a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify[[.line-through]#`quarkus.opensearch.ssl.verify`#]##
+a| [[quarkus-opensearch-client_quarkus-opensearch-ssl-verify]] [.property-path]##link:#quarkus-opensearch-client_quarkus-opensearch-ssl-verify[[.line-through]#`+++quarkus.opensearch.ssl.verify+++`#]##
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch.ssl.verify+++[]
 endif::add-copy-button-to-config-props[]
 
 
-[.line-through]#`quarkus.opensearch."client-name".ssl.verify`#
+[.line-through]#`+++quarkus.opensearch."client-name".ssl.verify+++`#
 ifdef::add-copy-button-to-config-props[]
 config_property_copy_button:+++quarkus.opensearch."client-name".ssl.verify+++[]
 endif::add-copy-button-to-config-props[]
@@ -716,7 +716,7 @@ Environment variable: `+++QUARKUS_OPENSEARCH_SSL_VERIFY+++`
 endif::add-copy-button-to-env-var[]
 --
 |boolean
-|`+++true+++`
+|true
 
 |===
 

@@ -30,10 +30,10 @@
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.30.2</quarkus.version>
+        <quarkus.version>3.30.8</quarkus.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.30.2</quarkus.platform.version>
+        <quarkus.platform.version>3.30.8</quarkus.platform.version>
         <quarkus-amazon-services.version>3.12.1</quarkus-amazon-services.version>
         <opensearch.version>3.3.2</opensearch.version>
         <opensearch.client.version>3.4.0</opensearch.client.version>

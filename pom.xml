@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.quarkiverse</groupId>
         <artifactId>quarkiverse-parent</artifactId>
-        <version>20</version>
+        <version>21</version>
     </parent>
     <groupId>io.quarkiverse.opensearch</groupId>
     <artifactId>quarkus-opensearch-parent</artifactId>
@@ -26,19 +26,19 @@
       <tag>HEAD</tag>
   </scm>  
     <properties>
-        <compiler-plugin.version>3.10.1</compiler-plugin.version>
+        <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus.version>3.30.6</quarkus.version>
+        <quarkus.version>3.34.3</quarkus.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.30.2</quarkus.platform.version>
-        <quarkus-amazon-services.version>3.12.1</quarkus-amazon-services.version>
-        <opensearch.version>3.4.0</opensearch.version>
-        <opensearch.client.version>3.4.0</opensearch.client.version>
-        <opensearch-testcontainers.version>3.0.2</opensearch-testcontainers.version>
-        <apache.httpccore5.version>5.4</apache.httpccore5.version>
+        <quarkus.platform.version>3.34.3</quarkus.platform.version>
+        <quarkus-amazon-services.version>3.16.0</quarkus-amazon-services.version>
+        <opensearch.version>3.8.0</opensearch.version>
+        <opensearch.client.version>3.8.0</opensearch.client.version>
+        <opensearch-testcontainers.version>4.1.0</opensearch-testcontainers.version>
+        <apache.httpccore5.version>5.4.2</apache.httpccore5.version>
         <apache.httpclient5.version>5.6</apache.httpclient5.version>
         <conscrypt-openjdk-uber.version>2.5.2</conscrypt-openjdk-uber.version>
     </properties>

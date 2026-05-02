@@ -35,6 +35,14 @@
         <dependency>
             <groupId>org.opensearch</groupId>
             <artifactId>opensearch-testcontainers</artifactId>
+            <!-- Explicit version: ensures the resolved value lands in the
+                 published deployment-artifact pom rather than relying on
+                 downstream consumers to walk the parent chain for
+                 ${opensearch-testcontainers.version}. Without this,
+                 downstream Maven resolution can fall through to an older
+                 transitive version and the deployment processor fails to
+                 load OpenSearchContainer. See #557. -->
+            <version>${opensearch-testcontainers.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>

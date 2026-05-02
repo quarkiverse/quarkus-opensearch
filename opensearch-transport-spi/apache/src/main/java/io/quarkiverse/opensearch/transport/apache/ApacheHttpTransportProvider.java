@@ -100,7 +100,6 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
 
                 HttpAsyncClientBuilder result = httpAsyncClientBuilder.setConnectionManager(connectionManager);
 
-
                 if (VertxThreadFactory.INSTANCE != null) {
                     result.setThreadFactory(new ThreadFactory() {
                         @Override

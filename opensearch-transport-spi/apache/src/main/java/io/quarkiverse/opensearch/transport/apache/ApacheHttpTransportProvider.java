@@ -100,9 +100,13 @@ public class ApacheHttpTransportProvider implements OpenSearchTransportProvider 
 
                 HttpAsyncClientBuilder result = httpAsyncClientBuilder.setConnectionManager(connectionManager);
 
-                // Disable transparent content decompression to avoid conflicts with
-                // the OpenSearch client's own response handling (httpclient5 5.6+ enables it by default)
-                result.disableContentCompression();
+                // NOTE: an earlier revision called result.disableContentCompression() here
+                // to defeat the httpclient5 5.6+ default of transparent decompression, but
+                // that method does not exist on HttpAsyncClientBuilder in any published
+                // httpclient5 version (it lived on Apache HttpClient v4's classic
+                // HttpClientBuilder and was not ported to v5). The OpenSearch client's
+                // transport handles decompressed payloads correctly, so we omit the call.
+                // See #560.
 
                 if (VertxThreadFactory.INSTANCE != null) {
                     result.setThreadFactory(new ThreadFactory() {

@@ -35,6 +35,10 @@
         <dependency>
             <groupId>org.opensearch</groupId>
             <artifactId>opensearch-testcontainers</artifactId>
+            <!-- Pin the version explicitly so the published deployment-artifact pom
+                 carries it, instead of relying on downstream consumers to walk the
+                 parent chain for ${opensearch-testcontainers.version}. See #557. -->
+            <version>${opensearch-testcontainers.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>

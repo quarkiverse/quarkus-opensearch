@@ -5,8 +5,6 @@ import java.util.*;
 import java.util.function.Supplier;
 
 import org.jboss.logging.Logger;
-import org.opensearch.testcontainers.OpenSearchContainer;
-import org.testcontainers.utility.DockerImageName;
 
 import io.quarkus.builder.BuildException;
 import io.quarkus.deployment.IsNormal;
@@ -156,26 +154,19 @@ public class DevServicesOpenSearchProcessor {
         Optional<ContainerAddress> maybeContainerAddress = openSearchContainerLocator.locateContainer(
                 config.serviceName(), config.shared(), launchMode.getLaunchMode());
 
-        Supplier<DevServicesResultBuildItem.RunningDevService> startContainer = () -> {
-            OpenSearchContainer container = new OpenSearchContainer(
-                    DockerImageName.parse(config.imageName())
-                            .asCompatibleSubstituteFor("opensearchproject/opensearch"));
-
-            if (config.serviceName() != null) {
-                container.withLabel(DEV_SERVICE_LABEL, config.serviceName());
-            }
-
-            config.port().ifPresent(port -> container.setPortBindings(List.of(port + ":" + port)));
-            timeout.ifPresent(container::withStartupTimeout);
-            container.addEnv("OPENSEARCH_JAVA_OPTS", config.javaOpts());
-
-            container.start();
-            return new DevServicesResultBuildItem.RunningDevService(
-                    OpenSearchDevServicesProcessor.FEATURE,
-                    container.getContainerId(),
-                    container::close,
-                    buildPropertiesMap(buildItemConfig, container.getHttpHostAddress()));
-        };
+        // Delegate the actual container creation to OpenSearchContainerStarter so that
+        // OpenSearchContainer / DockerImageName aren't referenced from this class's
+        // bytecode. Lets the processor load even when opensearch-testcontainers isn't
+        // on the deployment classpath (production builds without Dev Services). See #557.
+        Supplier<DevServicesResultBuildItem.RunningDevService> startContainer = () -> OpenSearchContainerStarter.start(
+                config.imageName(),
+                OpenSearchDevServicesProcessor.FEATURE,
+                DEV_SERVICE_LABEL,
+                Optional.ofNullable(config.serviceName()),
+                config.port(),
+                timeout,
+                config.javaOpts(),
+                buildItemConfig.hostsConfigProperties);
 
         return maybeContainerAddress
                 .map(addr -> new DevServicesResultBuildItem.RunningDevService(

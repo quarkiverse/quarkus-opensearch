@@ -33,7 +33,7 @@
         <quarkus.version>3.36.1</quarkus.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.36.1</quarkus.platform.version>
+        <quarkus.platform.version>3.36.2</quarkus.platform.version>
         <quarkus-amazon-services.version>3.19.0</quarkus-amazon-services.version>
         <opensearch.version>3.8.0</opensearch.version>
         <opensearch.client.version>3.8.0</opensearch.client.version>

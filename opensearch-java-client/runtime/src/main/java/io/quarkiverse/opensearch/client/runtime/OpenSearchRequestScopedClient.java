@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
@@ -60,8 +61,25 @@ public class OpenSearchRequestScopedClient {
     @Any
     Instance<OpenSearchTransportOptionsProvider> optionsProviders;
 
-    // Cached sorted providers for this request
-    private List<OpenSearchTransportOptionsProvider> sortedProviders;
+    // Providers sorted by priority, resolved once eagerly at bean construction and
+    // safely published as an immutable list. Must NOT be a lazily-initialized mutable
+    // field: a request-scoped instance can be touched by more than one thread (e.g. an
+    // event-loop call and an OpenSearch I/O continuation within the same request), and a
+    // non-volatile lazy init lets one thread observe the reference set but the list not
+    // yet populated -> empty providers -> resolveTransportOptions returns null -> the
+    // request goes out with no Authorization header (intermittent 401).
+    private volatile List<OpenSearchTransportOptionsProvider> sortedProviders = List.of();
+
+    @PostConstruct
+    void initSortedProviders() {
+        final List<OpenSearchTransportOptionsProvider> providers = new ArrayList<>();
+        for (OpenSearchTransportOptionsProvider provider : optionsProviders
+                .select(OpenSearchTransportOptionsConfig.Literal.INSTANCE)) {
+            providers.add(provider);
+        }
+        providers.sort(Comparator.comparingInt(OpenSearchTransportOptionsProvider::priority));
+        this.sortedProviders = List.copyOf(providers);
+    }
 
     /**
      * Get the default OpenSearch client with per-request transport options applied.
@@ -120,7 +138,7 @@ public class OpenSearchRequestScopedClient {
      * @return merged transport options, or null if no options provided
      */
     private TransportOptions resolveTransportOptions(String clientName) {
-        List<OpenSearchTransportOptionsProvider> providers = getSortedProviders();
+        List<OpenSearchTransportOptionsProvider> providers = sortedProviders;
         if (providers.isEmpty()) {
             return null;
         }
@@ -148,20 +166,5 @@ public class OpenSearchRequestScopedClient {
         }
 
         return mergedBuilder.build();
-    }
-
-    /**
-     * Get providers sorted by priority (cached for this request).
-     */
-    private List<OpenSearchTransportOptionsProvider> getSortedProviders() {
-        if (sortedProviders == null) {
-            sortedProviders = new ArrayList<>();
-            for (OpenSearchTransportOptionsProvider provider : optionsProviders
-                    .select(OpenSearchTransportOptionsConfig.Literal.INSTANCE)) {
-                sortedProviders.add(provider);
-            }
-            sortedProviders.sort(Comparator.comparingInt(OpenSearchTransportOptionsProvider::priority));
-        }
-        return sortedProviders;
     }
 }

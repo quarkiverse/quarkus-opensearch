@@ -13,7 +13,11 @@ import org.opensearch.client.transport.TransportOptions;
  * Register implementations as CDI beans with the {@code @OpenSearchTransportOptionsConfig}
  * qualifier to have them automatically discovered and applied.
  * <p>
- * Example usage for OIDC token propagation:
+ * Example usage for OIDC token propagation. Request the access token by its concrete
+ * type ({@link io.quarkus.oidc.AccessTokenCredential}) rather than the generic
+ * {@code TokenCredential}: a web-app / hybrid {@code SecurityIdentity} can carry several
+ * token credentials, and a generic lookup may return a non-access token (e.g. an
+ * HMAC-signed refresh token) that the downstream cannot verify against the realm JWKS.
  *
  * <pre>
  * &#64;ApplicationScoped
@@ -25,8 +29,11 @@ import org.opensearch.client.transport.TransportOptions;
  *
  *     &#64;Override
  *     public Optional&lt;TransportOptions&gt; getTransportOptions(String clientName) {
- *         TokenCredential token = securityIdentity.getCredential(TokenCredential.class);
- *         if (token != null) {
+ *         if (securityIdentity.isAnonymous()) {
+ *             return Optional.empty();
+ *         }
+ *         AccessTokenCredential token = securityIdentity.getCredential(AccessTokenCredential.class);
+ *         if (token != null &amp;&amp; token.getToken() != null) {
  *             return Optional.of(TransportOptions.builder()
  *                     .addHeader("Authorization", "Bearer " + token.getToken())
  *                     .build());

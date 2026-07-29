@@ -40,7 +40,7 @@
         <opensearch-testcontainers.version>4.1.0</opensearch-testcontainers.version>
         <apache.httpccore5.version>5.4.3</apache.httpccore5.version>
         <apache.httpclient5.version>5.6.2</apache.httpclient5.version>
-        <conscrypt-openjdk-uber.version>2.5.2</conscrypt-openjdk-uber.version>
+        <conscrypt-openjdk-uber.version>2.6.1</conscrypt-openjdk-uber.version>
     </properties>
     <dependencyManagement>
         <dependencies>

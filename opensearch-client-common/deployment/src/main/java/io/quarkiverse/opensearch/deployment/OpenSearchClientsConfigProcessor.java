@@ -5,17 +5,13 @@ import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.BuildSteps;
-import io.quarkus.deployment.builditem.ConfigMappingBuildItem;
 
+/**
+ * {@link OpenSearchClientsConfig} is a {@code @ConfigRoot} mapping and therefore registered by Quarkus
+ * automatically; we only make sure the bean is never removed.
+ */
 @BuildSteps
 public class OpenSearchClientsConfigProcessor {
-
-    @BuildStep
-    void registerOpenSearchClientsConfig(BuildProducer<ConfigMappingBuildItem> configMappings) {
-        configMappings.produce(new ConfigMappingBuildItem(
-                OpenSearchClientsConfig.class,
-                "quarkus.opensearch"));
-    }
 
     @BuildStep
     void produceConfigMappingBean(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {

@@ -15,6 +15,17 @@ This version supports **OpenSearch 3.x** which requires:
 If you need OpenSearch 2.x support, use an earlier version of this extension.
 ====
 
+== Compatibility
+
+[cols="1,1,1,1,1",options="header"]
+|===
+|Extension |Quarkus |OpenSearch |JDK |Status
+
+|4.x |4.x |3.x |21+ |Active (`main`)
+|3.x |3.27 LTS – 3.x latest |3.x |21+ |Maintenance (per-LTS branches)
+|2.x |3.27 LTS |2.x |17+ |Maintenance (`opensearch-2.x`)
+|===
+
 == OpenSearch Clients
 
 === link:https://opensearch.org/docs/latest/clients/java/[OpenSearch Java Client]

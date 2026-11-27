@@ -17,7 +17,7 @@ import io.quarkiverse.opensearch.client.runtime.OpenSearchClientsProducer;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchRequestScopedClient;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.ManagedContext;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 /**
  * Tests for {@link OpenSearchRequestScopedClient}.
@@ -25,7 +25,7 @@ import io.quarkus.test.QuarkusUnitTest;
 class RequestScopedClientTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest TEST = new QuarkusUnitTest()
+    static final QuarkusExtensionTest TEST = new QuarkusExtensionTest()
             .setArchiveProducer(
                     () -> ShrinkWrap.create(JavaArchive.class)
                             .addAsResource(new StringAsset(

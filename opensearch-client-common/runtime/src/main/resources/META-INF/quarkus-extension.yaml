@@ -1,6 +1,7 @@
 ---
 artifact: ${project.groupId}:${project.artifactId}:${project.version}
 name: "OpenSearch Common Resources"
+description: "Shared configuration and Dev Services for the OpenSearch extensions (pulled in transitively; not meant to be added directly)"
 metadata:
   keywords:
     - "opensearch"
@@ -9,3 +10,6 @@ metadata:
   categories:
     - "data"
   status: "stable"
+  unlisted: true
+  config:
+    - "quarkus.opensearch."

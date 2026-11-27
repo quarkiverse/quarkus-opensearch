@@ -1,11 +1,16 @@
 ---
 artifact: ${project.groupId}:${project.artifactId}:${project.version}
 name: "OpenSearch Java Client"
+description: "Connect to an OpenSearch cluster using the OpenSearch Java Client, with Dev Services, health checks, named clients and pluggable transports (Apache HttpClient 5, AWS SDK2)"
 metadata:
   keywords:
   - "opensearch"
   - "full text"
   - "search"
+  - "aws"
+  guide: "https://docs.quarkiverse.io/quarkus-opensearch/dev/index.html"
   categories:
   - "data"
   status: "stable"
+  config:
+  - "quarkus.opensearch."

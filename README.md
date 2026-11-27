@@ -12,10 +12,13 @@ This extension allows you to connect to an [OpenSearch cluster](https://opensear
 
 | Extension | OpenSearch | Quarkus | JDK | Status |
 |-----------|------------|---------|-----|--------|
-| **3.x** | 3.x | 3.27 LTS+ | 21+ | Active |
-| **2.x** | 2.x | 3.27 LTS | 17+ | Maintenance |
+| **4.x** | 3.x | 4.x | 21+ | Active (`main`) |
+| **3.x** | 3.x | 3.27 LTS – 3.x latest | 21+ | Maintenance (per-LTS branches) |
+| **2.x** | 2.x | 3.27 LTS | 17+ | Maintenance (`opensearch-2.x`) |
 
-**Important:** Extension 3.x requires JDK 21 (OpenSearch 3.x requirement) and only supports the OpenSearch Java Client.
+**Important:** Extensions 3.x and 4.x require JDK 21 (OpenSearch 3.x requirement) and only support the OpenSearch Java Client.
+
+The extension is production ready (`status: stable`) and available on [code.quarkus.io](https://code.quarkus.io/?extension-search=opensearch) and [extensions.quarkus.io](https://extensions.quarkus.io/?search-regex=opensearch).
 
 ## Supported OpenSearch Clients
 

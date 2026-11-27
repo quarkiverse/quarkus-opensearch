@@ -239,6 +239,9 @@
                     <value>!true</value>
                 </property>
             </activation>
+            <modules>
+                <module>integration-tests</module>
+            </modules>
         </profile>
     </profiles>
 </project>

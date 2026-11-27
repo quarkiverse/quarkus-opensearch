@@ -8,6 +8,7 @@ import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
 import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportOptionsConfig;
+import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProvider;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;
@@ -15,6 +16,7 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
 class OpenSearchClientProcessor {
@@ -70,95 +72,15 @@ class OpenSearchClientProcessor {
                 OPENSEARCH_TRANSPORT_OPTIONS_CONFIG, DotNames.APPLICATION_SCOPED, false));
     }
 
-    /*
-     * @BuildStep
-     * void registerOpenSearchClientsConfig(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-     * additionalBeans.produce(
-     * AdditionalBeanBuildItem.unremovableOf(OpenSearchClientsConfig.class)
-     * );
-     * }
+    /**
+     * Transports (Apache HttpClient 5, AWS SDK2, custom) are discovered at runtime via
+     * {@link java.util.ServiceLoader}. Quarkus disables automatic ServiceLoader registration in
+     * native images, so every provider on the classpath has to be registered explicitly.
      */
-    /*
-     * @BuildStep
-     *
-     * @Record(ExecutionTime.RUNTIME_INIT)
-     * void configureNamedClients(OpenSearchClientsRecorder recorder,
-     * OpenSearchClientsConfig config,
-     * BuildProducer<SyntheticBeanBuildItem> syntheticBeans) {
-     * for (Map.Entry<String, OpenSearchClientConfig> entry : config.namedClients().entrySet()) {
-     * String name = entry.getKey();
-     * if (OpenSearchClientsConfig.DEFAULT_CLIENT_KEY.equalsIgnoreCase(name)) {
-     * continue;
-     * }
-     * OpenSearchClientConfig cfg = entry.getValue();
-     *
-     * AnnotationInstance qualifier = AnnotationInstance.create(
-     * DotName.createSimple(OpenSearchClientName.class.getName()),
-     * null,
-     * List.of(AnnotationValue.createStringValue("value", name)));
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchClientConfig.class)
-     * .scope(ApplicationScoped.class)
-     * .qualifiers(qualifier)
-     * .setRuntimeInit()
-     * .createWith(recorder.config(cfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchTransport.class)
-     * .scope(ApplicationScoped.class)
-     * .qualifiers(qualifier)
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.transport(cfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchClient.class)
-     * .scope(ApplicationScoped.class)
-     * .qualifiers(qualifier)
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.client(cfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchAsyncClient.class)
-     * .scope(ApplicationScoped.class)
-     * .qualifiers(qualifier)
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.asyncClient(cfg))
-     * .done());
-     * }
-     *
-     * // Default client
-     * OpenSearchClientConfig defaultCfg = config.defaultClient();
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchClientConfig.class)
-     * .scope(ApplicationScoped.class)
-     * .defaultBean()
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.config(defaultCfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchTransport.class)
-     * .scope(ApplicationScoped.class)
-     * .defaultBean()
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.transport(defaultCfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchClient.class)
-     * .scope(ApplicationScoped.class)
-     * .defaultBean()
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.client(defaultCfg))
-     * .done());
-     *
-     * syntheticBeans.produce(SyntheticBeanBuildItem.configure(OpenSearchAsyncClient.class)
-     * .scope(ApplicationScoped.class)
-     * .defaultBean()
-     * .setRuntimeInit()
-     * .supplier(() -> recorder.asyncClient(defaultCfg))
-     * .done());
-     * }
-     *
-     */
+    @BuildStep
+    ServiceProviderBuildItem registerTransportProviders() {
+        return ServiceProviderBuildItem.allProvidersFromClassPath(OpenSearchTransportProvider.class.getName());
+    }
 
     @BuildStep
     ReflectiveClassBuildItem addReflectiveClassBuildItem() {

@@ -30,7 +30,7 @@ import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportOptionsProvide
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.ClientProxy;
 import io.quarkus.arc.ManagedContext;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 /**
  * Reproduces the intermittent auth-header drop: a single {@link OpenSearchRequestScopedClient}
@@ -46,7 +46,7 @@ class ConcurrentAuthHeaderTest {
     static final String AUTH = "Bearer test-token";
 
     @RegisterExtension
-    static final QuarkusUnitTest TEST = new QuarkusUnitTest()
+    static final QuarkusExtensionTest TEST = new QuarkusExtensionTest()
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class)
                     .addClass(FixedAuthProvider.class)
                     .addAsResource(new StringAsset(

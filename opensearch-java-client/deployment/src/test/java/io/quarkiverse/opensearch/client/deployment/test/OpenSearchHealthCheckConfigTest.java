@@ -15,12 +15,12 @@ import org.opensearch.client.opensearch.OpenSearchClient;
 
 import io.quarkiverse.opensearch.OpenSearchClientName;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 public class OpenSearchHealthCheckConfigTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest TEST = new QuarkusUnitTest()
+    static final QuarkusExtensionTest TEST = new QuarkusExtensionTest()
             .setArchiveProducer(() -> ShrinkWrap.create(JavaArchive.class)
                     .addAsResource(new StringAsset(
                             "quarkus.opensearch.username=dummy\n" +

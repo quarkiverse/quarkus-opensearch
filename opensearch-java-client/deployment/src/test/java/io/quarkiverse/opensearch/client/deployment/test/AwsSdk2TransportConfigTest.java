@@ -19,11 +19,11 @@ import io.quarkiverse.opensearch.OpenSearchClientsConfig;
 import io.quarkiverse.opensearch.client.runtime.OpenSearchTransportHelper;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
 import io.quarkiverse.opensearch.transport.aws.AwsSdk2TransportOptionsCallback;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 class AwsSdk2TransportConfigTest {
     @RegisterExtension
-    static final QuarkusUnitTest TEST = new QuarkusUnitTest()
+    static final QuarkusExtensionTest TEST = new QuarkusExtensionTest()
             .setArchiveProducer(
                     () -> ShrinkWrap.create(JavaArchive.class)
                             .addClasses(AwsSdk2TransportOptionsTestConfigurator.class, OpenSearchTransportHelper.class)

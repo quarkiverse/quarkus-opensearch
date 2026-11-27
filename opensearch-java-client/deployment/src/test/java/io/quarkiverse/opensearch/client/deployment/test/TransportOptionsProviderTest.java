@@ -21,7 +21,7 @@ import io.quarkiverse.opensearch.transport.OpenSearchTransportOptionsConfig;
 import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportOptionsProvider;
 import io.quarkus.arc.Arc;
 import io.quarkus.arc.ManagedContext;
-import io.quarkus.test.QuarkusUnitTest;
+import io.quarkus.test.QuarkusExtensionTest;
 
 /**
  * Tests for {@link OpenSearchTransportOptionsProvider} SPI and
@@ -30,7 +30,7 @@ import io.quarkus.test.QuarkusUnitTest;
 class TransportOptionsProviderTest {
 
     @RegisterExtension
-    static final QuarkusUnitTest TEST = new QuarkusUnitTest()
+    static final QuarkusExtensionTest TEST = new QuarkusExtensionTest()
             .setArchiveProducer(
                     () -> ShrinkWrap.create(JavaArchive.class)
                             .addClasses(

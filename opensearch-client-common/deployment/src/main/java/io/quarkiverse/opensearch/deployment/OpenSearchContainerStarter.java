@@ -1,19 +1,18 @@
 package io.quarkiverse.opensearch.deployment;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import org.opensearch.testcontainers.OpenSearchContainer;
 import org.testcontainers.utility.DockerImageName;
 
-import io.quarkus.deployment.builditem.DevServicesResultBuildItem;
+import io.quarkus.deployment.builditem.Startable;
+import io.quarkus.devservices.common.ConfigureUtil;
+import io.quarkus.runtime.LaunchMode;
 
 /**
- * Lazily-loaded helper that creates and starts an {@link OpenSearchContainer}.
+ * Lazily-loaded helper that creates an {@link OpenSearchContainer} for Dev Services.
  *
  * <p>
  * This class is the <strong>only</strong> place in the deployment module that references
@@ -33,37 +32,45 @@ final class OpenSearchContainerStarter {
     private OpenSearchContainerStarter() {
     }
 
-    static DevServicesResultBuildItem.RunningDevService start(
+    /**
+     * Creates (but does not start) the container. Quarkus' Dev Services lifecycle starts,
+     * reuses and stops it.
+     */
+    static Startable create(
             String imageName,
-            String featureName,
             String containerLabel,
-            Optional<String> serviceName,
+            LaunchMode launchMode,
+            String serviceName,
             Optional<Integer> port,
             Optional<Duration> startupTimeout,
-            String javaOpts,
-            Set<String> hostsConfigProperties) {
+            String javaOpts) {
 
-        OpenSearchContainer container = new OpenSearchContainer(
+        QuarkusOpenSearchContainer container = new QuarkusOpenSearchContainer(
                 DockerImageName.parse(imageName)
                         .asCompatibleSubstituteFor("opensearchproject/opensearch"));
 
-        serviceName.ifPresent(name -> container.withLabel(containerLabel, name));
-        port.ifPresent(p -> container.setPortBindings(List.of(p + ":" + p)));
+        ConfigureUtil.configureSharedServiceLabel(container, launchMode, containerLabel, serviceName);
+        port.ifPresent(p -> container.setPortBindings(List.of(p + ":" + DevServicesOpenSearchProcessor.OPENSEARCH_PORT)));
         startupTimeout.ifPresent(container::withStartupTimeout);
         container.addEnv("OPENSEARCH_JAVA_OPTS", javaOpts);
+        return container;
+    }
 
-        container.start();
+    static final class QuarkusOpenSearchContainer extends OpenSearchContainer<QuarkusOpenSearchContainer>
+            implements Startable {
 
-        Map<String, String> propertiesToSet = new HashMap<>();
-        String strippedHost = container.getHttpHostAddress().replaceFirst("^http://", "");
-        for (String property : hostsConfigProperties) {
-            propertiesToSet.put(property, strippedHost);
+        QuarkusOpenSearchContainer(DockerImageName imageName) {
+            super(imageName);
         }
 
-        return new DevServicesResultBuildItem.RunningDevService(
-                featureName,
-                container.getContainerId(),
-                container::close,
-                propertiesToSet);
+        @Override
+        public String getConnectionInfo() {
+            return getHttpHostAddress().replaceFirst("^http://", "");
+        }
+
+        @Override
+        public void close() {
+            super.close();
+        }
     }
 }

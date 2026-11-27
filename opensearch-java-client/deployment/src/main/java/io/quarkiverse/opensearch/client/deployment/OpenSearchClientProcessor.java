@@ -6,6 +6,7 @@ import io.quarkiverse.opensearch.client.runtime.OpenSearchClientsProducer;
 import io.quarkiverse.opensearch.client.runtime.health.OpenSearchHealthCheck;
 import io.quarkiverse.opensearch.deployment.OpenSearchBuildTimeConfig;
 import io.quarkiverse.opensearch.transport.OpenSearchTransportConfig;
+import io.quarkiverse.opensearch.transport.spi.OpenSearchTransportProvider;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
 import io.quarkus.arc.processor.DotNames;
@@ -13,6 +14,7 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 import io.quarkus.smallrye.health.deployment.spi.HealthBuildItem;
 
 class OpenSearchClientProcessor {
@@ -144,6 +146,16 @@ class OpenSearchClientProcessor {
      * }
      *
      */
+
+    /**
+     * Transports (Apache HttpClient 5, AWS SDK2, custom) are discovered at runtime via
+     * {@link java.util.ServiceLoader}. Quarkus disables automatic ServiceLoader registration in
+     * native images, so every provider on the classpath has to be registered explicitly.
+     */
+    @BuildStep
+    ServiceProviderBuildItem registerTransportProviders() {
+        return ServiceProviderBuildItem.allProvidersFromClassPath(OpenSearchTransportProvider.class.getName());
+    }
 
     @BuildStep
     ReflectiveClassBuildItem addReflectiveClassBuildItem() {
